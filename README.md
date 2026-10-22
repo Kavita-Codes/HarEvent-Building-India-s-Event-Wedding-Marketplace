@@ -1,16 +1,70 @@
-# React + Vite
+# HarEvent
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+HarEvent is an event and vendor discovery web app built with React and Vite. The home page introduces the service and helps visitors start searching for event professionals.
 
-Currently, two official plugins are available:
+## Preview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![HarEvent website preview](./public/image.png)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Home page with event, vendor category, and location search fields
+- Responsive navigation with links to the available sections
+- Footer with company, vendor, and contact links
+- Fixed WhatsApp chat button available across the app
+- Route scaffolds for the main visitor and vendor pages
 
-## Expanding the ESLint configuration
+## Tech stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- React Router
+- Tailwind CSS
+- Lucide React and React Icons
+
+## Getting started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Vite prints the local URL in the terminal. To use port `5173` explicitly:
+
+```bash
+npm run dev -- --port 5173
+```
+
+## Available scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build in `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+
+## App routes
+
+| Path | Page |
+| --- | --- |
+| `/` | Home |
+| `/event-planners` | Event Planners |
+| `/event-categories` | Event Categories |
+| `/vendor-categories` | Vendor Categories |
+| `/blogs` | Blogs |
+| `/about` | About |
+| `/contact` | Contact |
+| `/login` | Login |
+| `/favorites` | Favorites |
+| `/join-as-vendor` | Join as a Vendor |
+| `/search` | Search |
+
+The non-home routes are currently page scaffolds and can be filled in as the app develops.
