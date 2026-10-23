@@ -2,7 +2,8 @@ import { useState } from "react";
 import { ArrowLeft, Eye, EyeOff, LockKeyhole, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Login({ initialMode = "customer" }) {
+  const mode = initialMode;
   const [showPassword, setShowPassword] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -25,19 +26,25 @@ function Login() {
               </Link>
             </div>
             <p className="text-[9px] font-bold uppercase tracking-[1.5px] text-[#D4145A]">Your HarEvent account</p>
-            <h2 className="mt-1 text-2xl font-semibold tracking-tight text-[#30232B]">Welcome back</h2>
-            <p className="mt-1 text-xs leading-5 text-[#8A7580]">Enter your details to sign in to your account.</p>
+            <h2 className="mt-1 text-2xl font-semibold tracking-tight text-[#30232B]">
+              {mode === "vendor" ? "Login as Vendor" : "Welcome back"}
+            </h2>
+            <p className="mt-1 text-xs leading-5 text-[#8A7580]">
+              {mode === "vendor"
+                ? "Manage your listings, leads, and customer bookings."
+                : "Enter your details to sign in to your account."}
+            </p>
 
             <form onSubmit={handleSubmit} className="mt-5 space-y-3">
               <label className="block text-[11px] font-semibold text-[#493640]">
-                Email address
+                {mode === "vendor" ? "Email / Phone Number" : "Email address"}
                 <span className="mt-1.5 flex h-10 items-center gap-2.5 rounded-lg border border-[#EED5DF] bg-[#FFFAFC] px-3 focus-within:border-[#D4145A]">
                   <Mail size={15} className="shrink-0 text-[#D4145A]" />
                   <input
                     required
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@example.com"
+                    type={mode === "vendor" ? "text" : "email"}
+                    autoComplete={mode === "vendor" ? "username" : "email"}
+                    placeholder={mode === "vendor" ? "Enter mobile or email" : "you@example.com"}
                     className="min-w-0 flex-1 bg-transparent text-xs font-normal text-[#382832] outline-none placeholder:text-[#B3A3AA]"
                   />
                 </span>
@@ -90,8 +97,11 @@ function Login() {
 
             <p className="mt-5 text-center text-xs text-[#78646E]">
               Don&apos;t have an account?{" "}
-              <Link to="/signup" className="font-semibold text-[#D4145A] hover:text-[#A80F46]">
-                Create account
+              <Link
+                to={mode === "vendor" ? "/join-as-vendor" : "/signup"}
+                className="font-semibold text-[#D4145A] hover:text-[#A80F46]"
+              >
+                {mode === "vendor" ? "Register Now" : "Create account"}
               </Link>
             </p>
         </section>

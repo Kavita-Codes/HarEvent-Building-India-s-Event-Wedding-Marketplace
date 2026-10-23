@@ -46,8 +46,8 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="bg-white px-2 py-2 sm:px-4">
-      <div className="mx-auto max-w-[1440px] bg-[#FFF6F8] px-5 py-9 sm:px-8 sm:py-10 lg:px-12">
+    <section className="w-full bg-[#FFF6F8] py-9 sm:py-10">
+      <div className="mx-auto w-full px-5 sm:px-8 lg:px-12">
 
         {/* Section Heading */}
         <div className="text-center">
@@ -71,10 +71,10 @@ function HowItWorks() {
         </div>
 
         {/* Steps */}
-        <div className="relative mx-auto mt-10 max-w-[850px]">
+        <div className="relative mx-auto mt-10 w-full max-w-[1200px]">
 
           {/* Connecting Line */}
-          <div className="absolute left-[10%] right-[10%] top-[30px] hidden h-[2px] bg-gradient-to-r from-[#F4B4CD] via-[#F7A9C6] to-[#FFC18D] md:block" />
+          <div className="absolute left-[8%] right-[8%] top-[30px] hidden h-[2px] bg-gradient-to-r from-[#F4B4CD] via-[#F7A9C6] to-[#FFC18D] md:block" />
 
           <div className="relative grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-5 md:gap-4">
 
@@ -113,7 +113,7 @@ function HowItWorks() {
                 </h3>
 
                 {/* Description */}
-                <p className="mt-1.5 max-w-[155px] text-[11px] leading-[1.5] text-[#8C7883]">
+                <p className="mt-1.5 max-w-[190px] text-[11px] leading-[1.5] text-[#8C7883]">
                   {description}
                 </p>
               </div>

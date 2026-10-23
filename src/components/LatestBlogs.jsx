@@ -6,67 +6,71 @@ const articles = [
   {
     title: "How to Choose the Right Wedding Photographer",
     description: "Learn how to evaluate photography styles, portfolios, experience, and packages before making your decision.",
-    image: "/Joyful Indian Wedding Procession.png",
+    image: "/Golden Meadow Wedding Photoshoot.png",
     icon: Camera,
   },
   {
     title: "10 Things to Check Before Booking an Event Venue",
     description: "Discover the essential details to consider when choosing the perfect venue for your event.",
-    image: "/Golden-Hour Garden Wedding Ceremony.png",
+    image: "/Lavish Red and Gold Wedding Stage.png",
     icon: MapPin,
   },
   {
     title: "How to Plan a Beautiful Event on a Budget",
     description: "Explore practical ways to prioritize your requirements, compare vendors, and plan your event thoughtfully.",
-    image: "/Lavish Red and Gold Wedding Stage.png",
+    image: "/Joyful Indian Wedding Procession.png",
     icon: Wallet,
   },
 ];
 
 function LatestBlogs() {
   return (
-    <section className="bg-[#FFFAFC] px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
+    <section className="bg-[#FFF3F5] px-5 py-8 sm:px-8 lg:px-[30px] lg:py-8">
       <div className="mx-auto max-w-[1440px]">
-        <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <p className="mb-2 text-[10px] font-bold uppercase tracking-[1.5px] text-[#D4145A]">
+            <p className="mb-1 text-[12px] font-bold uppercase tracking-[0.5px] text-[#D4145A]">
               Guides & Inspiration
             </p>
-            <h2 className="text-3xl font-semibold tracking-tight text-[#30232B] sm:text-4xl">
-              Latest from HarEvent
+            <h2 className="!font-sans !text-[28px] !font-bold !leading-[1.2] !tracking-[-0.5px] !text-[#292329] sm:!text-[30px]">
+              Latest From HarEvent
             </h2>
-            <p className="mt-3 text-sm leading-6 text-[#8A7580]">
+            <p className="mt-1 !text-[14px] !leading-5 !text-[#75656C]">
               Get inspired with practical planning tips, creative ideas, and helpful insights for your next celebration.
             </p>
           </div>
           <Link
             to="/blogs"
-            className="inline-flex w-fit shrink-0 items-center gap-2 text-xs font-semibold text-[#D4145A] transition hover:text-[#A80F46]"
+            className="inline-flex h-9 w-fit shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#E60059] to-[#FF790D] px-4 !text-[12px] !font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
-            Explore All Articles <ArrowRight size={15} />
+            Explore All Articles <ArrowRight size={14} />
           </Link>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-3 md:gap-6 lg:gap-[7.2%]">
           {articles.map(({ title, description, image, icon: Icon }) => (
             <article
               key={title}
-              className="overflow-hidden rounded-2xl border border-[#F1DDE5] bg-white transition hover:-translate-y-1 hover:shadow-lg"
+              className="overflow-hidden rounded-[15px] bg-white shadow-[0_2px_8px_rgba(71,34,52,0.04)]"
             >
               <SectionImage
                 src={image}
                 alt={title}
                 icon={Icon}
-                className="h-48"
+                className="h-[166px]"
               />
-              <div className="p-5">
-                <h3 className="text-base font-bold leading-6 text-[#382832]">{title}</h3>
-                <p className="mt-2 text-xs leading-5 text-[#8A7580]">{description}</p>
+              <div className="min-h-[174px] p-5">
+                <div role="heading" aria-level="3" className="font-sans text-[16px] font-semibold leading-[1.35] text-[#30272D]">
+                  {title}
+                </div>
+                <p className="mt-2 line-clamp-2 !text-[13px] !leading-[1.35] !text-[#897A81]">
+                  {description}
+                </p>
                 <Link
                   to="/blogs"
-                  className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#D4145A] hover:text-[#A80F46]"
+                  className="mt-3 inline-flex items-center gap-1 !text-[13px] !font-semibold !text-[#E60059] transition hover:text-[#A80F46]"
                 >
-                  Read More <ArrowRight size={14} />
+                  Read More <ArrowRight size={13} strokeWidth={2.5} />
                 </Link>
               </div>
             </article>

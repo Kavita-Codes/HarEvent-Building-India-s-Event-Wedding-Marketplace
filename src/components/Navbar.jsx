@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Heart, Menu, Search, X } from "lucide-react";
+import { Menu, Search, UserRound, X } from "lucide-react";
 
-function Navbar() {
+function Navbar({ onLoginClick }) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Navbar() {
   ];
 
   const linkClass = ({ isActive }) =>
-    `whitespace-nowrap rounded-md px-2 py-2 text-[12px] font-medium transition-colors ${
+    `whitespace-nowrap rounded-md px-2 py-2 !text-[13px] !font-medium transition-colors ${
       isActive
         ? "bg-[#FCE8F0] text-[#D4145A]"
         : "text-[#51434B] hover:text-[#D4145A]"
@@ -46,7 +46,7 @@ function Navbar() {
           aria-label="HarEvent Home"
         >
           <img
-            src="/logo.png"
+            src="/logoNavbar.png"
             alt="HarEvent"
             className="h-14 w-auto object-contain"
           />
@@ -54,7 +54,7 @@ function Navbar() {
 
         {/* Desktop Navigation */}
         <nav
-          className="hidden items-center gap-2 lg:flex"
+          className="hidden items-center gap-3 lg:flex"
           aria-label="Main navigation"
         >
           {links.map((link) => (
@@ -89,31 +89,25 @@ function Navbar() {
             />
           </form>
 
-          {/* Wishlist */}
-          <Link
-            to="/favorites"
-            aria-label="Wishlist"
-            title="Wishlist"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#D4145A] transition hover:bg-[#FFF0F5]"
-          >
-            <Heart size={19} strokeWidth={1.8} />
-          </Link>
-
           {/* Login */}
-          <Link
-            to="/login"
-            className="whitespace-nowrap rounded-full bg-[#D4145A] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#A80F46]"
-          >
-            Login
-          </Link>
-
-          {/* Join CTA */}
-          <Link
-            to="/join-as-vendor"
-            className="whitespace-nowrap rounded-md bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
-          >
-            Join as a Vendor
-          </Link>
+          {onLoginClick ? (
+            <button
+              type="button"
+              onClick={onLoginClick}
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
+            >
+              <UserRound size={13} aria-hidden="true" />
+              Login
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
+            >
+              <UserRound size={13} aria-hidden="true" />
+              Login
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -157,7 +151,7 @@ function Navbar() {
                 end={link.to === "/"}
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  `rounded-lg px-4 py-3 text-sm font-medium ${
+                  `rounded-lg px-4 py-3 !text-[14px] !font-medium ${
                     isActive
                       ? "bg-[#FFF0F5] text-[#D4145A]"
                       : "text-[#51434B] hover:bg-[#FFF7FA]"
@@ -168,33 +162,33 @@ function Navbar() {
               </NavLink>
             ))}
 
-            <Link
-              to="/favorites"
-              onClick={closeMenu}
-              className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-[#51434B] hover:bg-[#FFF7FA]"
-            >
-              <Heart size={17} className="text-[#D4145A]" />
-              Wishlist
-            </Link>
           </nav>
 
           {/* Mobile Buttons */}
-          <div className="mt-4 grid grid-cols-2 gap-3 border-t border-[#F0DDE5] pt-4">
-            <Link
-              to="/login"
-              onClick={closeMenu}
-              className="rounded-full border border-[#D4145A] px-3 py-3 text-center text-sm font-semibold text-[#D4145A]"
-            >
-              Login
-            </Link>
+          <div className="mt-4 grid grid-cols-1 gap-3 border-t border-[#F0DDE5] pt-4">
+            {onLoginClick ? (
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenu();
+                  onLoginClick();
+                }}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-3 py-3 text-center text-sm font-semibold text-white"
+              >
+                <UserRound size={16} aria-hidden="true" />
+                Login
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                onClick={closeMenu}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-3 py-3 text-center text-sm font-semibold text-white"
+              >
+                <UserRound size={16} aria-hidden="true" />
+                Login
+              </Link>
+            )}
 
-            <Link
-              to="/join-as-vendor"
-              onClick={closeMenu}
-              className="rounded-md bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-3 py-3 text-center text-sm font-semibold text-white"
-            >
-              Join as Vendor
-            </Link>
           </div>
         </div>
       )}

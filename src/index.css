@@ -1,1 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", sans-serif;
+  --font-serif: "Playfair Display", serif;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif !important;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(36px, 5vw, 60px) !important;
+  font-weight: 700 !important;
+}
+
+h2 {
+  font-size: clamp(24px, 2.5vw, 30px) !important;
+  font-weight: 600 !important;
+}
+
+h3 {
+  font-size: clamp(18px, 1.85vw, 22px) !important;
+  font-weight: 600 !important;
+}
+
+p {
+  font-family: "Poppins", sans-serif !important;
+  font-size: clamp(15px, 1.12vw, 17px) !important;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+p[class~="text-xs"],
+p[class*="text-[9px]"],
+p[class*="text-[10px]"],
+p[class*="text-[11px]"],
+p[class*="text-[12px]"] {
+  font-size: 12px !important;
+}
+
+button,
+input,
+select,
+textarea,
+label,
+small {
+  font-family: "Poppins", sans-serif;
+}
+
+button {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+label,
+small {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+header nav a {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+a[class*="bg-gradient-to-r"],
+a[class*="bg-[#D4145A]"] {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}

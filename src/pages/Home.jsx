@@ -1,7 +1,7 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import BrandsAndPartners from "../components/BrandsAndPartners";
-import FeaturedServiceCategories from "../components/FeaturedServiceCategories";
 import Events from "../components/Events";
 import FindRightVendor from "../components/FindRightVendor";
 import HowItWorks from "../components/HowItWorks";
@@ -12,24 +12,54 @@ import CustomerAssistance from "../components/CustomerAssistance";
 import LatestBlogs from "../components/LatestBlogs";
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
+import LoginModal from "../components/LoginModal";
 
 function Home() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const requestedForm = new URLSearchParams(location.search).get("form");
+  const loginMode = ["login", "vendor", "signup", "vendor-signup"].includes(requestedForm)
+    ? requestedForm
+    : null;
+
+  const openLogin = (mode = "login") => {
+    navigate(`/?form=${mode}`);
+  };
+
+  const closeLogin = () => navigate("/");
+
   return (
     <>
-      <Navbar />
+      <Navbar onLoginClick={() => openLogin("login")} />
       <Hero />
       <BrandsAndPartners />
-      <FeaturedServiceCategories />
       <HowItWorks />
       <Events />
       <FindRightVendor />
       <PopularVendors />
       <WhyChooseHarEvent />
-      <VendorRegistrationBanner />
+      <VendorRegistrationBanner
+        onVendorLoginClick={() => openLogin("vendor")}
+        onVendorRegisterClick={() => openLogin("vendor-signup")}
+      />
       <CustomerAssistance />
       <LatestBlogs />
       <FAQ />
       <Footer />
+      {loginMode && (
+        <LoginModal
+          key={loginMode}
+          initialMode={loginMode}
+          onClose={closeLogin}
+          onRegister={(mode) => {
+            if (mode === "login" || mode === "vendor") {
+              openLogin(mode);
+            } else {
+              openLogin(mode === "vendor-signup" ? mode : "signup");
+            }
+          }}
+        />
+      )}
     </>
   );
 }

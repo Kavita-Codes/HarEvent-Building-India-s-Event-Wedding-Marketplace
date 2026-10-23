@@ -12,18 +12,18 @@ function Signup({ vendorMode = false }) {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#FFFAFC] px-4 py-4 sm:px-6 sm:py-6">
+    <main className="flex min-h-screen items-center justify-center bg-[#FFFAFC] px-4 py-5 sm:px-6 sm:py-7">
       <div className="w-full max-w-md">
         <Link to="/" className="mb-3 inline-flex items-center gap-2 text-xs font-medium text-[#78646E] hover:text-[#D4145A]">
           <ArrowLeft size={16} /> Back to HarEvent
         </Link>
 
         <div className="rounded-2xl border border-[#F1DDE5] bg-white p-5 shadow-[0_12px_32px_rgba(89,32,55,0.08)] sm:p-6">
-            <section>
-              <div className="mb-4">
-                <Link to="/">
-                  <img src="/logo.png" alt="HarEvent" className="h-8 w-auto object-contain" />
-                </Link>
+          <section>
+            <div className="mb-4">
+              <Link to="/">
+                <img src="/logo.png" alt="HarEvent" className="h-8 w-auto object-contain" />
+              </Link>
             </div>
             <p className="text-[9px] font-bold uppercase tracking-[1.5px] text-[#D4145A]">
               {vendorMode ? "Vendor registration" : "Get started"}
@@ -112,7 +112,7 @@ function Signup({ vendorMode = false }) {
               Already have an account?{" "}
               <Link to="/login" className="font-semibold text-[#D4145A] hover:text-[#A80F46]">Sign in</Link>
             </p>
-            </section>
+          </section>
         </div>
       </div>
     </main>

@@ -5,57 +5,77 @@ import {
   BriefcaseBusiness,
   Image as ImageIcon,
   MapPin,
-  MessageCircle,
   Star,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const filters = ["All", "Photography", "Decor", "Venues", "Catering", "Entertainment"];
 
-const vendors = [];
-
-const portfolioPreviews = [
+const vendors = [
   {
-    id: "wedding-photography-preview",
-    category: "Photography",
+    id: "royal-moments",
+    category: "Wedding Photography",
+    businessName: "Royal Moments...",
+    description: "Specializing in cinematic wedding stories, candid moments and timeless portraits.",
+    rating: 4.8,
+    reviewCount: 142,
+    ratingVerified: true,
+    location: "Pune",
     portfolioImage: "/Joyful Indian Wedding Petal Shower.png",
-    imageAlt: "Wedding celebration with a flower petal shower",
+    imageAlt: "Wedding couple celebrating with flower petals",
   },
   {
-    id: "floral-decor-preview",
-    category: "Decor",
+    id: "mayur-mandap-floral",
+    category: "Wedding Decor",
+    businessName: "Mayur Mandap & Floral...",
+    description: "Elegant mandap designs, floral installations and contemporary decor.",
+    rating: 4.9,
+    reviewCount: 86,
+    ratingVerified: true,
+    location: "Pune & Mumbai",
     portfolioImage: "/Waterfront Romance Under a Floral Canopy.png",
-    imageAlt: "Waterfront celebration under a floral canopy",
+    imageAlt: "Wedding decor with a floral canopy",
   },
   {
-    id: "wedding-venue-preview",
-    category: "Venues",
+    id: "imperial-palace-banquets",
+    category: "Luxury Venue",
+    businessName: "Imperial Palace & Banquets",
+    description: "Spacious luxury banquet spaces for weddings, receptions and celebrations.",
+    rating: 4.6,
+    reviewCount: 216,
+    ratingVerified: true,
+    location: "Kharadi, Pune",
+    filterCategory: "Venues",
     portfolioImage: "/Opulent Indian Garden Wedding Mandap.png",
-    imageAlt: "Garden wedding mandap",
+    imageAlt: "Luxury garden wedding venue with a mandap",
   },
   {
-    id: "wedding-catering-preview",
+    id: "saffron-spice-gourmet",
     category: "Catering",
+    businessName: "Saffron & Spice Gourmet...",
+    description: "Multi-cuisine catering with regional specialties and live counters.",
+    rating: 4.7,
+    reviewCount: 98,
+    ratingVerified: true,
+    location: "Pune",
     portfolioImage: "/Lavish Indian Fusion Wedding Buffet.png",
-    imageAlt: "Indian fusion wedding buffet",
+    imageAlt: "Indian fusion wedding buffet with multiple dishes",
   },
-].map((preview) => ({
-  ...preview,
-  isPortfolioPreview: true,
-  description: "Portfolio preview. Business information will appear when available.",
-  inquiryUrl: `/enquiry?category=${encodeURIComponent(preview.category)}`,
+].map((vendor) => ({
+  ...vendor,
+  inquiryUrl: `/enquiry?vendor=${encodeURIComponent(vendor.businessName)}&category=${encodeURIComponent(vendor.category)}`,
   profileUrl: "/vendor-categories",
 }));
 
 function VendorCard({ vendor }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#F1DDE5] bg-white transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative h-40 overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#FFF8F2] to-[#FCE4EC]">
+    <article className="group flex h-full flex-col overflow-hidden rounded-[18px] border border-[#F1DDE5] bg-white shadow-[0_3px_14px_rgba(71,34,52,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#E9B4C7] hover:shadow-[0_12px_28px_rgba(71,34,52,0.12)]">
+      <div className="relative h-[122px] overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#FFF8F2] to-[#FCE4EC]">
         {vendor.portfolioImage ? (
           <img
             src={vendor.portfolioImage}
             alt={vendor.imageAlt || `${vendor.businessName} portfolio`}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
             loading="lazy"
           />
         ) : (
@@ -73,46 +93,38 @@ function VendorCard({ vendor }) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col p-4">
-        <div className="flex items-center justify-between gap-2 text-[10px]">
+      <div className="flex flex-1 flex-col px-3 py-2.5">
+        <div className="flex min-h-[16px] items-center justify-between gap-2 text-[9px]">
           {vendor.ratingVerified === true &&
           Number.isFinite(vendor.rating) &&
           vendor.rating >= 0 &&
           vendor.rating <= 5 ? (
             <span className="inline-flex items-center gap-1 font-semibold text-[#493640]">
-              <Star size={13} className="fill-[#F5A623] text-[#F5A623]" />
+              <Star size={11} className="fill-[#FF790D] text-[#FF790D]" />
               {vendor.rating.toFixed(1)}
               {Number.isInteger(vendor.reviewCount) && vendor.reviewCount > 0 && (
                 <span className="font-normal text-[#8A7580]">
                   ({vendor.reviewCount})
                 </span>
               )}
-              <BadgeCheck
-                size={12}
-                className="text-[#247A45]"
-                aria-label="Verified rating"
-              />
             </span>
-          ) : (
-            <span />
-          )}
+          ) : <span aria-hidden="true" />}
           {vendor.location && (
-            <span className="inline-flex items-center gap-1 text-right text-[#8A7580]">
-              <MapPin size={12} className="shrink-0 text-[#D4145A]" />
+            <span className="inline-flex items-center gap-1 text-right text-[9px] text-[#8A7580]">
+              <MapPin size={11} className="shrink-0 text-[#E60059]" />
               {vendor.location}
             </span>
           )}
         </div>
 
         {vendor.category && (
-          <p className="mt-2 text-[9px] font-bold uppercase tracking-wide text-[#D4145A]">
-            {vendor.isPortfolioPreview ? "Portfolio Preview · " : ""}
+          <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.3px] text-[#E60059]">
             {vendor.category}
           </p>
         )}
         <div className="mt-1 flex items-center gap-1.5">
-          <h3 className="truncate text-sm font-bold text-[#382832]">
-            {vendor.isPortfolioPreview ? "Vendor listing coming soon" : vendor.businessName}
+          <h3 className="truncate !font-sans !text-[13px] !font-semibold !leading-[1.2] text-[#382832]">
+            {vendor.businessName}
           </h3>
           {vendor.isVerified === true && (
             <BadgeCheck
@@ -123,24 +135,24 @@ function VendorCard({ vendor }) {
           )}
         </div>
         {vendor.description && (
-          <p className="mt-1 line-clamp-2 min-h-10 text-xs leading-5 text-[#8A7580]">
+          <p className="mt-1 line-clamp-2 min-h-[30px] !text-[11px] !leading-[1.3] !text-[#8A7580]">
             {vendor.description}
           </p>
         )}
 
-        <div className="mt-auto flex gap-2 border-t border-[#F7E8EE] pt-3">
+        <div className="mt-auto flex gap-1.5 border-t border-[#F7E8EE] pt-1.5">
           <Link
             to={
               vendor.inquiryUrl ||
               `/enquiry?vendor=${encodeURIComponent(vendor.businessName)}&category=${encodeURIComponent(vendor.category || "Vendor")}`
             }
-            className="inline-flex min-w-0 flex-1 items-center justify-center gap-1 rounded-full bg-[#D4145A] px-3 py-2 text-[10px] font-semibold text-white transition hover:bg-[#A80F46]"
+            className="inline-flex h-[25px] min-w-0 flex-1 items-center justify-center rounded-full bg-[#E60059] px-2 !text-[11px] !font-semibold text-white transition hover:bg-[#A80F46]"
           >
-            <MessageCircle size={12} /> Send Inquiry
+            Send Inquiry
           </Link>
           <Link
             to={vendor.profileUrl || "/vendor-categories"}
-            className="inline-flex min-w-0 flex-1 items-center justify-center rounded-full border border-[#F1DDE5] bg-[#FFF7FA] px-3 py-2 text-[10px] font-semibold text-[#493640] transition hover:border-[#E9B4C7]"
+            className="inline-flex h-[25px] min-w-0 flex-1 items-center justify-center rounded-full border border-[#F1DDE5] bg-[#FFF7FA] px-2 !text-[11px] !font-normal text-[#493640] transition hover:border-[#E9B4C7]"
           >
             View Profile
           </Link>
@@ -152,10 +164,12 @@ function VendorCard({ vendor }) {
 
 function PopularVendors() {
   const [activeFilter, setActiveFilter] = useState("All");
-  const visibleVendors = [...vendors, ...portfolioPreviews].filter(
+  const visibleVendors = vendors.filter(
     (vendor) =>
       activeFilter === "All" ||
-      vendor.category?.toLowerCase().includes(activeFilter.toLowerCase()),
+      (vendor.filterCategory || vendor.category)
+        ?.toLowerCase()
+        .includes(activeFilter.toLowerCase()),
   );
 
   return (
@@ -195,7 +209,7 @@ function PopularVendors() {
             </div>
             <Link
               to="/vendor-categories"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-5 py-2.5 text-[10px] font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-5 text-[10px] font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               View All Vendors <ArrowRight size={13} />
             </Link>
@@ -203,19 +217,19 @@ function PopularVendors() {
         </div>
 
         {visibleVendors.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {visibleVendors.map((vendor) => (
               <VendorCard key={vendor.id} vendor={vendor} />
             ))}
           </div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[0, 1, 2, 3].map((slot) => (
               <div
                 key={slot}
-                className="flex min-h-[300px] flex-col overflow-hidden rounded-2xl border border-[#F1DDE5] bg-white"
+                className="flex min-h-[336px] flex-col overflow-hidden rounded-[18px] border border-[#F1DDE5] bg-white shadow-[0_3px_14px_rgba(71,34,52,0.04)]"
               >
-                <div className="flex h-40 items-center justify-center bg-gradient-to-br from-[#FFF0F5] via-[#FFF8F2] to-[#FCE4EC] text-[#D4145A]/50">
+                <div className="flex h-[190px] items-center justify-center bg-gradient-to-br from-[#FFF0F5] via-[#FFF8F2] to-[#FCE4EC] text-[#D4145A]/50">
                   {activeFilter === "All" ? (
                     <BriefcaseBusiness size={28} strokeWidth={1.5} />
                   ) : (
@@ -235,13 +249,13 @@ function PopularVendors() {
                   <div className="mt-auto flex gap-2 border-t border-[#F7E8EE] pt-3">
                     <Link
                       to="/enquiry"
-                      className="flex flex-1 items-center justify-center rounded-full bg-[#D4145A] px-2 py-2 text-center text-[10px] font-semibold text-white transition hover:bg-[#A80F46] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4145A]"
+                      className="flex h-10 flex-1 items-center justify-center rounded-full bg-[#D4145A] px-2 text-center text-[10px] font-semibold text-white transition hover:bg-[#A80F46] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4145A]"
                     >
                       Send Inquiry
                     </Link>
                     <Link
                       to="/vendor-categories"
-                      className="flex flex-1 items-center justify-center rounded-full border border-[#F1DDE5] bg-white px-2 py-2 text-center text-[10px] font-semibold text-[#493640] transition hover:border-[#D4145A] hover:text-[#D4145A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4145A]"
+                      className="flex h-10 flex-1 items-center justify-center rounded-full border border-[#F1DDE5] bg-white px-2 text-center text-[10px] font-semibold text-[#493640] transition hover:border-[#D4145A] hover:text-[#D4145A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4145A]"
                     >
                       View Profile
                     </Link>

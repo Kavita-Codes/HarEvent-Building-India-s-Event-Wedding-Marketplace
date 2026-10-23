@@ -1,11 +1,11 @@
-import { Search, CalendarDays, Camera, MapPin, ChevronDown } from "lucide-react";
+import { Search, CalendarDays, Camera, MapPin } from "lucide-react";
 
 function Hero() {
   return (
     <>
       <main>
         {/* Hero Banner */}
-        <section className="relative flex min-h-[520px] items-center justify-center overflow-hidden bg-[#24151B] px-4 py-16 sm:min-h-[560px]">
+        <section className="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-[#24151B] px-4 py-16 sm:min-h-[640px] lg:min-h-[calc(100svh-76px)]">
 
           {/* Background Image */}
           <img
