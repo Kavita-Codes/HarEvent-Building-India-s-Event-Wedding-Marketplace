@@ -4,12 +4,14 @@ import { FaWhatsapp } from "react-icons/fa";
 import About from "./pages/About";
 import Blogs from "./pages/Blogs";
 import Contact from "./pages/Contact";
+import Enquiry from "./pages/Enquiry";
 import EventCategories from "./pages/EventCategories";
 import EventPlanners from "./pages/EventPlanners";
 import Favorites from "./pages/Favorites";
 import Home from "./pages/Home";
 import JoinAsVendor from "./pages/JoinAsVendor";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import Search from "./pages/Search";
 import VendorCategories from "./pages/VendorCategories";
@@ -26,7 +28,10 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/enquiry" element={<Enquiry />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/vendor-login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/join-as-vendor" element={<JoinAsVendor />} />
           <Route path="/search" element={<Search />} />

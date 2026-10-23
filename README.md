@@ -4,7 +4,7 @@ HarEvent is an event and vendor discovery web app built with React and Vite. The
 
 ## Preview
 
-![HarEvent website preview](./public/image.png)
+![HarEvent website preview](./public/preview.png)
 
 ## Features
 
