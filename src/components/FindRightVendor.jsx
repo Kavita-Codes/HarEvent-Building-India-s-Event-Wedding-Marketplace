@@ -109,7 +109,7 @@ function FindRightVendor() {
                   src={image}
                   alt={`${name} portfolio`}
                   icon={Icon}
-                  className="h-[165px] transition duration-500 group-hover:scale-[1.03]"
+                  className="h-[180px] transition duration-500 group-hover:scale-[1.03]"
                 />
                 {popular && (
                   <span className="absolute left-3 top-3 rounded-full border border-[#F8D8E5] bg-white px-3 py-1 text-[10px] font-semibold leading-none text-[#E60059] shadow-sm">

@@ -70,7 +70,7 @@ const vendors = [
 function VendorCard({ vendor }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[18px] border border-[#F1DDE5] bg-white shadow-[0_3px_14px_rgba(71,34,52,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#E9B4C7] hover:shadow-[0_12px_28px_rgba(71,34,52,0.12)]">
-      <div className="relative h-[122px] overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#FFF8F2] to-[#FCE4EC]">
+      <div className="relative h-[157px] overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#FFF8F2] to-[#FCE4EC]">
         {vendor.portfolioImage ? (
           <img
             src={vendor.portfolioImage}

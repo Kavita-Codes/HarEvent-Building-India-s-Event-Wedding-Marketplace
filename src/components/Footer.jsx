@@ -65,16 +65,16 @@ function Footer() {
     <footer className="relative mt-10 border-t-4 border-[#FCE8F0] bg-white">
 
       {/* Main Footer */}
-      <div className="mx-auto max-w-[1440px] px-5 pb-5 pt-6 sm:px-8 lg:px-10 lg:pt-7">
+      <div className="mx-auto max-w-[1440px] px-5 pb-3 pt-8 sm:px-8 lg:px-10 lg:pb-3 lg:pt-9">
 
         {/* Footer Columns */}
-        <div className="grid grid-cols-1 items-start gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-[1.25fr_0.8fr_0.85fr_0.95fr_1fr] lg:gap-x-8">
+        <div className="grid grid-cols-1 items-start gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.25fr_0.8fr_0.85fr_0.95fr_1fr] lg:gap-x-8">
 
           {/* Brand */}
           <div className="max-w-[380px]">
 
             <img
-              src="/logo.png"
+              src="/logoNavbar.png"
               alt="HarEvent"
               className="mb-4 h-[76px] w-auto object-contain object-left"
             />
@@ -129,7 +129,7 @@ function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="pt-3 sm:pt-4">
             <h3 className="mb-4 text-sm font-bold text-[#32252D]">
               Quick Links
             </h3>
@@ -146,7 +146,7 @@ function Footer() {
           </div>
 
           {/* Company */}
-          <div>
+          <div className="pt-3 sm:pt-4">
             <h3 className="mb-4 text-sm font-bold text-[#32252D]">
               Company
             </h3>
@@ -163,7 +163,7 @@ function Footer() {
           </div>
 
           {/* For Vendors */}
-          <div>
+          <div className="pt-3 sm:pt-4">
             <h3 className="mb-4 text-sm font-bold text-[#32252D]">
               For Vendors
             </h3>
@@ -180,7 +180,7 @@ function Footer() {
           </div>
 
           {/* Contact Us */}
-          <div>
+          <div className="pt-3 sm:pt-4">
             <h3 className="mb-4 text-sm font-bold text-[#32252D]">
               Contact Us
             </h3>

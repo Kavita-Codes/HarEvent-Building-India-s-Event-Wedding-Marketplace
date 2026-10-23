@@ -57,7 +57,7 @@ function LatestBlogs() {
                 src={image}
                 alt={title}
                 icon={Icon}
-                className="h-[166px]"
+                className="h-[180px]"
               />
               <div className="min-h-[174px] p-5">
                 <div role="heading" aria-level="3" className="font-sans text-[16px] font-semibold leading-[1.35] text-[#30272D]">

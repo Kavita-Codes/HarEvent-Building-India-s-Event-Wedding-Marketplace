@@ -155,7 +155,7 @@ function Events() {
                   src={image}
                   alt={`${name} celebration`}
                   icon={Icon}
-                  className="h-[165px] transition duration-500 group-hover:scale-[1.03] sm:h-[175px]"
+                  className="h-[180px] transition duration-500 group-hover:scale-[1.03] sm:h-[190px]"
                 />
                 {name === "Weddings" && (
                   <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-full bg-[#E60059] px-2 py-1 text-[9px] font-semibold leading-none text-white shadow-sm">

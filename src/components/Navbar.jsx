@@ -18,7 +18,7 @@ function Navbar({ onLoginClick }) {
   ];
 
   const linkClass = ({ isActive }) =>
-    `whitespace-nowrap rounded-md px-2 py-2 !text-[13px] !font-medium transition-colors ${
+    `whitespace-nowrap rounded-md px-2.5 py-2 !text-[13px] !font-semibold transition-colors ${
       isActive
         ? "bg-[#FCE8F0] text-[#D4145A]"
         : "text-[#51434B] hover:text-[#D4145A]"
@@ -36,7 +36,7 @@ function Navbar({ onLoginClick }) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#F4E5EB] bg-white">
-      <div className="mx-auto flex min-h-[72px] max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
+      <div className="mx-auto flex min-h-[68px] max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6 lg:gap-4 lg:px-10">
 
         {/* Logo */}
         <Link
@@ -48,13 +48,13 @@ function Navbar({ onLoginClick }) {
           <img
             src="/logoNavbar.png"
             alt="HarEvent"
-            className="h-14 w-auto object-contain"
+            className="h-[56px] w-auto object-contain"
           />
         </Link>
 
         {/* Desktop Navigation */}
         <nav
-          className="hidden items-center gap-3 lg:flex"
+          className="hidden items-center gap-1 xl:ml-auto xl:flex 2xl:gap-2"
           aria-label="Main navigation"
         >
           {links.map((link) => (
@@ -70,12 +70,12 @@ function Navbar({ onLoginClick }) {
         </nav>
 
         {/* Right Actions */}
-        <div className="hidden shrink-0 items-center gap-2 md:flex">
+        <div className="hidden shrink-0 items-center gap-2 md:flex xl:ml-2">
 
           {/* Search */}
           <form
             onSubmit={handleSearch}
-            className="flex h-9 w-[190px] items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#FFF7FA] px-3 focus-within:border-[#D4145A] lg:w-[230px]"
+            className="flex h-9 w-[220px] items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#FFF7FA] px-3 focus-within:border-[#D4145A] 2xl:w-[240px]"
           >
             <Search size={15} className="shrink-0 text-[#907D87]" />
 
@@ -85,7 +85,7 @@ function Navbar({ onLoginClick }) {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search events, vendors or locations..."
               aria-label="Search events, vendors or locations"
-              className="min-w-0 flex-1 bg-transparent text-[10px] text-[#453640] outline-none placeholder:text-[#9A8992]"
+              className="min-w-0 flex-1 bg-transparent !text-[13px] text-[#453640] outline-none placeholder:text-[#9A8992]"
             />
           </form>
 
@@ -94,7 +94,7 @@ function Navbar({ onLoginClick }) {
             <button
               type="button"
               onClick={onLoginClick}
-              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-[18px] py-2 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
             >
               <UserRound size={13} aria-hidden="true" />
               Login
@@ -102,7 +102,7 @@ function Navbar({ onLoginClick }) {
           ) : (
             <Link
               to="/login"
-              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
+              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-[18px] py-2 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
             >
               <UserRound size={13} aria-hidden="true" />
               Login
@@ -116,7 +116,7 @@ function Navbar({ onLoginClick }) {
           onClick={() => setOpen(!open)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#F0DDE5] text-[#D4145A] md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#F0DDE5] text-[#D4145A] xl:hidden"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -124,7 +124,7 @@ function Navbar({ onLoginClick }) {
 
       {/* Mobile Navigation */}
       {open && (
-        <div className="border-t border-[#F0DDE5] bg-white px-4 pb-5 pt-4 shadow-lg md:hidden">
+        <div className="border-t border-[#F0DDE5] bg-white px-4 pb-5 pt-4 shadow-lg xl:hidden">
 
           {/* Mobile Search */}
           <form

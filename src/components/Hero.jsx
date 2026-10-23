@@ -5,7 +5,7 @@ function Hero() {
     <>
       <main>
         {/* Hero Banner */}
-        <section className="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-[#24151B] px-4 py-16 sm:min-h-[640px] lg:min-h-[calc(100svh-76px)]">
+        <section className="relative mx-2 flex min-h-[640px] items-center justify-center overflow-hidden rounded-[4px] bg-[#24151B] px-4 py-16 sm:mx-3 sm:min-h-[660px] lg:mx-4 lg:min-h-[calc(100svh-68px)]">
 
           {/* Background Image */}
           <img

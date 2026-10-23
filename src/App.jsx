@@ -43,10 +43,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat with us on WhatsApp"
-          className="fixed bottom-5 right-5 z-[60] inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-900/20 transition hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4145A]"
+          className="fixed bottom-5 right-5 z-[60] inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-900/20 transition hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4145A] max-sm:bottom-3 max-sm:right-3 max-sm:px-3"
         >
           <FaWhatsapp size={19} aria-hidden="true" />
-          Chat with us
+          <span className="max-sm:hidden">Chat with us</span>
         </a>
       </>
     </BrowserRouter>
