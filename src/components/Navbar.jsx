@@ -20,7 +20,7 @@ function Navbar({ onLoginClick }) {
   const linkClass = ({ isActive }) =>
     `whitespace-nowrap rounded-md px-2.5 py-2 !text-[13px] !font-semibold transition-colors ${
       isActive
-        ? "bg-[#FCE8F0] text-[#D4145A]"
+        ? "text-[#D4145A]"
         : "text-[#51434B] hover:text-[#D4145A]"
     }`;
 
@@ -42,14 +42,17 @@ function Navbar({ onLoginClick }) {
         <Link
           to="/"
           onClick={closeMenu}
-          className="shrink-0"
+          className="flex shrink-0 items-center gap-0"
           aria-label="HarEvent Home"
         >
           <img
-            src="/logoNavbar.png"
-            alt="HarEvent"
-            className="h-[56px] w-auto object-contain"
+            src="/logoForm.jpeg"
+            alt=""
+            className="h-16 w-16 object-contain"
           />
+          <span className="bg-gradient-to-r from-[#E50059] to-[#FF8429] bg-clip-text font-serif text-[20px] font-bold leading-none text-transparent">
+            HarEvent
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -153,7 +156,7 @@ function Navbar({ onLoginClick }) {
                 className={({ isActive }) =>
                   `rounded-lg px-4 py-3 !text-[14px] !font-medium ${
                     isActive
-                      ? "bg-[#FFF0F5] text-[#D4145A]"
+                      ? "text-[#D4145A]"
                       : "text-[#51434B] hover:bg-[#FFF7FA]"
                   }`
                 }

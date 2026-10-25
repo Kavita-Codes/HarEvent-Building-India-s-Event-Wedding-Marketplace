@@ -34,17 +34,16 @@ h3 {
 
 p {
   font-family: "Poppins", sans-serif !important;
-  font-size: clamp(15px, 1.12vw, 17px) !important;
+  font-size: 16px !important;
   font-weight: 400;
   line-height: 1.6;
 }
 
-p[class~="text-xs"],
-p[class*="text-[9px]"],
-p[class*="text-[10px]"],
-p[class*="text-[11px]"],
-p[class*="text-[12px]"] {
-  font-size: 12px !important;
+footer p,
+footer a,
+footer span,
+footer h3 {
+  font-size: 16px !important;
 }
 
 button,
@@ -54,6 +53,15 @@ textarea,
 label,
 small {
   font-family: "Poppins", sans-serif;
+}
+
+select {
+  accent-color: #E50059;
+}
+
+select option:checked {
+  background-color: #E50059;
+  color: white;
 }
 
 button {

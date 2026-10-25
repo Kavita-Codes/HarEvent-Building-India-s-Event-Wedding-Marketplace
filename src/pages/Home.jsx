@@ -10,7 +10,6 @@ import WhyChooseHarEvent from "../components/WhyChooseHarEvent";
 import VendorRegistrationBanner from "../components/VendorRegistrationBanner";
 import CustomerAssistance from "../components/CustomerAssistance";
 import LatestBlogs from "../components/LatestBlogs";
-import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
 import LoginModal from "../components/LoginModal";
 
@@ -44,7 +43,6 @@ function Home() {
       />
       <CustomerAssistance />
       <LatestBlogs />
-      <FAQ />
       <Footer />
       {loginMode && (
         <LoginModal

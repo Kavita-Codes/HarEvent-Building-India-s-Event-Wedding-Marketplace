@@ -43,10 +43,12 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat with us on WhatsApp"
-          className="fixed bottom-5 right-5 z-[60] inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-900/20 transition hover:-translate-y-0.5 hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4145A] max-sm:bottom-3 max-sm:right-3 max-sm:px-3"
+          title="Chat with us on WhatsApp"
+          className="fixed bottom-7 right-7 z-[60] flex h-16 w-16 items-center justify-center rounded-full bg-[#12B886] text-white shadow-lg shadow-emerald-900/20 transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#12B886] max-sm:bottom-4 max-sm:right-4 motion-reduce:transition-none"
         >
-          <FaWhatsapp size={19} aria-hidden="true" />
-          <span className="max-sm:hidden">Chat with us</span>
+          <span className="absolute inset-0 -z-10 rounded-full bg-[#12B886]/40 motion-safe:animate-ping motion-reduce:animate-none" aria-hidden="true" />
+          <FaWhatsapp size={32} aria-hidden="true" />
+          <span className="absolute right-0 top-0 h-4 w-4 rounded-full border-2 border-white bg-[#12B886]" aria-hidden="true" />
         </a>
       </>
     </BrowserRouter>
