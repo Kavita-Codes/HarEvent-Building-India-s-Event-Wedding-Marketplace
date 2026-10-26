@@ -44,14 +44,13 @@ function Hero() {
             </p>
 
             {/* Search Panel */}
-            <div className="mx-auto mt-8 max-w-5xl rounded-2xl bg-white p-4 text-left shadow-2xl sm:p-5">
+            {/* <div className="mx-auto mt-8 max-w-5xl rounded-2xl bg-white p-4 text-left shadow-2xl sm:p-5"> */}
 
-              <form
+              {/* <form
                 onSubmit={(e) => e.preventDefault()}
                 className="grid grid-cols-1 items-end gap-3 md:grid-cols-[1fr_1.35fr_1fr_auto]"
               >
 
-                {/* Event Type */}
                 <label className="block min-w-0">
                   <span className="mb-2 block text-[10px] font-bold uppercase tracking-wide text-[#8C7882]">
                     Event Type
@@ -77,7 +76,6 @@ function Hero() {
                   </div>
                 </label>
 
-                {/* Vendor Category */}
                 <label className="block min-w-0">
                   <span className="mb-2 block text-[10px] font-bold uppercase tracking-wide text-[#8C7882]">
                     Vendor Category
@@ -104,7 +102,6 @@ function Hero() {
                   </div>
                 </label>
 
-                {/* Location */}
                 <label className="block min-w-0">
                   <span className="mb-2 block text-[10px] font-bold uppercase tracking-wide text-[#8C7882]">
                     Location
@@ -121,7 +118,6 @@ function Hero() {
                   </div>
                 </label>
 
-                {/* Search Button */}
                 <button
                   type="submit"
                   className="flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-7 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
@@ -130,10 +126,9 @@ function Hero() {
                   Search Vendors
                 </button>
 
-              </form>
+              </form> */}
 
-              {/* Supporting Text */}
-              <div className="mt-4 flex items-start justify-center gap-2 text-center text-xs leading-5 text-[#897782]">
+              {/* <div className="mt-4 flex items-start justify-center gap-2 text-center text-xs leading-5 text-[#897782]">
                 <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-orange-500" />
 
                 <p>
@@ -141,8 +136,8 @@ function Hero() {
                   discover everything you need to make your celebration
                   unforgettable.
                 </p>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
           </div>
         </section>
       </main>

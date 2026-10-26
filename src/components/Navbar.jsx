@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Menu, Search, UserRound, X } from "lucide-react";
@@ -18,7 +19,7 @@ function Navbar({ onLoginClick }) {
   ];
 
   const linkClass = ({ isActive }) =>
-    `whitespace-nowrap rounded-md px-2.5 py-2 !text-[13px] !font-semibold transition-colors ${
+    `whitespace-nowrap rounded-md px-2.5 py-2 !text-[14px] !font-semibold font-poppins transition-colors ${
       isActive
         ? "text-[#D4145A]"
         : "text-[#51434B] hover:text-[#D4145A]"
@@ -33,6 +34,9 @@ function Navbar({ onLoginClick }) {
   };
 
   const closeMenu = () => setOpen(false);
+
+  const loginClass =
+    "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-[18px] py-2 text-[12px] font-semibold font-poppins text-white shadow-sm transition hover:brightness-105";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#F4E5EB] bg-white">
@@ -50,9 +54,12 @@ function Navbar({ onLoginClick }) {
             alt=""
             className="h-16 w-16 object-contain"
           />
-          <span className="bg-gradient-to-r from-[#E50059] to-[#FF8429] bg-clip-text font-serif text-[20px] font-bold leading-none text-transparent">
-            HarEvent
-          </span>
+     <span
+          style={{ fontFamily: '"Playfair Display", serif' }}
+           className="bg-gradient-to-r from-[#E50059] to-[#FF8429] bg-clip-text !text-[25px] !font-bold leading-none text-transparent"
+       >
+  HarEvent
+</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -80,7 +87,10 @@ function Navbar({ onLoginClick }) {
             onSubmit={handleSearch}
             className="flex h-9 w-[220px] items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#FFF7FA] px-3 focus-within:border-[#D4145A] 2xl:w-[240px]"
           >
-            <Search size={15} className="shrink-0 text-[#907D87]" />
+            <Search
+              size={16}
+              className="shrink-0 text-[#907D87]"
+            />
 
             <input
               type="search"
@@ -88,7 +98,7 @@ function Navbar({ onLoginClick }) {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search events, vendors or locations..."
               aria-label="Search events, vendors or locations"
-              className="min-w-0 flex-1 bg-transparent !text-[13px] text-[#453640] outline-none placeholder:text-[#9A8992]"
+              className="min-w-0 flex-1 bg-transparent !text-[12px] font-poppins text-[#453640] outline-none placeholder:text-[#9A8992]"
             />
           </form>
 
@@ -97,17 +107,14 @@ function Navbar({ onLoginClick }) {
             <button
               type="button"
               onClick={onLoginClick}
-              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-[18px] py-2 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
+              className={loginClass}
             >
-              <UserRound size={13} aria-hidden="true" />
+              <UserRound size={16} aria-hidden="true" />
               Login
             </button>
           ) : (
-            <Link
-              to="/login"
-              className="inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-[18px] py-2 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
-            >
-              <UserRound size={13} aria-hidden="true" />
+            <Link to="/login" className={loginClass}>
+              <UserRound size={14} aria-hidden="true" />
               Login
             </Link>
           )}
@@ -141,12 +148,13 @@ function Navbar({ onLoginClick }) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search events, vendors or locations..."
-              className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[#9A8992]"
+              aria-label="Search events, vendors or locations"
+              className="min-w-0 flex-1 bg-transparent text-sm font-poppins outline-none placeholder:text-[#9A8992]"
             />
           </form>
 
           {/* Mobile Links */}
-          <nav className="flex flex-col gap-1">
+          <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
             {links.map((link) => (
               <NavLink
                 key={link.to}
@@ -154,7 +162,7 @@ function Navbar({ onLoginClick }) {
                 end={link.to === "/"}
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  `rounded-lg px-4 py-3 !text-[14px] !font-medium ${
+                  `rounded-lg px-4 py-3 !text-[14px] !font-medium font-poppins ${
                     isActive
                       ? "text-[#D4145A]"
                       : "text-[#51434B] hover:bg-[#FFF7FA]"
@@ -164,10 +172,9 @@ function Navbar({ onLoginClick }) {
                 {link.name}
               </NavLink>
             ))}
-
           </nav>
 
-          {/* Mobile Buttons */}
+          {/* Mobile Login */}
           <div className="mt-4 grid grid-cols-1 gap-3 border-t border-[#F0DDE5] pt-4">
             {onLoginClick ? (
               <button
@@ -176,7 +183,7 @@ function Navbar({ onLoginClick }) {
                   closeMenu();
                   onLoginClick();
                 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-3 py-3 text-center text-sm font-semibold text-white"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-3 py-3 text-center text-sm font-semibold font-poppins text-white"
               >
                 <UserRound size={16} aria-hidden="true" />
                 Login
@@ -185,13 +192,12 @@ function Navbar({ onLoginClick }) {
               <Link
                 to="/login"
                 onClick={closeMenu}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-3 py-3 text-center text-sm font-semibold text-white"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-3 py-3 text-center text-sm font-semibold font-poppins text-white"
               >
                 <UserRound size={16} aria-hidden="true" />
                 Login
               </Link>
             )}
-
           </div>
         </div>
       )}
@@ -199,4 +205,4 @@ function Navbar({ onLoginClick }) {
   );
 }
 
-export default Navbar
+export default Navbar;

@@ -1,9 +1,11 @@
+
+import { BadgeCheck, MapPin } from "lucide-react";
 import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-} from "react-icons/fa";
+  FiFacebook,
+  FiInstagram,
+  FiLinkedin,
+  FiYoutube,
+} from "react-icons/fi";
 
 function Footer() {
   const quickLinks = [
@@ -21,52 +23,71 @@ function Footer() {
     ["Terms & Conditions", "/terms"],
   ];
 
+  const vendorLinks = [
+    ["Join as Vendor", "/join-as-vendor"],
+    ["Vendor Login", "/vendor-login"],
+    ["Vendor Registration", "/join-as-vendor"],
+    ["Partner Guidelines", "/partner-guidelines"],
+  ];
+
   const socialLinks = [
     {
       name: "Instagram",
-      icon: FaInstagram,
+      icon: FiInstagram,
       url: "https://www.instagram.com/harevent_20/?hl=en",
     },
     {
       name: "YouTube",
-      icon: FaYoutube,
+      icon: FiYoutube,
       url: "https://www.youtube.com/",
     },
     {
       name: "LinkedIn",
-      icon: FaLinkedinIn,
+      icon: FiLinkedin,
       url: "https://www.linkedin.com/in/harevent-company-20772a428/",
     },
     {
       name: "Facebook",
-      icon: FaFacebookF,
+      icon: FiFacebook,
       url: "https://www.facebook.com/profile.php?id=61593053192328",
     },
   ];
 
   const linkClass =
-    "inline-flex items-center text-[13px] text-[#78646E] transition-colors duration-200 hover:text-[#D4145A]";
+    "inline-flex items-center font-poppins text-[15px] font-normal text-[#78646E] transition-colors duration-200 hover:text-[#D4145A]";
 
   return (
-    <footer className="relative mt-10 bg-white">
-      <div className="mx-auto max-w-[1440px] px-5 pb-2 pt-0 sm:px-8 lg:px-10">
+    <footer className="mt-1 w-full bg-white font-poppins">
+      {/* Main Footer */}
+      <div className="mx-auto w-full max-w-[1540px] px-5 pb-6 pt-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 items-start gap-x-8 gap-y-8 sm:grid-cols-2 xl:grid-cols-[1.2fr_0.9fr_0.9fr_1fr]">
-          <div className="max-w-[380px]">
-            <a href="/" aria-label="HarEvent Home" className="mb-4 inline-flex items-center gap-1">
+
+          {/* Brand and Description */}
+          <div className="max-w-[420px]">
+            <a
+              href="/"
+              aria-label="HarEvent Home"
+              className="mb-3 inline-flex items-center"
+            >
               <img
                 src="/logo.png"
-                alt=""
-                className="h-30 w-30 object-contain"
+                alt="HarEvent"
+                className="h-[110px] w-[110px] object-contain"
               />
             </a>
 
-            <p className="max-w-[360px] text-[13px] leading-6 text-[#78646E]">
-              HarEvent helps customers discover event professionals and
-              services for weddings, celebrations, corporate functions,
-              and special occasions.
+            <h3 className="mb-1 font-playfair text-[22px] !font-bold leading-snug text-[#32252D]">
+              One Platform. Every Event. Every Vendor.
+            </h3>
+
+            <p className="!text-[15px] font-normal leading-[1.7] text-[#78646E]">
+              HarEvent helps customers discover event professionals
+              and services for weddings, celebrations, corporate
+              functions, and special occasions.
             </p>
 
-            <div className="mt-5 flex items-center gap-2.5">
+            {/* Social Icons */}
+            <div className="mt-4 flex w-full items-center gap-3">
               {socialLinks.map(({ name, icon: Icon, url }) => (
                 <a
                   key={name}
@@ -75,18 +96,33 @@ function Footer() {
                   rel="noopener noreferrer"
                   aria-label={name}
                   title={name}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F1F4F8] text-[#536174] transition-all duration-200 hover:-translate-y-1 hover:bg-[#E5EAF1] hover:text-[#D4145A]"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E60059] p-0 text-white transition-colors duration-200 hover:bg-[#C90D50]"
                 >
-                  <Icon size={17} />
+                  <Icon size={19} strokeWidth={2.5} className="shrink-0" />
                 </a>
               ))}
             </div>
+
+            {/* Trust Badges */}
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF2E9] px-2.5 py-1 font-poppins !text-[12px] font-medium uppercase tracking-wide text-[#E76A25]">
+                <BadgeCheck size={12} />
+                100% Verified
+              </span>
+
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FCE8F0] px-2.5 py-1 font-poppins !text-[12px] font-medium uppercase tracking-wide text-[#D4145A]">
+                <MapPin size={12} />
+                Pan India
+              </span>
+            </div>
           </div>
 
-          <div>
-            <h3 className="mb-4 border-b border-[#E9EDF2] pb-3 text-sm font-bold text-[#32252D]">
+          {/* Quick Links */}
+          <div className="xl:pt-[70px]">
+            <h3 className="mb-4 font-playfair text-[22px] font-semibold text-[#32252D]">
               Quick Links
             </h3>
+
             <ul className="space-y-2.5">
               {quickLinks.map(([name, to]) => (
                 <li key={name}>
@@ -98,10 +134,12 @@ function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-4 border-b border-[#E9EDF2] pb-3 text-sm font-bold text-[#32252D]">
+          {/* Company */}
+          <div className="xl:pt-[70px]">
+            <h3 className="mb-4 font-playfair text-[22px] font-semibold text-[#32252D]">
               Company
             </h3>
+
             <ul className="space-y-2.5">
               {companyLinks.map(([name, to]) => (
                 <li key={name}>
@@ -113,40 +151,30 @@ function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-4 border-b border-[#E9EDF2] pb-3 text-sm font-bold text-[#32252D]">
+          {/* For Vendors */}
+          <div className="xl:pt-[70px]">
+            <h3 className="mb-4 font-playfair text-[22px] font-semibold text-[#32252D]">
               For Vendors
             </h3>
-            <p className="mb-4 text-[13px] leading-5 text-[#78646E]">
-              Grow your event business with thousands of active bookings.
-            </p>
-            <div className="space-y-2.5">
-              <a
-                href="/vendor-login"
-                className="flex min-h-10 items-center justify-center rounded-lg border border-[#E6EAF0] bg-[#F1F4F8] px-4 text-[13px] font-semibold text-[#32252D] transition-colors hover:bg-[#E5EAF1]"
-              >
-                Vendor Login
-              </a>
-              <a
-                href="/join-as-vendor"
-                className="flex min-h-10 items-center justify-center rounded-lg bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-4 text-[13px] font-semibold text-white transition hover:brightness-105"
-              >
-                Register as Vendor
-              </a>
-            </div>
-          </div>
-        </div>
 
-        <div className="mt-5 flex flex-col gap-3 border-t border-[#E9EDF2] pt-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[11px] leading-5 text-[#8A7580]">
-            © 2026 HarEvent. All rights reserved.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="text-[11px] text-[#8A7580]">
-              Designed for Seamless Celebrations
-            </span>
+            <ul className="space-y-2.5">
+              {vendorLinks.map(([name, to]) => (
+                <li key={name}>
+                  <a href={to} className={linkClass}>
+                    {name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
+      </div>
+
+      {/* Full-Width Bottom Copyright Strip */}
+      <div className="w-full bg-[#FFF2F4] px-4 py-4 text-center">
+        <p className="font-poppins !text-[13px] font-normal leading-5 text-[#8A7580]">
+          © 2026 HarEvent India Private Limited. All rights reserved.
+        </p>
       </div>
     </footer>
   );

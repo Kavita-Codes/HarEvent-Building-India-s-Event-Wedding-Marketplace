@@ -64,6 +64,12 @@ select option:checked {
   color: white;
 }
 
+select option:hover,
+select option:focus {
+  background-color: #E60059;
+  color: white;
+}
+
 button {
   font-size: 15px !important;
   font-weight: 600 !important;
@@ -76,12 +82,18 @@ small {
 }
 
 header nav a {
-  font-size: 13px !important;
+  font-size: 16px !important;
   font-weight: 600 !important;
 }
 
 a[class*="bg-gradient-to-r"],
 a[class*="bg-[#D4145A]"] {
-  font-size: 15px !important;
+  font-size: 16px !important;
   font-weight: 600 !important;
+}
+
+header :is(a, button, span, p, li, label, input, select, textarea, small)[class],
+main :is(a, button, span, p, li, label, input, select, textarea, small)[class],
+footer :is(a, button, span, p, li, label, input, select, textarea, small)[class] {
+  font-size: 16px !important;
 }
