@@ -1,7 +1,7 @@
 import Signup from "./Signup";
 
 function JoinAsVendor() {
-  return <Signup vendorMode />;
+  return <Signup initialVendorMode />;
 }
 
 export default JoinAsVendor;

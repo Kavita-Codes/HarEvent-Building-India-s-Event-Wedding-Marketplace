@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import BrandsAndPartners from "../components/BrandsAndPartners";
@@ -17,7 +17,7 @@ function Home() {
   const location = useLocation();
   const navigate = useNavigate();
   const requestedForm = new URLSearchParams(location.search).get("form");
-  const loginMode = ["login", "vendor", "signup", "vendor-signup"].includes(requestedForm)
+  const loginMode = ["login", "vendor"].includes(requestedForm)
     ? requestedForm
     : null;
 
@@ -26,6 +26,15 @@ function Home() {
   };
 
   const closeLogin = () => navigate("/");
+
+  if (requestedForm === "signup" || requestedForm === "vendor-signup") {
+    return (
+      <Navigate
+        to={requestedForm === "vendor-signup" ? "/join-as-vendor" : "/signup"}
+        replace
+      />
+    );
+  }
 
   return (
     <>
@@ -50,11 +59,9 @@ function Home() {
           initialMode={loginMode}
           onClose={closeLogin}
           onRegister={(mode) => {
-            if (mode === "login" || mode === "vendor") {
-              openLogin(mode);
-            } else {
-              openLogin(mode === "vendor-signup" ? mode : "signup");
-            }
+            if (mode === "vendor-signup") navigate("/join-as-vendor");
+            else if (mode === "signup") navigate("/signup");
+            else openLogin(mode);
           }}
         />
       )}
