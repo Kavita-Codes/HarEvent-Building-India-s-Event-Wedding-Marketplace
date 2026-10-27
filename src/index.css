@@ -1,99 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Poppins", sans-serif;
   --font-serif: "Playfair Display", serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-playfair: "Playfair Display", serif;
 }
 
 body {
   font-family: "Poppins", sans-serif;
-}
-
-h1,
-h2,
-h3 {
-  font-family: "Playfair Display", serif !important;
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: clamp(36px, 5vw, 60px) !important;
-  font-weight: 700 !important;
-}
-
-h2 {
-  font-size: clamp(24px, 2.5vw, 30px) !important;
-  font-weight: 600 !important;
-}
-
-h3 {
-  font-size: clamp(18px, 1.85vw, 22px) !important;
-  font-weight: 600 !important;
-}
-
-p {
-  font-family: "Poppins", sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 400;
-  line-height: 1.6;
-}
-
-footer p,
-footer a,
-footer span,
-footer h3 {
-  font-size: 16px !important;
-}
-
-button,
-input,
-select,
-textarea,
-label,
-small {
-  font-family: "Poppins", sans-serif;
-}
-
-select {
-  accent-color: #E50059;
-}
-
-select option:checked {
-  background-color: #E50059;
-  color: white;
-}
-
-select option:hover,
-select option:focus {
-  background-color: #E60059;
-  color: white;
-}
-
-button {
-  font-size: 15px !important;
-  font-weight: 600 !important;
-}
-
-label,
-small {
-  font-size: 12px;
-  font-weight: 500;
-}
-
-header nav a {
-  font-size: 16px !important;
-  font-weight: 600 !important;
-}
-
-a[class*="bg-gradient-to-r"],
-a[class*="bg-[#D4145A]"] {
-  font-size: 16px !important;
-  font-weight: 600 !important;
-}
-
-header :is(a, button, span, p, li, label, input, select, textarea, small)[class],
-main :is(a, button, span, p, li, label, input, select, textarea, small)[class],
-footer :is(a, button, span, p, li, label, input, select, textarea, small)[class] {
-  font-size: 16px !important;
 }
