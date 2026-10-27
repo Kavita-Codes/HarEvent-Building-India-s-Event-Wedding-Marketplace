@@ -59,9 +59,8 @@ function Footer() {
   return (
     <footer className="mt-1 w-full bg-white font-poppins">
       {/* Main Footer */}
-      <div className="mx-auto w-full max-w-[1540px] px-5 pb-6 pt-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 items-start gap-x-8 gap-y-8 sm:grid-cols-2 xl:grid-cols-[1.2fr_0.9fr_0.9fr_1fr]">
-
+      <div className="mx-auto w-full max-w-none px-5 pb-6 pt-6 sm:px-8 lg:px-[5.25%]">
+        <div className="grid grid-cols-1 items-start gap-x-8 gap-y-8 sm:grid-cols-2 xl:grid-cols-4">
           {/* Brand and Description */}
           <div className="max-w-[420px]">
             <a
@@ -98,7 +97,11 @@ function Footer() {
                   title={name}
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E60059] p-0 text-white transition-colors duration-200 hover:bg-[#C90D50]"
                 >
-                  <Icon size={19} strokeWidth={2.5} className="shrink-0" />
+                  <Icon
+                    size={19}
+                    strokeWidth={2.5}
+                    className="shrink-0"
+                  />
                 </a>
               ))}
             </div>
@@ -180,4 +183,4 @@ function Footer() {
   );
 }
 
-export default Footer
+export default Footer;

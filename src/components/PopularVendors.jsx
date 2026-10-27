@@ -69,13 +69,13 @@ const vendors = [
 
 function VendorCard({ vendor }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-[18px] border border-[#F1DDE5] bg-white shadow-[0_3px_14px_rgba(71,34,52,0.04)] transition duration-300 hover:-translate-y-1 hover:border-[#E9B4C7] hover:shadow-[0_12px_28px_rgba(71,34,52,0.12)]">
-      <div className="relative h-[157px] overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#FFF8F2] to-[#FCE4EC]">
+    <article className="group flex h-[365px] flex-col overflow-hidden rounded-[15px] border border-[#F1DDE5] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#E9A0BA] hover:shadow-[0_8px_20px_rgba(71,34,52,0.12)] sm:h-[380px] lg:h-[395px]">
+      <div className="relative h-[210px] shrink-0 overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#FFF8F2] to-[#FCE4EC] sm:h-[220px] lg:h-[230px]">
         {vendor.portfolioImage ? (
           <img
             src={vendor.portfolioImage}
             alt={vendor.imageAlt || `${vendor.businessName} portfolio`}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             loading="lazy"
           />
         ) : (
@@ -93,8 +93,8 @@ function VendorCard({ vendor }) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col px-3 py-2.5">
-        <div className="flex min-h-[16px] items-center justify-between gap-2 text-[9px]">
+      <div className="flex min-h-0 flex-1 flex-col px-3 pb-2.5 pt-2.5 sm:px-3.5">
+        <div className="flex min-h-[16px] items-center justify-between gap-2 text-[11px]">
           {vendor.ratingVerified === true &&
           Number.isFinite(vendor.rating) &&
           vendor.rating >= 0 &&
@@ -110,7 +110,7 @@ function VendorCard({ vendor }) {
             </span>
           ) : <span aria-hidden="true" />}
           {vendor.location && (
-            <span className="inline-flex items-center gap-1 text-right text-[9px] text-[#8A7580]">
+            <span className="inline-flex items-center gap-1 text-right text-[11px] text-[#8A7580]">
               <MapPin size={11} className="shrink-0 text-[#E60059]" />
               {vendor.location}
             </span>
@@ -118,12 +118,12 @@ function VendorCard({ vendor }) {
         </div>
 
         {vendor.category && (
-          <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.3px] text-[#E60059]">
+          <p className="mt-1 text-[13px] font-bold uppercase tracking-[0.3px] text-[#E60059]">
             {vendor.category}
           </p>
         )}
         <div className="mt-1 flex items-center gap-1.5">
-          <h3 className="truncate !font-sans !text-[13px] !font-semibold !leading-[1.2] text-[#382832]">
+          <h3 className="truncate font-sans text-[16px] font-semibold leading-5 text-[#382832]">
             {vendor.businessName}
           </h3>
           {vendor.isVerified === true && (
@@ -135,24 +135,24 @@ function VendorCard({ vendor }) {
           )}
         </div>
         {vendor.description && (
-          <p className="mt-1 line-clamp-2 min-h-[30px] !text-[11px] !leading-[1.3] !text-[#8A7580]">
+          <p className="mt-1 line-clamp-2 min-h-[30px] text-[13px] leading-[1.4] text-[#8A7580]">
             {vendor.description}
           </p>
         )}
 
-        <div className="mt-auto flex gap-1.5 border-t border-[#F7E8EE] pt-1.5">
+        <div className="mt-auto flex gap-1.5 border-t border-[#F2DDE5] pt-2">
           <Link
             to={
               vendor.inquiryUrl ||
               `/enquiry?vendor=${encodeURIComponent(vendor.businessName)}&category=${encodeURIComponent(vendor.category || "Vendor")}`
             }
-            className="inline-flex h-[25px] min-w-0 flex-1 items-center justify-center rounded-full bg-[#E60059] px-2 !text-[11px] !font-semibold text-white transition hover:bg-[#A80F46]"
+            className="inline-flex h-7 min-w-0 flex-1 items-center justify-center rounded-full bg-[#E60059] px-2 text-[11px] font-semibold text-white transition hover:bg-[#A80F46]"
           >
             Send Inquiry
           </Link>
           <Link
             to={vendor.profileUrl || "/vendor-categories"}
-            className="inline-flex h-[25px] min-w-0 flex-1 items-center justify-center rounded-full border border-[#F1DDE5] bg-[#FFF7FA] px-2 !text-[11px] !font-normal text-[#493640] transition hover:border-[#E9B4C7]"
+            className="inline-flex h-7 min-w-0 flex-1 items-center justify-center rounded-full border border-[#F1DDE5] bg-[#FFF7FA] px-2 text-[11px] font-normal text-[#493640] transition hover:border-[#E9B4C7]"
           >
             View Profile
           </Link>

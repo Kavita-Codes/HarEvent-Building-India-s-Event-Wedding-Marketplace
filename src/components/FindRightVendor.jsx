@@ -78,14 +78,14 @@ function FindRightVendor() {
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-1 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[1.2px] text-[#D4145A]">
+            <p className="mb-1 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[1.2px] text-[#D4145A]">
               <span className="h-[2px] w-6 bg-[#D4145A]" />
               Curated Specialists
             </p>
-            <h2 className="text-3xl font-semibold tracking-tight text-[#30232B] sm:text-4xl">
+            <h2 className="text-3xl font-playfair font-bold tracking-tight text-[#30232B] sm:text-4xl">
               Find the Right Vendor
             </h2>
-            <p className="mt-1.5 text-sm leading-6 text-[#8A7580]">
+            <p className="mt-1.5 text-[16px] leading-6 text-[#8A7580]">
               Discover professionals for every part of your event.
             </p>
           </div>
@@ -102,14 +102,14 @@ function FindRightVendor() {
             <Link
               key={name}
               to="/vendor-categories"
-              className="group overflow-hidden rounded-[14px] border border-[#F1DDE5] bg-white transition duration-300 hover:-translate-y-1 hover:border-[#E9B4C7] hover:shadow-[0_10px_24px_rgba(71,34,52,0.12)]"
+              className="group flex h-[340px] flex-col overflow-hidden rounded-[15px] border border-[#F1DDE5] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#E9A0BA] hover:shadow-[0_8px_20px_rgba(71,34,52,0.12)] sm:h-[355px] lg:h-[370px]"
             >
-              <div className="relative overflow-hidden">
+              <div className="relative h-[210px] shrink-0 overflow-hidden sm:h-[220px] lg:h-[230px]">
                 <SectionImage
                   src={image}
                   alt={`${name} portfolio`}
                   icon={Icon}
-                  className="h-[180px] transition duration-500 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                 />
                 {popular && (
                   <span className="absolute left-3 top-3 rounded-full border border-[#F8D8E5] bg-white px-3 py-1 text-[10px] font-semibold leading-none text-[#E60059] shadow-sm">
@@ -117,25 +117,25 @@ function FindRightVendor() {
                   </span>
                 )}
               </div>
-              <div className="flex min-h-[106px] flex-col px-3 pb-2 pt-2.5">
-                <h3 className="text-sm font-semibold leading-snug text-[#382832]">{name}</h3>
-                <p className="mt-1 line-clamp-2 text-xs leading-[1.35] text-[#8A7580]">
+              <div className="flex min-h-0 flex-1 flex-col px-3 pb-2.5 pt-2.5 sm:px-3.5">
+                <h3 className="mt-1 font-sans text-[16px] font-semibold leading-5 text-[#382832]">{name}</h3>
+                <p className="mt-1 line-clamp-2 text-[13px] leading-[1.4] text-[#8A7580]">
                   {description}
                 </p>
-                <div className="mt-auto flex items-center justify-between gap-2 border-t border-[#F2DDE5] pt-1.5">
-                  <span className={`rounded-full px-2 py-1 text-[9px] font-semibold leading-none ${
+                <div className="mt-auto flex items-center justify-between gap-2 border-t border-[#F2DDE5] pt-2">
+                  <span className={`inline-flex max-w-[calc(100%-32px)] items-center rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none ${
                     ["Event Planners", "Decorators", "Invitations & Gifts"].includes(name)
                       ? "bg-[#FFF3E9] text-[#F07814]"
                       : "bg-[#FFF1F6] text-[#D4145A]"
                   }`}>
                     {vendorCount}
                   </span>
-                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white transition group-hover:scale-105 ${
+                  <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white transition duration-300 group-hover:scale-110 group-hover:shadow-md ${
                     ["Event Planners", "Decorators", "Invitations & Gifts"].includes(name)
                       ? "bg-[#FF790D]"
                       : "bg-[#E60059]"
                   }`}>
-                    <ArrowRight size={13} strokeWidth={2.5} />
+                    <ArrowRight size={14} strokeWidth={2.5} />
                   </span>
                 </div>
               </div>

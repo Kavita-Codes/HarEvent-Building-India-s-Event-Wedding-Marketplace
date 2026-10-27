@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import {
   Search,
   CalendarDays,
@@ -8,30 +9,66 @@ import {
   Star,
 } from "lucide-react";
 
+const eventOptions = [
+  "Weddings",
+  "Birthdays",
+  "Engagements",
+  "Corporate Events",
+  "Baby Showers",
+  "Anniversaries",
+  "Receptions",
+  "Pre-Wedding Events",
+  "Naming Ceremonies",
+  "Family & Social Gatherings",
+  "Farewell & Retirement",
+];
+
+const vendorOptions = [
+  "Event Planner",
+  "Photographer",
+  "Venue",
+  "Decorator",
+  "Caterer",
+  "Makeup Artist",
+  "Entertainment",
+];
+
 function Hero() {
   const [eventType, setEventType] = useState("");
   const [vendorCategory, setVendorCategory] = useState("");
-  const [location, setLocation] = useState("Pune");
+  const [location, setLocation] = useState("Location");
   const [openDropdown, setOpenDropdown] = useState(null);
 
-  const eventOptions = [
-    "Wedding",
-    "Birthday",
-    "Engagement",
-    "Corporate Event",
-    "Anniversary",
-    "Baby Shower",
-  ];
+  // Typing animation
+  const [eventIndex, setEventIndex] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const vendorOptions = [
-    "Event Planner",
-    "Photographer",
-    "Venue",
-    "Decorator",
-    "Caterer",
-    "Makeup Artist",
-    "Entertainment",
-  ];
+  useEffect(() => {
+    const currentEvent = eventOptions[eventIndex];
+    let delay = isDeleting ? 45 : 100;
+
+    if (!isDeleting && typedText === currentEvent) {
+      delay = 1400;
+    } else if (isDeleting && typedText === "") {
+      delay = 250;
+    }
+
+    const timer = setTimeout(() => {
+      if (!isDeleting && typedText === currentEvent) {
+        setIsDeleting(true);
+      } else if (isDeleting && typedText === "") {
+        setIsDeleting(false);
+        setEventIndex((prev) => (prev + 1) % eventOptions.length);
+      } else if (isDeleting) {
+        setTypedText(currentEvent.slice(0, typedText.length - 1));
+      } else {
+        setTypedText(currentEvent.slice(0, typedText.length + 1));
+      }
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [typedText, isDeleting, eventIndex]);
 
   const selectOption = (type, value) => {
     if (type === "event") setEventType(value);
@@ -39,72 +76,76 @@ function Hero() {
     setOpenDropdown(null);
   };
 
-  const fieldClass =
-    "flex h-[44px] w-full min-w-0 items-center gap-2 rounded-[10px] bg-[#FFF1F5] px-3";
+  
+const renderDropdown = (type, value, placeholder, options, Icon) => (
+  <div className="relative w-full min-w-0">
+    <button
+      type="button"
+      onClick={() =>
+        setOpenDropdown(openDropdown === type ? null : type)
+      }
+      aria-expanded={openDropdown === type}
+      className="flex h-[44px] w-full min-w-0 items-center gap-2 rounded-[7px] border border-white/35 bg-white/5 px-3 text-left transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+    >
+      <Icon
+        size={16}
+        strokeWidth={2}
+        className="shrink-0 text-white"
+      />
 
-  const labelClass =
-    "mb-2 block font-poppins text-[10px] font-medium uppercase tracking-wide text-[#8C7882]";
-
-  const renderDropdown = (type, value, placeholder, options, Icon) => (
-    <div className="relative w-full min-w-0">
-      <button
-        type="button"
-        onClick={() => setOpenDropdown(openDropdown === type ? null : type)}
-        aria-expanded={openDropdown === type}
-        className={`${fieldClass} cursor-pointer text-left transition-colors hover:bg-[#FFE6EF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E50059]/30`}
+      <span
+        className={`min-w-0 flex-1 truncate font-poppins text-[12px] sm:text-[13px] ${
+          value
+            ? "font-medium text-white"
+            : "font-normal text-white/90"
+        }`}
       >
-        <Icon size={16} strokeWidth={2} className="shrink-0 text-[#E50059]" />
+        {value || placeholder}
+      </span>
 
-        <span
-          className={`min-w-0 flex-1 truncate font-poppins text-[14px] ${
-            value ? "font-medium text-[#382832]" : "font-normal text-[#9D8B94]"
-          }`}
-        >
-          {value || placeholder}
-        </span>
+      <ChevronDown
+        size={15}
+        strokeWidth={1.8}
+        className={`shrink-0 text-white/90 transition-transform ${
+          openDropdown === type ? "rotate-180" : ""
+        }`}
+      />
+    </button>
 
-        <ChevronDown
-          size={15}
-          strokeWidth={1.8}
-          className={`shrink-0 text-[#A58D98] transition-transform ${
-            openDropdown === type ? "rotate-180" : ""
-          }`}
+    {openDropdown === type && (
+      <>
+        <button
+          type="button"
+          aria-label="Close dropdown"
+          className="fixed inset-0 z-20 cursor-default"
+          onClick={() => setOpenDropdown(null)}
         />
-      </button>
 
-      {openDropdown === type && (
-        <>
-          <button
-            type="button"
-            aria-label="Close dropdown"
-            className="fixed inset-0 z-20 cursor-default"
-            onClick={() => setOpenDropdown(null)}
-          />
+        <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-30 max-h-60 overflow-y-auto rounded-lg border border-white/25 bg-[#24151B]/95 text-left shadow-xl backdrop-blur-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {options.map((option) => {
+            const selected = value === option;
 
-          <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-30 max-h-60 overflow-y-auto rounded-xl border border-[#F0DDE5] bg-white text-left shadow-xl">
-            {options.map((option) => {
-              const selected = value === option;
+            return (
+              <button
+                key={option}
+                type="button"
+                onClick={() => selectOption(type, option)}
+                className={`block w-full px-3 py-3 text-left font-poppins text-[12px] transition-all duration-200 sm:text-[13px] ${
+                  selected
+                    ? "bg-gradient-to-r from-[#D4145A] to-[#FF7628] font-semibold text-white"
+                    : "bg-transparent font-normal text-white/90 hover:bg-gradient-to-r hover:from-[#D4145A] hover:to-[#FF7628] hover:font-semibold hover:text-white"
+                }`}
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
+      </>
+    )}
+  </div>
+);
 
-              return (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => selectOption(type, option)}
-                  className={`flex w-full items-center rounded-none px-3 py-2.5 text-left font-poppins text-[13px] transition-colors ${
-                    selected
-                      ? "bg-gradient-to-r from-[#D4145A] to-[#FF7628] font-semibold text-white"
-                      : "font-normal text-[#382832] hover:bg-gradient-to-r hover:from-[#D4145A] hover:to-[#FF7628] hover:text-white"
-                  }`}
-                >
-                  {option}
-                </button>
-              );
-            })}
-          </div>
-        </>
-      )}
-    </div>
-  );
 
   return (
     <main>
@@ -120,7 +161,7 @@ function Hero() {
         <div className="absolute inset-0 bg-black/45" />
 
         {/* Hero Content */}
-        <div className="relative z-10 mx-auto w-full max-w-[1000px] text-center">
+        <div className="relative z-10 mx-auto w-full max-w-[1250px] text-center">
           {/* Eyebrow */}
           <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-orange-300/30 bg-black/40 px-4 py-2 font-poppins text-[10px] font-semibold uppercase tracking-wide text-[#FF8429] sm:text-[11px]">
             <span className="flex h-[15px] w-[15px] shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#FF8429] to-[#FF7628]">
@@ -131,15 +172,30 @@ function Hero() {
                 className="text-white"
               />
             </span>
-            <span>India's Event &amp; Vendor Discovery Platform</span>
+
+            <span>
+              India's Event &amp; Vendor Discovery Platform
+            </span>
           </div>
 
           {/* Main Heading */}
-          <h1 className="mt-6 font-playfair text-[36px] font-bold leading-[1.1] text-white sm:text-[48px] md:text-[60px]">
+          <h1 className="mt-6 font-playfair text-[36px] font-bold leading-[1.12] text-white sm:text-[48px] md:text-[60px]">
             Plan Your Perfect Event
             <br />
-            <span className="mt-1 inline-block bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text font-playfair text-[36px] font-bold leading-[1.1] text-transparent sm:text-[48px] md:text-[60px]">
-              All in One Place
+
+            <span className="inline-flex max-w-full flex-wrap items-baseline justify-center gap-x-3">
+              <span className="bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent">
+                All in One Place...
+              </span>
+
+              <span className="inline-flex min-h-[1.12em] items-baseline bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent">
+                <span>{typedText}</span>
+
+                <span
+                  aria-hidden="true"
+                  className="ml-1 inline-block h-[0.8em] w-[3px] translate-y-[2px] animate-pulse rounded-full bg-[#FF7628]"
+                />
+              </span>
             </span>
           </h1>
 
@@ -150,87 +206,61 @@ function Hero() {
             to life.
           </p>
 
-          {/* Search Panel */}
-          <div className="mx-auto mt-8 w-full max-w-[1000px] rounded-[18px] bg-white px-4 py-5 text-left shadow-2xl sm:px-6">
+          {/* Compact Transparent Search Panel */}
+          <div className="mx-auto mt-8 w-full max-w-[940px] rounded-[12px] border border-white/30 bg-black/25 p-3 text-left shadow-xl backdrop-blur-md sm:p-4">
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="grid grid-cols-1 items-end gap-3 md:grid-cols-2 lg:grid-cols-[1fr_1.35fr_1fr_auto]"
+              className="grid grid-cols-1 items-center gap-2.5 sm:grid-cols-2 lg:grid-cols-[1fr_1.1fr_0.85fr_auto]"
             >
               {/* Event Type */}
-              <label className="block w-full min-w-0">
-                <span className={labelClass}>Event Type</span>
-
+              <div className="w-full min-w-0">
                 {renderDropdown(
                   "event",
                   eventType,
-                  "Select your event",
+                  "Event Type",
                   eventOptions,
-                  CalendarDays,
+                  CalendarDays
                 )}
-              </label>
+              </div>
 
               {/* Vendor Category */}
-              <label className="block w-full min-w-0">
-                <span className={labelClass}>Vendor Category</span>
-
+              <div className="w-full min-w-0">
                 {renderDropdown(
                   "vendor",
                   vendorCategory,
-                  "Choose a service",
+                  "Vendor Category",
                   vendorOptions,
-                  Camera,
+                  Camera
                 )}
-              </label>
+              </div>
 
               {/* Location */}
-              <label className="block w-full min-w-0">
-                <span className={labelClass}>Location</span>
+              <div className="flex h-[44px] w-full min-w-0 items-center gap-2 rounded-[7px] border border-white/35 bg-white/5 px-3 transition-colors focus-within:bg-white/10">
+                <MapPin
+                  size={16}
+                  strokeWidth={2}
+                  className="shrink-0 text-white"
+                />
 
-                <div
-                  className={`${fieldClass} focus-within:ring-2 focus-within:ring-[#E50059]/20`}
-                >
-                  <MapPin
-                    size={16}
-                    strokeWidth={2}
-                    className="shrink-0 text-[#E50059]"
-                  />
-
-                  <input
-                    type="text"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    placeholder="Enter city or location"
-                    className="w-full min-w-0 bg-transparent font-poppins text-[14px] font-medium text-[#382832] outline-none placeholder:font-normal placeholder:text-[#9D8B94]"
-                  />
-                </div>
-              </label>
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="Enter city"
+                  aria-label="Location"
+                  className="w-full min-w-0 bg-transparent font-poppins text-[12px] font-medium text-white outline-none placeholder:font-normal placeholder:text-white/90 sm:text-[13px]"
+                />
+              </div>
 
               {/* Search Button */}
               <button
                 type="submit"
-                className="flex h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-7 font-poppins text-[15px] font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                className="flex h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D4145A] to-[#FF7628] px-5 font-poppins text-[13px] font-semibold text-white shadow-md transition duration-300 hover:-translate-y-0.5 hover:shadow-lg"
               >
                 <Search size={16} strokeWidth={2.2} />
                 Search Vendors
               </button>
             </form>
-
-            {/* Supporting Text */}
-            <div className="mt-3 flex w-fit max-w-full min-w-0 items-start justify-start gap-1 font-poppins text-[12px] font-normal leading-4 text-[#897782]">
-              <span className="mt-0.5 flex h-[13px] w-[13px] shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#FF8429] to-[#FF7628]">
-                <Star
-                  size={8}
-                  strokeWidth={2.5}
-                  fill="white"
-                  className="text-white"
-                />
-              </span>
-
-              <p className="m-0 min-w-0 text-left font-poppins text-[13px] font-normal leading-4 sm:text-[13px]">
-                From beautiful venues to exceptional event services, discover
-                everything you need to make your celebration unforgettable.
-              </p>
-            </div>
           </div>
         </div>
       </section>

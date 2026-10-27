@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import {
   ArrowRight,
   AudioLines,
@@ -111,7 +112,7 @@ const categories = [
     icon: Cake,
     color: "orange",
   },
-   {
+  {
     name: "Grand Stays",
     category: "Venues",
     icon: Building2,
@@ -126,13 +127,76 @@ const categories = [
 ];
 
 function BrandsAndPartners() {
+  const [isPaused, setIsPaused] = useState(false);
+
+  const renderPartnerCard = (
+    { name, category, icon: Icon, color, popular },
+    index,
+    duplicate = false
+  ) => (
+    <Link
+      key={`${name}-${category}-${index}-${duplicate ? "duplicate" : "original"}`}
+      to="/vendor-categories"
+      tabIndex={duplicate ? -1 : undefined}
+      aria-hidden={duplicate ? "true" : undefined}
+      onPointerDown={() => setIsPaused(true)}
+      onPointerUp={() => setIsPaused(false)}
+      onPointerCancel={() => setIsPaused(false)}
+      onPointerLeave={() => setIsPaused(false)}
+      className={`partner-card group relative flex h-[190px] w-[175px] shrink-0 flex-col items-center rounded-[16px] border-2 px-2 pt-8 transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-[#E9A0BB] hover:shadow-[0_10px_24px_rgba(71,34,52,0.13)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4145A] focus-visible:ring-offset-2 sm:w-[170px] ${
+        popular
+          ? "border-[#F3A0BD] bg-gradient-to-b from-[#FFF9FB] to-[#FFF5F8] shadow-[0_2px_5px_rgba(212,20,90,0.10)]"
+          : "border-[#F2D7E1] bg-white shadow-[0_1px_2px_rgba(70,25,45,0.04)]"
+      }`}
+    >
+      {/* Popular Badge */}
+      {popular && (
+        <span className="absolute -top-[9px] right-2 flex h-5 items-center gap-1 rounded-full bg-[#E60059] px-2.5 font-poppins text-[11px] font-semibold text-white">
+          <Star size={11} fill="currentColor" />
+          Popular
+        </span>
+      )}
+
+      {/* Icon */}
+      <span
+        className={`mb-3 flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-[15px] text-white transition-transform duration-300 group-hover:scale-110 ${
+          color === "pink" ? "bg-[#E60059]" : "bg-[#FF790D]"
+        }`}
+      >
+        {name === "Royal Florist" ? (
+          <LotusIcon size={35} />
+        ) : name === "After Weddings" ? (
+          <Heart size={31} strokeWidth={1.3} />
+        ) : (
+          <Icon size={31} strokeWidth={2.3} />
+        )}
+      </span>
+
+      {/* Partner Name */}
+      <span className="max-w-full text-center font-poppins text-[13px] font-bold leading-[1.3] text-[#382A32] transition-colors duration-300 group-hover:text-[#D4145A]">
+        {name}
+      </span>
+
+      {/* Category */}
+      <span
+        className={`mt-2.5 flex h-6 max-w-full items-center justify-center whitespace-nowrap rounded-full px-5 font-poppins text-[10px] font-semibold leading-none ${
+          popular
+            ? "bg-[#F9C9DB] text-[#D4145A]"
+            : color === "pink"
+              ? "bg-[#FFF0F5] text-[#E60059]"
+              : "bg-[#FFF3E8] text-[#F07816]"
+        }`}
+      >
+        {category}
+      </span>
+    </Link>
+  );
+
   return (
     <section className="w-full overflow-hidden bg-white px-5 pb-8 pt-8 sm:px-8 lg:px-[4.55%] lg:pb-10">
       <div className="mx-auto max-w-[1440px]">
-
         {/* Heading and Statistics */}
         <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[1.05fr_1.55fr] lg:gap-7">
-
           {/* Left Content */}
           <div className="min-w-0">
             <p className="mb-[10px] flex items-center gap-[9px] font-poppins text-[13px] font-bold uppercase tracking-[1.25px] text-[#E60059]">
@@ -155,7 +219,6 @@ function BrandsAndPartners() {
 
           {/* Right Content */}
           <div className="flex min-w-0 flex-col items-end gap-3 lg:flex-row lg:items-end">
-
             {/* Trust Statistics Panel */}
             <ul className="grid min-h-[87px] w-full min-w-0 flex-1 grid-cols-3 items-center rounded-[16px] border border-[#F5D7E1] bg-[#FFFAFC] px-2 py-3">
               {highlights.map(({ title, detail, icon: Icon }, index) => (
@@ -197,116 +260,106 @@ function BrandsAndPartners() {
           </div>
         </div>
 
-        {/* Horizontally Scrollable Partner Cards */}
+        {/* Infinite Auto-Scrolling Carousel */}
         <div
-          className="partners-scroll mt-9 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain pb-4 pt-3"
+          className={`partners-carousel mt-9 ${isPaused ? "is-paused" : ""}`}
           aria-label="Browse trusted brands and partners"
+          onPointerUp={() => setIsPaused(false)}
+          onPointerCancel={() => setIsPaused(false)}
+          onPointerLeave={() => setIsPaused(false)}
         >
-          {categories.map(({ name, category, icon: Icon, color, popular }, index) => (
-            <Link
-              key={name}
-              to="/vendor-categories"
-              style={{ animationDelay: `${index * 80}ms` }}
-              className={`partner-card group relative flex h-[190px] w-[175px] shrink-0 snap-start flex-col items-center rounded-[16px] border-2 px-2 pt-8 transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-[#E9A0BB] hover:shadow-[0_10px_24px_rgba(71,34,52,0.13)] sm:w-[170px] ${
-                popular
-                  ? "border-[#F3A0BD] bg-gradient-to-b from-[#FFF9FB] to-[#FFF5F8] shadow-[0_2px_5px_rgba(212,20,90,0.10)]"
-                  : "border-[#F2D7E1] bg-white shadow-[0_1px_2px_rgba(70,25,45,0.04)]"
-              }`}
-            >
-              {/* Popular Badge */}
-              {popular && (
-                <span className="absolute -top-[9px] right-2 flex h-5 items-center gap-1 rounded-full bg-[#E60059] px-2.5 font-poppins text-[11px] font-semibold text-white">
-                  <Star size={11} fill="currentColor" />
-                  Popular
-                </span>
+          <div className="partners-track">
+            {/* Original Cards */}
+            <div className="partners-group">
+              {categories.map((item, index) =>
+                renderPartnerCard(item, index)
               )}
+            </div>
 
-              {/* Icon */}
-              <span
-                className={`mb-3 flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-[15px] text-white transition-transform duration-300 group-hover:scale-110 ${
-                  color === "pink" ? "bg-[#E60059]" : "bg-[#FF790D]"
-                }`}
-              >
-                {name === "Royal Florist" ? (
-                  <LotusIcon size={35} />
-                ) : name === "After Weddings" ? (
-                  <Heart size={31} strokeWidth={1.3} />
-                ) : (
-                  <Icon size={31} strokeWidth={2.3} />
-                )}
-              </span>
-
-              {/* Partner Name */}
-              <span className="max-w-full text-center font-poppins text-[13px] font-bold leading-[1.3] text-[#382A32] transition-colors duration-300 group-hover:text-[#D4145A]">
-                {name}
-              </span>
-
-              {/* Category */}
-              <span
-                className={`mt-2.5 flex h-6 max-w-full items-center justify-center whitespace-nowrap rounded-full px-5 font-poppins text-[10px] font-semibold leading-none ${
-                  popular
-                    ? "bg-[#F9C9DB] text-[#D4145A]"
-                    : color === "pink"
-                      ? "bg-[#FFF0F5] text-[#E60059]"
-                      : "bg-[#FFF3E8] text-[#F07816]"
-                }`}
-              >
-                {category}
-              </span>
-            </Link>
-          ))}
+            {/* Duplicate Cards for Seamless Loop */}
+            <div className="partners-group" aria-hidden="true">
+              {categories.map((item, index) =>
+                renderPartnerCard(item, index, true)
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Scrollbar and Entrance Animation */}
+      {/* Carousel and Hover Animations */}
       <style>{`
-        .partners-scroll {
-          scrollbar-width: thin;
-          scrollbar-color: #E6A4BC #FFF1F6;
-          scroll-behavior: smooth;
+        .partners-carousel {
+          width: 100%;
+          overflow: hidden;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          touch-action: pan-y;
         }
 
-        .partners-scroll::-webkit-scrollbar {
-          height: 7px;
+        .partners-track {
+          display: flex;
+          width: max-content;
+          animation: partnersMarquee 38s linear infinite;
+          will-change: transform;
         }
 
-        .partners-scroll::-webkit-scrollbar-track {
-          background: #FFF1F6;
-          border-radius: 999px;
+        .partners-group {
+          display: flex;
+          flex: 0 0 auto;
+          align-items: stretch;
+          gap: 12px;
+          padding-right: 12px;
         }
 
-        .partners-scroll::-webkit-scrollbar-thumb {
-          background: linear-gradient(90deg, #D4145A, #FF7628);
-          border-radius: 999px;
-        }
-
-        .partners-scroll::-webkit-scrollbar-thumb:hover {
-          background: #D4145A;
+        .partners-carousel:hover .partners-track,
+        .partners-carousel.is-paused .partners-track,
+        .partners-carousel:focus-within .partners-track {
+          animation-play-state: paused;
         }
 
         .partner-card {
           animation: partnerCardEnter 550ms ease-out both;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        .partner-card:active {
+          transform: scale(0.98);
+        }
+
+        @keyframes partnersMarquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
         }
 
         @keyframes partnerCardEnter {
           from {
             opacity: 0;
-            transform: translateY(14px);
+            translate: 0 10px;
           }
           to {
             opacity: 1;
-            transform: translateY(0);
+            translate: 0 0;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .partners-track {
+            animation-duration: 32s;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
+          .partners-track {
+            animation: none;
+          }
+
           .partner-card {
             animation: none;
             transition: none;
-          }
-
-          .partners-scroll {
-            scroll-behavior: auto;
           }
         }
       `}</style>
