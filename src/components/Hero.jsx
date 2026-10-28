@@ -34,7 +34,7 @@ const vendorOptions = [
 ];
 
 const rotatingKeywords = [
-  "Wedding Planners",
+  "Wedding Planner",
   "Venues",
   "Photographers",
   "Caterers",
