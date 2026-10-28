@@ -54,24 +54,21 @@ function Hero() {
 
   useEffect(() => {
     const word = rotatingKeywords[keywordIndex];
-    const delay = isDeleting
-      ? 45
-      : typedText === word
-        ? 1600
-        : 90;
+    const delay = isDeleting ? 45 : typedText === word ? 1600 : 90;
 
-    const timer = setTimeout(() => {
-      if (!isDeleting && typedText === word) {
-        setIsDeleting(true);
-      } else if (isDeleting && typedText === "") {
-        setIsDeleting(false);
-        setKeywordIndex((index) => (index + 1) % rotatingKeywords.length);
-      } else {
-        setTypedText(
-          word.slice(0, typedText.length + (isDeleting ? -1 : 1))
-        );
-      }
-    }, isDeleting && typedText === "" ? 280 : delay);
+    const timer = setTimeout(
+      () => {
+        if (!isDeleting && typedText === word) {
+          setIsDeleting(true);
+        } else if (isDeleting && typedText === "") {
+          setIsDeleting(false);
+          setKeywordIndex((index) => (index + 1) % rotatingKeywords.length);
+        } else {
+          setTypedText(word.slice(0, typedText.length + (isDeleting ? -1 : 1)));
+        }
+      },
+      isDeleting && typedText === "" ? 280 : delay,
+    );
 
     return () => clearTimeout(timer);
   }, [typedText, isDeleting, keywordIndex]);
@@ -87,9 +84,7 @@ function Hero() {
     <div className="relative w-full min-w-0">
       <button
         type="button"
-        onClick={() =>
-          setOpenDropdown(openDropdown === type ? null : type)
-        }
+        onClick={() => setOpenDropdown(openDropdown === type ? null : type)}
         aria-expanded={openDropdown === type}
         className="flex h-[44px] w-full min-w-0 items-center gap-2 rounded-[7px] border border-white/35 bg-white/5 px-3 text-left transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
       >
@@ -121,7 +116,7 @@ function Hero() {
             onClick={() => setOpenDropdown(null)}
           />
 
-          <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-30 max-h-60 overflow-y-auto rounded-lg border border-white/25 bg-[#24151B]/95 text-left shadow-xl backdrop-blur-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="dropdown-menu absolute left-0 right-0 top-[calc(100%+6px)] z-30 max-h-none overflow-visible rounded-lg border border-white/25 bg-[#24151B]/95 text-left shadow-xl backdrop-blur-xl">
             {options.map((option) => (
               <button
                 key={option}
@@ -200,7 +195,7 @@ function Hero() {
                 eventType,
                 "Event Type",
                 eventOptions,
-                CalendarDays
+                CalendarDays,
               )}
 
               {renderDropdown(
@@ -208,7 +203,7 @@ function Hero() {
                 vendorCategory,
                 "Vendor Category",
                 vendorOptions,
-                Camera
+                Camera,
               )}
 
               <div className="flex h-[44px] w-full min-w-0 items-center gap-2 rounded-[7px] border border-white/35 bg-white/5 px-3 transition-colors focus-within:bg-white/10">
@@ -243,4 +238,4 @@ function Hero() {
   );
 }
 
-export default Hero
+export default Hero;

@@ -220,34 +220,35 @@ function BrandsAndPartners() {
           {/* Right Content */}
           <div className="flex min-w-0 flex-col items-end gap-3 lg:flex-row lg:items-end">
             {/* Trust Statistics Panel */}
-            <ul className="grid min-h-[87px] w-full min-w-0 flex-1 grid-cols-3 items-center rounded-[16px] border border-[#F5D7E1] bg-[#fef0e1] px-2 py-3">
-              {highlights.map(({ title, detail, icon: Icon }, index) => (
-                <li
-                  key={title}
-                  className={`flex min-h-[58px] min-w-0 items-center gap-2 px-2 ${
-                    index > 0 ? "border-l border-[#F0DDE5]" : ""
-                  }`}
-                >
-                  <span className="flex h-[35px] w-[35px] shrink-0 items-center justify-center rounded-full border border-[#F7D5E1] bg-white text-[#E60059] shadow-sm">
-                    <Icon
-                      size={17}
-                      strokeWidth={2}
-                      fill={index === 1 ? "currentColor" : "none"}
-                    />
-                  </span>
+          
+<ul className="grid min-h-[87px] w-full min-w-0 flex-1 grid-cols-3 items-center rounded-[16px] border border-[#F5D7E1] bg-[#fef0e1] px-2 py-3">
+  {highlights.map(({ title, detail, icon: Icon }, index) => (
+    <li
+      key={title}
+      className={`flex min-h-[58px] min-w-0 items-center gap-2 px-2 ${
+        index > 0 ? "border-l border-[#F0DDE5]" : ""
+      }`}
+    >
+      <span className="hidden h-[35px] w-[35px] shrink-0 items-center justify-center rounded-full border border-[#F7D5E1] bg-white text-[#E60059] shadow-sm sm:flex">
+        <Icon
+          size={17}
+          strokeWidth={2}
+          fill={index === 1 ? "currentColor" : "none"}
+        />
+      </span>
 
-                  <span className="min-w-0">
-                    <span className="block whitespace-pre-line font-poppins text-[12px] font-bold leading-[1.2] text-[#30272C]">
-                      {title}
-                    </span>
+      <span className="min-w-0">
+        <span className="block whitespace-pre-line font-poppins text-[12px] font-bold leading-[1.2] text-[#30272C]">
+          {title}
+        </span>
 
-                    <span className="mt-1 block whitespace-pre-line font-poppins text-[10px] leading-[1.3] text-[#95838C] sm:text-[11px]">
-                      {detail}
-                    </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
+        <span className="mt-1 block whitespace-pre-line font-poppins text-[10px] leading-[1.3] text-[#95838C] sm:text-[11px]">
+          {detail}
+        </span>
+      </span>
+    </li>
+  ))}
+</ul>
 
             {/* View All Partners */}
             <Link
