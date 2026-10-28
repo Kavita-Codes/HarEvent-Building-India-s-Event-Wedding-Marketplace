@@ -25,7 +25,7 @@ const articles = [
 
 function LatestBlogs() {
   return (
-    <section className="bg-[#FFF3F5] px-5 py-8 sm:px-8 lg:px-[30px] lg:py-8">
+    <section className="bg-[#fef0e1] px-5 py-8 sm:px-8 lg:px-[30px] lg:py-8">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-6 flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div className="min-w-0">

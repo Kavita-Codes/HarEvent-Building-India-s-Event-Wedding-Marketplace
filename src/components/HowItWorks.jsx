@@ -54,7 +54,7 @@ export default function HowItWorks() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#FFF6F8] via-[#FFF9FA] to-[#FFF6F8] px-4 pt-0 pb-12 font-poppins sm:px-6 sm:pb-16 lg:px-8 lg:pb-20">
+    <section className="relative w-full overflow-hidden bg-[#fef0e1] px-4 pt-0 pb-12 font-poppins sm:px-6 sm:pb-16 lg:px-8 lg:pb-20">
       {/* Soft ambient background orbs */}
       <div className="pointer-events-none absolute -left-28 top-10 -z-10 h-72 w-72 rounded-full bg-pink-200/40 blur-[90px]" />
       <div className="pointer-events-none absolute -right-28 bottom-20 -z-10 h-80 w-80 rounded-full bg-orange-200/40 blur-[90px]" />

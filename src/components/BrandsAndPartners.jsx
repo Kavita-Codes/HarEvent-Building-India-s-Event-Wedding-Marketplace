@@ -145,7 +145,7 @@ function BrandsAndPartners() {
       onPointerLeave={() => setIsPaused(false)}
       className={`partner-card group relative flex h-[190px] w-[175px] shrink-0 flex-col items-center rounded-[16px] border-2 px-2 pt-8 transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-[#E9A0BB] hover:shadow-[0_10px_24px_rgba(71,34,52,0.13)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4145A] focus-visible:ring-offset-2 sm:w-[170px] ${
         popular
-          ? "border-[#F3A0BD] bg-gradient-to-b from-[#FFF9FB] to-[#FFF5F8] shadow-[0_2px_5px_rgba(212,20,90,0.10)]"
+          ? "border-[#F3A0BD] bg-[#fef0e1] shadow-[0_2px_5px_rgba(212,20,90,0.10)]"
           : "border-[#F2D7E1] bg-white shadow-[0_1px_2px_rgba(70,25,45,0.04)]"
       }`}
     >
@@ -200,7 +200,7 @@ function BrandsAndPartners() {
           {/* Left Content */}
           <div className="min-w-0">
             <p className="mb-[10px] flex items-center gap-[9px] font-poppins text-[13px] font-bold uppercase tracking-[1.25px] text-[#E60059]">
-              <span className="h-[2px] w-[30px] bg-[#E60059]" />
+              <span className="h-[2px] w-[30px] bg-[#fef0e1]" />
               Network Excellence
             </p>
 
@@ -220,7 +220,7 @@ function BrandsAndPartners() {
           {/* Right Content */}
           <div className="flex min-w-0 flex-col items-end gap-3 lg:flex-row lg:items-end">
             {/* Trust Statistics Panel */}
-            <ul className="grid min-h-[87px] w-full min-w-0 flex-1 grid-cols-3 items-center rounded-[16px] border border-[#F5D7E1] bg-[#FFFAFC] px-2 py-3">
+            <ul className="grid min-h-[87px] w-full min-w-0 flex-1 grid-cols-3 items-center rounded-[16px] border border-[#F5D7E1] bg-[#fef0e1] px-2 py-3">
               {highlights.map(({ title, detail, icon: Icon }, index) => (
                 <li
                   key={title}

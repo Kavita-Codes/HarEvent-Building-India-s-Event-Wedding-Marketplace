@@ -5,7 +5,7 @@ function CustomerAssistance() {
   return (
     <section className="px-5 py-10 sm:px-8 lg:px-12 ">
       <div
-        className="mx-auto max-w-[1440px] overflow-hidden border rounded-3xl bg-[#FFF6F8]  px-6 py-10 text-white sm:px-10 lg:flex lg:items-center lg:justify-between lg:px-14 lg:py-12"
+        className="mx-auto max-w-[1440px] overflow-hidden border rounded-3xl bg-[#fef0e1]  px-6 py-10 text-white sm:px-10 lg:flex lg:items-center lg:justify-between lg:px-14 lg:py-12"
       >
         <div className="flex items-start gap-4">
           <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#FFF0F5] text-[#D4145A]">

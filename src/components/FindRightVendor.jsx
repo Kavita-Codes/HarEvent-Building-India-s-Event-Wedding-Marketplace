@@ -74,7 +74,7 @@ const categories = [
 
 function FindRightVendor() {
   return (
-    <section className="bg-[#FFFAFC] px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
+    <section className="bg-[#fef0e1] px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
