@@ -547,7 +547,7 @@ function Navbar({ onLoginClick }) {
           {/* Search */}
           <form
             onSubmit={handleSearch}
-            className="flex h-9 w-[220px] items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#FFF7FA] px-3 focus-within:border-[#ed0055] 2xl:w-[240px]"
+            className="flex h-9 w-[220px] items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#fef0e1] px-3 focus-within:border-[#ed0055] 2xl:w-[240px]"
           >
             <Search size={16} className="shrink-0 text-[#907D87]" />
             <input
@@ -590,16 +590,15 @@ function Navbar({ onLoginClick }) {
         </button>
       </div>
 
-      {/* ================================================================ */}
       {/* DESKTOP MEGA MENU DROPDOWN                                      */}
-      {/* ================================================================ */}
+
       {activeMegaMenu && currentMegaData && (
         <div
           onMouseEnter={() => {
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
           }}
           onMouseLeave={handleMouseLeave}
-          className="absolute left-0 top-[68px] z-50 w-full border-t border-rose-100 bg-white shadow-2xl transition-all duration-300"
+          className="absolute left-0 top-[68px] z-50 w-full border-t border-rose-100 bg-[#fef0e1] shadow-2xl transition-all duration-300"
         >
           <div className="mx-auto max-w-[1440px]">
             {/* Top Horizontal Tabs */}
@@ -634,7 +633,7 @@ function Navbar({ onLoginClick }) {
             </div>
 
             {/* Subcategories 4-Column Grid */}
-            <div className="bg-[#fffcfd] px-6 py-7 sm:px-10 sm:py-8">
+            <div className="bg-[#fef0e1] px-6 py-7 sm:px-10 sm:py-8">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
                 {activeTabObj.columns.map((col, cIdx) => (
                   <div key={col.title || cIdx} className="flex flex-col">
@@ -696,7 +695,7 @@ function Navbar({ onLoginClick }) {
           {/* Mobile Search */}
           <form
             onSubmit={handleSearch}
-            className="mb-4 flex h-11 items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#FFF7FA] px-3"
+            className="mb-4 flex h-11 items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#fef0e1] px-3"
           >
             <Search size={17} className="text-[#ed0055]" />
             <input
@@ -784,7 +783,7 @@ function Navbar({ onLoginClick }) {
             </div>
 
             {/* Vendor Category Accordion */}
-            <div className="rounded-lg border border-rose-100/60 bg-[#fffbfc] p-2">
+            <div className="rounded-lg border border-rose-100/60 bg-[#fef0e1] p-2">
               <button
                 type="button"
                 onClick={() => setMobileVendorOpen(!mobileVendorOpen)}
