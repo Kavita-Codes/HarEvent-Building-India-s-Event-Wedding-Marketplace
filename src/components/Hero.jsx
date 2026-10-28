@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import {
   Search,
@@ -34,11 +33,12 @@ const vendorOptions = [
 ];
 
 const rotatingKeywords = [
-  "Wedding Planner",
   "Venues",
   "Photographers",
   "Caterers",
   "Decorators",
+  "Event Planner",
+  "Wedding Planner",
   "Makeup Artists",
 ];
 
@@ -85,76 +85,74 @@ function Hero() {
     setOpenDropdown(null);
   };
 
-  
-const renderDropdown = (type, value, placeholder, options, Icon) => (
-  <div className="relative w-full min-w-0">
-    <button
-      type="button"
-      onClick={() =>
-        setOpenDropdown(openDropdown === type ? null : type)
-      }
-      aria-expanded={openDropdown === type}
-      className="flex h-[44px] w-full min-w-0 items-center gap-2 rounded-[7px] border border-white/35 bg-white/5 px-3 text-left transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-    >
-      <Icon
-        size={16}
-        strokeWidth={2}
-        className="shrink-0 text-white"
-      />
-
-      <span
-        className={`min-w-0 flex-1 truncate font-poppins text-[12px] sm:text-[13px] ${
-          value
-            ? "font-medium text-white"
-            : "font-normal text-white/90"
-        }`}
+  const renderDropdown = (type, value, placeholder, options, Icon) => (
+    <div className="relative w-full min-w-0">
+      <button
+        type="button"
+        onClick={() =>
+          setOpenDropdown(openDropdown === type ? null : type)
+        }
+        aria-expanded={openDropdown === type}
+        className="flex h-[44px] w-full min-w-0 items-center gap-2 rounded-[7px] border border-white/35 bg-white/5 px-3 text-left transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
       >
-        {value || placeholder}
-      </span>
-
-      <ChevronDown
-        size={15}
-        strokeWidth={1.8}
-        className={`shrink-0 text-white/90 transition-transform ${
-          openDropdown === type ? "rotate-180" : ""
-        }`}
-      />
-    </button>
-
-    {openDropdown === type && (
-      <>
-        <button
-          type="button"
-          aria-label="Close dropdown"
-          className="fixed inset-0 z-20 cursor-default"
-          onClick={() => setOpenDropdown(null)}
+        <Icon
+          size={16}
+          strokeWidth={2}
+          className="shrink-0 text-white"
         />
 
-        <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-30 max-h-60 overflow-y-auto rounded-lg border border-white/25 bg-[#24151B]/95 text-left shadow-xl backdrop-blur-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {options.map((option) => {
-            const selected = value === option;
+        <span
+          className={`min-w-0 flex-1 truncate font-poppins text-[12px] sm:text-[13px] ${
+            value
+              ? "font-medium text-white"
+              : "font-normal text-white/90"
+          }`}
+        >
+          {value || placeholder}
+        </span>
 
-            return (
-              <button
-                key={option}
-                type="button"
-                onClick={() => selectOption(type, option)}
-                className={`block w-full px-3 py-3 text-left font-poppins text-[12px] transition-all duration-200 sm:text-[13px] ${
-                  selected
-                    ? "bg-gradient-to-r from-[#D4145A] to-[#FF7628] font-semibold text-white"
-                    : "bg-transparent font-normal text-white/90 hover:bg-gradient-to-r hover:from-[#D4145A] hover:to-[#FF7628] hover:font-semibold hover:text-white"
-                }`}
-              >
-                {option}
-              </button>
-            );
-          })}
-        </div>
-      </>
-    )}
-  </div>
-);
+        <ChevronDown
+          size={15}
+          strokeWidth={1.8}
+          className={`shrink-0 text-white/90 transition-transform ${
+            openDropdown === type ? "rotate-180" : ""
+          }`}
+        />
+      </button>
 
+      {openDropdown === type && (
+        <>
+          <button
+            type="button"
+            aria-label="Close dropdown"
+            className="fixed inset-0 z-20 cursor-default"
+            onClick={() => setOpenDropdown(null)}
+          />
+
+          <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-30 max-h-60 overflow-y-auto rounded-lg border border-white/25 bg-[#24151B]/95 text-left shadow-xl backdrop-blur-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {options.map((option) => {
+              const selected = value === option;
+
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => selectOption(type, option)}
+                  className={`block w-full px-3 py-3 text-left font-poppins text-[12px] transition-all duration-200 sm:text-[13px] ${
+                    selected
+                      ? "bg-gradient-to-r from-[#D4145A] to-[#FF7628] font-semibold text-white"
+                      : "bg-transparent font-normal text-white/90 hover:bg-gradient-to-r hover:from-[#D4145A] hover:to-[#FF7628] hover:font-semibold hover:text-white"
+                  }`}
+                >
+                  {option}
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
 
   return (
     <main>
@@ -193,10 +191,10 @@ const renderDropdown = (type, value, placeholder, options, Icon) => (
 
             <span className="mt-1 flex flex-wrap items-baseline justify-center gap-x-3 text-center sm:inline-flex sm:flex-nowrap">
               <span className="shrink-0 bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent">
-                All in One Place...
+                All in One Place..
               </span>
 
-              <span className="relative inline-block h-[1.2em] w-[260px] max-w-full overflow-visible whitespace-nowrap text-center align-baseline bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent sm:w-[350px] sm:text-left md:w-[450px]">
+              <span className="relative inline-block h-[1.2em] w-[290px] max-w-full overflow-visible whitespace-nowrap text-center align-baseline bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent sm:w-[380px] sm:text-left md:w-[480px]">
                 <span className="inline-block">{typedText}</span>
 
                 <span

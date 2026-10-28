@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   ArrowLeft,
@@ -318,7 +317,7 @@ function Signup({ vendorMode: initialVendorMode = false }) {
                         <div
                           role="listbox"
                           aria-label="Service Category"
-                          className="absolute left-0 right-0 top-full z-30 mt-1 overflow-hidden rounded-lg border border-[#F1DDE5] bg-white py-1 shadow-[0_12px_30px_rgba(55,25,40,0.18)]"
+                          className="absolute left-0 right-0 top-full z-30 mt-1 max-h-52 overflow-y-auto rounded-lg border border-[#F1DDE5] bg-white py-1 shadow-[0_12px_30px_rgba(55,25,40,0.18)]"
                         >
                           {serviceOptions.map((option) => {
                             const selected = serviceCategory === option;
