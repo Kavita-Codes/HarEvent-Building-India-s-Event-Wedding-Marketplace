@@ -10,8 +10,36 @@
   --font-playfair: "Playfair Display", serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Poppins", sans-serif;
+}
+
+/* Custom Thin HarEvent Gradient Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff5f8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ed0055 0%, #ff7900 100%);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #d0004b 0%, #e66a00 100%);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ed0055 #fff5f8;
 }
 
 .signup-mode-toggle__fill {

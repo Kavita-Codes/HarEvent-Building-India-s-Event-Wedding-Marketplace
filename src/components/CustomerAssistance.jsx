@@ -3,21 +3,32 @@ import { Link } from "react-router-dom";
 
 function CustomerAssistance() {
   return (
-    <section className="bg-white px-5 py-10 sm:px-8 lg:px-12">
-      <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-6 rounded-3xl border border-[#F1DDE5] bg-[#FFFAFC] p-6 sm:p-8 md:flex-row md:items-center md:justify-between lg:p-10">
+    <section className="px-5 py-10 sm:px-8 lg:px-12 ">
+      <div
+        className="mx-auto max-w-[1440px] overflow-hidden border rounded-3xl bg-[#FFF6F8]  px-6 py-10 text-white sm:px-10 lg:flex lg:items-center lg:justify-between lg:px-14 lg:py-12"
+        style={{
+          backgroundImage: "url('/cream.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="flex items-start gap-4">
           <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#FFF0F5] text-[#D4145A]">
             <MessageCircleHeart size={23} />
           </span>
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-[#30232B] sm:text-3xl">
+            <h2 className="text-2xl font-semibold tracking-tight text-[#000000] sm:text-3xl">
               Need Help Finding the Right Vendor?
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#8A7580]">
-              Tell us about your upcoming event, and let us help you discover services that match your requirements.
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#000000]">
+              Tell us about your upcoming event, and let us help you discover
+              services that match your requirements.
             </p>
-            <p className="mt-2 max-w-2xl text-xs leading-5 text-[#8A7580]">
-              Whether you&apos;re planning a wedding, birthday, corporate function, or another special occasion, we&apos;re here to help you take the next step.
+            <p className="mt-2 max-w-2xl text-xs leading-5 text-[#000000]">
+              Whether you&apos;re planning a wedding, birthday, corporate
+              function, or another special occasion, we&apos;re here to help you
+              take the next step.
             </p>
           </div>
         </div>

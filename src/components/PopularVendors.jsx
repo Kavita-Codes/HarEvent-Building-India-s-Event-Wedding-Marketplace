@@ -95,6 +95,7 @@ function VendorCard({ vendor }) {
 
       <div className="flex min-h-0 flex-1 flex-col px-3 pb-2.5 pt-2.5 sm:px-3.5">
         <div className="flex min-h-[16px] items-center justify-between gap-2 text-[11px]">
+          {/* Rating commented out as requested
           {vendor.ratingVerified === true &&
           Number.isFinite(vendor.rating) &&
           vendor.rating >= 0 &&
@@ -109,6 +110,8 @@ function VendorCard({ vendor }) {
               )}
             </span>
           ) : <span aria-hidden="true" />}
+          */}
+          <span aria-hidden="true" />
           {vendor.location && (
             <span className="inline-flex items-center gap-1 text-right text-[11px] text-[#8A7580]">
               <MapPin size={11} className="shrink-0 text-[#E60059]" />

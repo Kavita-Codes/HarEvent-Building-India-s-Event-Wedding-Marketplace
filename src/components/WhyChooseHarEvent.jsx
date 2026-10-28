@@ -1,124 +1,252 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
-  ArrowLeftRight,
-  Compass,
-  Layers3,
-  MessageCircle,
-  Star,
+  Building2,
+  Cake,
+  Heart,
+  Gem,
+  GlassWater,
+  ArrowRight,
+  UsersRound,
+  ShieldCheck,
+  Zap,
 } from "lucide-react";
 
-const benefits = [
+const showcaseCards = [
   {
-    title: "More Choices, One Platform",
-    description: "Explore a wide range of event professionals and services across multiple categories.",
-    icon: Layers3,
+    title: "Corporate Events",
+    icon: Building2,
+    image: "/Corporate Summit Networking Reception.png",
+    rotation: -16,
+    translateY: 18,
+    scale: 0.86,
+    zIndex: 10,
+    path: "/events/corporate-events",
   },
   {
-    title: "Convenient Discovery",
-    description: "Find relevant vendors without having to search across multiple platforms.",
-    icon: Compass,
+    title: "Birthdays",
+    icon: Cake,
+    image: "/Joyful Birthday Cake Celebration.png",
+    rotation: -8,
+    translateY: 6,
+    scale: 0.93,
+    zIndex: 20,
+    path: "/events/birthdays",
   },
   {
-    title: "Compare with Confidence",
-    description: "Review available portfolios, services, pricing information, and genuine customer feedback.",
-    icon: ArrowLeftRight,
+    title: "Weddings",
+    icon: Heart,
+    image: "/Opulent Indian Garden Wedding Mandap.png",
+    rotation: 0,
+    translateY: -8,
+    scale: 1.05,
+    zIndex: 30,
+    isHero: true,
+    path: "/events/weddings",
   },
   {
-    title: "Your Event, Your Preferences",
-    description: "Discover professionals according to your occasion, location, style, and budget.",
-    icon: Star,
+    title: "Engagements",
+    icon: Gem,
+    image: "/Rohan and Eisha’s Floral Engagement.png",
+    rotation: 8,
+    translateY: 6,
+    scale: 0.93,
+    zIndex: 20,
+    path: "/events/engagements",
   },
   {
-    title: "Direct Vendor Connections",
-    description: "Communicate with the professionals you choose to discuss your requirements.",
-    icon: MessageCircle,
+    title: "Anniversaries",
+    icon: GlassWater,
+    image: "/Romantic Anniversary Cake Cutting Celebration.png",
+    rotation: 16,
+    translateY: 18,
+    scale: 0.86,
+    zIndex: 10,
+    path: "/events/anniversaries",
   },
 ];
 
-function WhyChooseHarEvent() {
+const keyFeatures = [
+  {
+    title: "Wide Variety",
+    description: "Explore professionals across multiple categories",
+    icon: UsersRound,
+  },
+  {
+    title: "Trusted Vendors",
+    description: "Verified and reliable event professionals",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Easy & Convenient",
+    description: "Find, compare and connect all in one place",
+    icon: Zap,
+  },
+];
+
+export default function WhyChooseHarEvent() {
+  const navigate = useNavigate();
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   return (
-    <section className="w-full bg-[#FFF6F8] px-5 py-10 sm:px-8 sm:py-12 lg:px-8 lg:py-14">
+    <section className="relative w-full overflow-hidden bg-[#fff8fa] px-4 py-0 font-poppins sm:px-6 lg:px-8">
+      {/* Ambient background glows */}
+      <div className="pointer-events-none absolute -left-20 top-16 -z-10 h-72 w-72 rounded-full bg-gradient-to-tr from-pink-300/30 to-orange-200/30 blur-3xl" />
+      <div className="pointer-events-none absolute right-0 top-1/2 -z-10 h-80 w-80 rounded-full bg-gradient-to-bl from-rose-200/30 to-pink-100/40 blur-3xl" />
+
       <div className="mx-auto max-w-[1440px]">
-        <div className="mb-7">
-          <p className="mb-1 flex items-center gap-2 !text-[10px] !font-bold uppercase !tracking-[1.2px] !text-[#D4145A]">
-            <span className="h-[2px] w-6 bg-[#D4145A]" />
-            Your Event, Your Way
-          </p>
-          <h2 className="!font-sans !text-[26px] !font-bold !leading-[1.2] !tracking-[-0.4px] !text-[#30232B] sm:!text-[30px]">
+        {/* Top Header section - centered, single-line text, tight padding */}
+        <div className="mx-auto mb-3 flex flex-col items-center pt-3 text-center sm:mb-4 sm:pt-4">
+          <div className="flex items-center justify-center gap-2.5 text-[11px] font-bold uppercase tracking-[1.5px] text-[#ed0055]">
+            <span className="h-[2px] w-6 rounded-full bg-[#ed0055]" />
+            <span>YOUR EVENT, YOUR WAY</span>
+            <span className="h-[2px] w-6 rounded-full bg-[#ed0055]" />
+          </div>
+
+          <h2 className="mt-1 font-playfair text-[28px] font-bold leading-tight tracking-[-0.5px] text-[#1f1625] sm:text-[34px] lg:text-[36px]">
             Why Choose HarEvent?
           </h2>
-          <p className="mt-1 !text-[13px] !leading-5 !text-[#8A7580]">
-            Finding the right event professionals shouldn&apos;t be complicated. HarEvent brings event discovery and vendor connections together in one convenient place.
+
+          <p className="mt-1 max-w-5xl text-center text-[13px] leading-normal text-[#6b6370] sm:text-[14px]">
+            Finding the right event professionals shouldn&apos;t be complicated.
+            HarEvent brings event discovery and vendor connections together in
+            one convenient place.
           </p>
         </div>
 
-        <div className="grid items-stretch gap-5 lg:grid-cols-[0.72fr_1fr] lg:gap-7">
-          <div className="relative min-h-[300px] overflow-hidden rounded-[16px] bg-[#5A3D38] sm:min-h-[330px]">
-            <img
-              src="/Opulent Indian Garden Wedding Mandap.png"
-              alt="Garden wedding venue prepared for a celebration"
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/5" />
-            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-              <h3 className="!font-sans !text-[19px] !font-semibold !leading-tight !text-white sm:!text-[21px]">
-                More Choices, One Platform
-              </h3>
-              <p className="mt-1.5 max-w-[430px] !text-[12px] !leading-[1.5] !text-white/90">
-                Explore a wide range of event professionals and services across multiple categories.
-              </p>
-              <div className="mt-4 flex items-center gap-2 rounded-xl border border-white/60 bg-white/95 px-3 py-2.5 text-[#3A2931] shadow-sm sm:px-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#FFF0F5] text-[#E60059]">
-                  <Star size={17} fill="currentColor" strokeWidth={1.8} />
-                </span>
-                <span className="min-w-0">
-                  <span className="block !text-[11px] !font-semibold !leading-4">
-                    Your vision matters.
-                  </span>
-                  <span className="block !text-[9px] !leading-3 !text-[#8A7580]">
-                    We&apos;re here to help you find the right connections to bring it to life.
-                  </span>
-                </span>
-                <Star
-                  size={15}
-                  className="ml-auto shrink-0 text-[#FF790D]"
-                  fill="currentColor"
-                  strokeWidth={1.5}
-                  aria-hidden="true"
-                />
-              </div>
+        {/* Main 2-column Grid */}
+        <div className="grid items-center gap-8 pb-4 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 xl:gap-16 sm:pb-6">
+          {/* Left Column: Interactive 3D Fanned Cards Showcase */}
+          <div className="relative flex items-center justify-center py-2 sm:py-4">
+            {/* Background circular ambient blob behind cards */}
+            <div className="pointer-events-none absolute h-[260px] w-[260px] rounded-full bg-gradient-to-tr from-[#ed0055]/15 via-[#ff7900]/15 to-transparent blur-2xl sm:h-[340px] sm:w-[340px]" />
+
+            {/* Fanned Cards Wrapper */}
+            <div className="relative flex items-center justify-center -space-x-10 sm:-space-x-12 lg:-space-x-14 max-sm:scale-[0.82] max-sm:origin-center">
+              {showcaseCards.map((card, idx) => {
+                const Icon = card.icon;
+                const isHovered = hoveredIndex === idx;
+                const isAnyHovered = hoveredIndex !== null;
+
+                // Dynamic transform for interactive 3D fanning
+                const baseTransform = `rotate(${card.rotation}deg) translateY(${card.translateY}px) scale(${card.scale})`;
+                const hoverTransform =
+                  "rotate(0deg) translateY(-26px) scale(1.14)";
+
+                return (
+                  <button
+                    key={card.title}
+                    type="button"
+                    onClick={() => navigate(card.path)}
+                    onMouseEnter={() => setHoveredIndex(idx)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onFocus={() => setHoveredIndex(idx)}
+                    onBlur={() => setHoveredIndex(null)}
+                    aria-label={`View ${card.title}`}
+                    style={{
+                      transform: isHovered ? hoverTransform : baseTransform,
+                      zIndex: isHovered ? 40 : card.zIndex,
+                    }}
+                    className={`group relative h-[225px] w-[145px] shrink-0 cursor-pointer rounded-2xl border-[3px] border-white bg-white shadow-[0_14px_30px_rgba(237,0,85,0.12),0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-400 ease-[cubic-bezier(0.2,0.9,0.25,1.35)] outline-none sm:h-[265px] sm:w-[172px] sm:rounded-[22px] lg:h-[285px] lg:w-[185px] ${
+                      isHovered
+                        ? "shadow-[0_24px_48px_rgba(237,0,85,0.28),0_8px_20px_rgba(0,0,0,0.12)] ring-2 ring-[#ed0055]"
+                        : isAnyHovered
+                        ? "opacity-90"
+                        : "opacity-100"
+                    }`}
+                  >
+                    {/* Card Image */}
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="h-full w-full rounded-[13px] object-cover transition-transform duration-500 ease-out group-hover:scale-105 sm:rounded-[19px]"
+                      loading="lazy"
+                    />
+
+                    {/* Gradient overlay at bottom for pill contrast */}
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 rounded-b-[13px] bg-gradient-to-t from-black/60 via-black/15 to-transparent sm:rounded-b-[19px]" />
+
+                    {/* Bottom Pill Badge */}
+                    <div
+                      className={`absolute bottom-2.5 inset-x-2.5 flex items-center justify-center gap-1.5 rounded-full bg-white/95 px-2 py-1.5 shadow-md backdrop-blur-md transition-all duration-300 group-hover:bg-white sm:bottom-3 sm:inset-x-3 sm:px-2.5 sm:py-2 ${
+                        card.isHero ? "ring-1 ring-[#ed0055]/30" : ""
+                      }`}
+                    >
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#ed0055] to-[#ff7900] text-white shadow-xs sm:h-6 sm:w-6">
+                        <Icon size={12} strokeWidth={2.2} />
+                      </span>
+                      <span className="truncate text-[11px] font-semibold text-[#1f1625] sm:text-[12px]">
+                        {card.title}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <div className="grid gap-2.5">
-            {benefits.map(({ title, description, icon: Icon }) => (
-              <article
-                key={title}
-                className="flex min-h-[62px] items-center gap-3 rounded-[13px] border border-[#F1DDE5] bg-white px-3.5 py-2.5 sm:gap-4 sm:px-4"
-              >
-                <span className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-[10px] border border-[#F5DCE6] bg-[#FFF4F7] text-[#E60059]">
-                  <Icon
-                    size={18}
-                    strokeWidth={2}
-                    fill={title === "Your Event, Your Preferences" ? "currentColor" : "none"}
-                  />
-                </span>
-                <span className="min-w-0">
-                  <span className="block font-sans text-[13px] font-semibold leading-[1.25] text-[#382832] sm:text-[14px]">
-                    {title}
-                  </span>
-                  <span className="mt-0.5 block text-[11px] leading-[1.35] text-[#8A7580] sm:text-[12px]">
-                    {description}
-                  </span>
-                </span>
-              </article>
-            ))}
+          {/* Right Column: Platform Information & Features */}
+          <div className="flex flex-col items-start">
+            {/* Pill Tag */}
+            <span className="inline-flex items-center rounded-full bg-[#ffe8f0] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#ed0055]">
+              ALL YOUR EVENTS, ONE PLATFORM
+            </span>
+
+            {/* Heading */}
+            <h3 className="mt-3.5 font-sans text-[27px] font-bold leading-[1.2] tracking-[-0.5px] text-[#1f1625] sm:text-[34px] lg:text-[35px]">
+              Discover, Plan and Celebrate with the{" "}
+              <span className="bg-gradient-to-r from-[#ed0055] to-[#ff7900] bg-clip-text text-transparent">
+                Right Professionals
+              </span>
+            </h3>
+
+            {/* Subtext */}
+            <p className="mt-3.5 text-[14px] leading-relaxed text-[#6b6370] sm:text-[15px]">
+              From intimate gatherings to grand celebrations, HarEvent helps
+              you find trusted event professionals, compare options, and connect
+              easily.
+            </p>
+
+            {/* Action Button */}
+            <button
+              type="button"
+              onClick={() => navigate("/event-categories")}
+              className="group mt-6 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-7 py-3 text-[14px] font-semibold text-white shadow-lg shadow-[#ed0055]/25 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-[#ed0055]/35 active:scale-95 sm:text-[15px]"
+            >
+              <span>Explore Events</span>
+              <ArrowRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </button>
+
+            {/* 3 Key Feature Callouts with Dividers */}
+            <div className="mt-8 grid w-full grid-cols-1 divide-y divide-rose-100 border-t border-rose-100/80 pt-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              {keyFeatures.map((feat) => {
+                const FeatIcon = feat.icon;
+                return (
+                  <div
+                    key={feat.title}
+                    className="flex flex-col items-start px-2 py-3 sm:px-4 sm:py-1 first:pl-0 last:pr-0"
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#fff0f4] text-[#ed0055] shadow-xs">
+                      <FeatIcon size={20} strokeWidth={2} />
+                    </span>
+
+                    <h4 className="mt-3 text-[14px] font-bold text-[#1f1625]">
+                      {feat.title}
+                    </h4>
+
+                    <p className="mt-1 text-[12px] leading-snug text-[#7a7080]">
+                      {feat.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   );
 }
-
-export default WhyChooseHarEvent;

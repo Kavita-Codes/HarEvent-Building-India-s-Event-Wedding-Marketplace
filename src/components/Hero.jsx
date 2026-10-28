@@ -33,6 +33,15 @@ const vendorOptions = [
   "Entertainment",
 ];
 
+const rotatingKeywords = [
+  "Wedding Planners",
+  "Venues",
+  "Photographers",
+  "Caterers",
+  "Decorators",
+  "Makeup Artists",
+];
+
 function Hero() {
   const [eventType, setEventType] = useState("");
   const [vendorCategory, setVendorCategory] = useState("");
@@ -40,35 +49,35 @@ function Hero() {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   // Typing animation
-  const [eventIndex, setEventIndex] = useState(0);
+  const [keywordIndex, setKeywordIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const currentEvent = eventOptions[eventIndex];
-    let delay = isDeleting ? 45 : 100;
+    const currentWord = rotatingKeywords[keywordIndex];
+    let delay = isDeleting ? 45 : 90;
 
-    if (!isDeleting && typedText === currentEvent) {
-      delay = 1400;
+    if (!isDeleting && typedText === currentWord) {
+      delay = 1600;
     } else if (isDeleting && typedText === "") {
-      delay = 250;
+      delay = 280;
     }
 
     const timer = setTimeout(() => {
-      if (!isDeleting && typedText === currentEvent) {
+      if (!isDeleting && typedText === currentWord) {
         setIsDeleting(true);
       } else if (isDeleting && typedText === "") {
         setIsDeleting(false);
-        setEventIndex((prev) => (prev + 1) % eventOptions.length);
+        setKeywordIndex((prev) => (prev + 1) % rotatingKeywords.length);
       } else if (isDeleting) {
-        setTypedText(currentEvent.slice(0, typedText.length - 1));
+        setTypedText(currentWord.slice(0, typedText.length - 1));
       } else {
-        setTypedText(currentEvent.slice(0, typedText.length + 1));
+        setTypedText(currentWord.slice(0, typedText.length + 1));
       }
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [typedText, isDeleting, eventIndex]);
+  }, [typedText, isDeleting, keywordIndex]);
 
   const selectOption = (type, value) => {
     if (type === "event") setEventType(value);
@@ -179,21 +188,20 @@ const renderDropdown = (type, value, placeholder, options, Icon) => (
           </div>
 
           {/* Main Heading */}
-          <h1 className="mt-6 font-playfair text-[36px] font-bold leading-[1.12] text-white sm:text-[48px] md:text-[60px]">
-            Plan Your Perfect Event
-            <br />
+          <h1 className="mt-6 font-playfair text-[34px] font-bold leading-[1.15] text-white sm:text-[48px] md:text-[60px]">
+            <span className="block">Plan Your Perfect Event</span>
 
-            <span className="inline-flex max-w-full flex-wrap items-baseline justify-center gap-x-3">
-              <span className="bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent">
+            <span className="mt-1 flex flex-wrap items-baseline justify-center gap-x-3 text-center sm:inline-flex sm:flex-nowrap">
+              <span className="shrink-0 bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent">
                 All in One Place...
               </span>
 
-              <span className="inline-flex min-h-[1.12em] items-baseline bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent">
-                <span>{typedText}</span>
+              <span className="relative inline-block h-[1.2em] w-[260px] max-w-full overflow-visible whitespace-nowrap text-center align-baseline bg-gradient-to-r from-[#E50059] via-[#FF4D63] to-[#FF8429] bg-clip-text text-transparent sm:w-[350px] sm:text-left md:w-[450px]">
+                <span className="inline-block">{typedText}</span>
 
                 <span
                   aria-hidden="true"
-                  className="ml-1 inline-block h-[0.8em] w-[3px] translate-y-[2px] animate-pulse rounded-full bg-[#FF7628]"
+                  className="ml-1 inline-block h-[0.75em] w-[3px] translate-y-[2px] animate-pulse rounded-full bg-[#FF7628]"
                 />
               </span>
             </span>
