@@ -96,23 +96,23 @@ export default function Footer() {
             <Link
               to="/"
               aria-label="HarEvent Home"
-              className="mb-[18px] flex items-start max-w-full"
+              className="mb-[18px] flex items-start max-w-full -ml-[15px] max-[540px]:-ml-[9px]"
             >
               <img
                 src="/logoForm.jpeg"
                 alt="HarEvent Logo"
-                className="block h-[100px] w-[100px] shrink-0 object-contain mix-blend-multiply max-[540px]:h-[76px] max-[540px]:w-[76px]"
+                className="block h-[100px] w-[100px] shrink-0 object-contain mix-blend-multiply max-[540px]:h-[58px] max-[540px]:w-[58px]"
               />
 
-              <span className="flex min-w-0 flex-col pl-[3px] pt-[11px]">
-                <span className="font-playfair bg-gradient-to-r from-[#ed0055] to-[#ff7900] bg-clip-text text-[40px] font-bold leading-none text-transparent translate-y-[5px] max-[540px]:text-[32px]">
+              <span className="flex flex-col pl-[3px] pt-[11px] max-[540px]:pt-[2px] max-[540px]:pl-[6px]">
+                <span className="font-playfair bg-gradient-to-r from-[#ed0055] to-[#ff7900] bg-clip-text text-[40px] font-bold leading-none text-transparent translate-y-[5px] max-[540px]:text-[26px] whitespace-nowrap">
                   HarEvent
                 </span>
 
-                <span className="relative mt-[12px] flex items-center gap-[8px]">
+                <span className="relative mt-[12px] flex items-center gap-[8px] max-[540px]:mt-[8px] max-[540px]:gap-[5px]">
 
                   <span className="h-[1px] flex-1 bg-[#c9962f]/70" />
-                  <span className="whitespace-nowrap font-poppins text-[11px] font-semibold tracking-[0.2em] text-[#7a5c2e]">
+                  <span className="whitespace-nowrap font-poppins text-[11px] font-semibold tracking-[0.2em] text-[#7a5c2e] max-[540px]:text-[8px] max-[540px]:tracking-[0.14em]">
                     PLAN • CONNECT • CELEBRATE
                   </span>
                   <span className="h-[1px] flex-1 bg-[#c9962f]/70" />
