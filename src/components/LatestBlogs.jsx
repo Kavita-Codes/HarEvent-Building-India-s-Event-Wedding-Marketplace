@@ -1,27 +1,111 @@
-import { ArrowRight, Camera, MapPin, Wallet } from "lucide-react";
+import {
+  ArrowRight,
+  Camera,
+  Clock,
+  Landmark,
+  Lightbulb,
+} from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 import SectionImage from "./SectionImage";
+
+const MotionLink = motion(Link);
 
 const articles = [
   {
+    category: "Photography",
     title: "How to Choose the Right Wedding Photographer",
-    description: "Learn how to evaluate photography styles, portfolios, experience, and packages before making your decision.",
+    description:
+      "Learn how to evaluate photography styles, portfolios, experience, and packages to find the right fit for your big day.",
     image: "/Golden Meadow Wedding Photoshoot.png",
     icon: Camera,
+    readTime: "5 min read",
   },
   {
+    category: "Venue Guide",
     title: "10 Things to Check Before Booking an Event Venue",
-    description: "Discover the essential details to consider when choosing the perfect venue for your event.",
+    description:
+      "From location and capacity to amenities and catering, here's what you should know before finalizing your event venue.",
     image: "/Lavish Red and Gold Wedding Stage.png",
-    icon: MapPin,
+    icon: Landmark,
+    readTime: "6 min read",
   },
   {
+    category: "Planning Tips",
     title: "How to Plan a Beautiful Event on a Budget",
-    description: "Explore practical ways to prioritize your requirements, compare vendors, and plan your event thoughtfully.",
+    description:
+      "Discover smart planning ideas, cost-saving tips, and creative ways to make your event special without overspending.",
     image: "/Joyful Indian Wedding Procession.png",
-    icon: Wallet,
+    icon: Lightbulb,
+    readTime: "4 min read",
   },
 ];
+
+function BlogCard({ article, index }) {
+  const { category, title, description, image, icon: Icon, readTime } = article;
+
+  return (
+    <MotionLink
+      to="/blogs"
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-70px" }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.12,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{ y: -8 }}
+      className="group flex min-h-[430px] flex-col overflow-hidden rounded-[15px] bg-white no-underline shadow-[0_2px_10px_rgba(71,34,52,0.05)] transition-shadow duration-300 hover:shadow-[0_18px_38px_rgba(212,20,90,0.15)]"
+    >
+      {/* Cover image */}
+      <div className="relative h-[205px] shrink-0 overflow-hidden">
+        <SectionImage
+          src={image}
+          alt={title}
+          icon={Icon}
+          className="h-full w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.08] motion-reduce:transition-none"
+        />
+        <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#3a1220]/25 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      </div>
+
+      {/* Body */}
+      <div className="flex min-h-0 grow flex-col p-5">
+        <span className="inline-flex w-fit items-center gap-[7px] rounded-full bg-[#FFF0F5] px-[11px] py-[5px] font-poppins text-[10.5px] font-bold uppercase tracking-[0.13em] text-[#E60059] transition-colors duration-300 group-hover:bg-[#FFE3EC]">
+          <Icon size={12} strokeWidth={2.4} />
+          {category}
+        </span>
+
+        <h3 className="mt-[13px] font-playfair text-[19.5px] font-bold leading-[1.32] tracking-[-0.2px] text-[#26233c]">
+          {title}
+        </h3>
+
+        <span className="mt-[10px] block h-[2px] w-[34px] rounded-full bg-gradient-to-r from-[#E60059] to-[#FF790D] transition-all duration-500 ease-out group-hover:w-[62px]" />
+
+        <p className="mt-[11px] line-clamp-3 font-poppins text-[13px] leading-[1.62] text-[#897A81]">
+          {description}
+        </p>
+
+        {/* Meta footer */}
+        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#F5E9EE] pt-[13px]">
+          <span className="flex items-center gap-[6px] font-poppins text-[12px] font-medium whitespace-nowrap text-[#9A8A91]">
+            <Clock size={12.5} strokeWidth={2.2} />
+            {readTime}
+          </span>
+
+          <span className="flex items-center gap-[5px] font-poppins text-[12.5px] font-bold whitespace-nowrap text-[#E60059] transition-colors duration-300 group-hover:text-[#FF790D]">
+            Read Article
+            <ArrowRight
+              size={13}
+              strokeWidth={2.6}
+              className="transition-transform duration-300 ease-out group-hover:translate-x-[4px] motion-reduce:transition-none"
+            />
+          </span>
+        </div>
+      </div>
+    </MotionLink>
+  );
+}
 
 function LatestBlogs() {
   return (
@@ -36,7 +120,8 @@ function LatestBlogs() {
               Latest From HarEvent
             </h2>
             <p className="mt-1 !text-[16px] !leading-6 !text-[#75656C] xl:whitespace-nowrap">
-              Get inspired with practical planning tips, creative ideas, and helpful insights for your next celebration.
+              Get inspired with practical planning tips, creative ideas, and
+              helpful insights for your next celebration.
             </p>
           </div>
           <Link
@@ -48,32 +133,8 @@ function LatestBlogs() {
         </div>
 
         <div className="grid gap-5 md:grid-cols-3 md:gap-6 lg:gap-[7.2%]">
-          {articles.map(({ title, description, image, icon: Icon }) => (
-            <article
-              key={title}
-              className="min-h-[430px] overflow-hidden rounded-[15px] bg-white shadow-[0_2px_8px_rgba(71,34,52,0.04)]"
-            >
-              <SectionImage
-                src={image}
-                alt={title}
-                icon={Icon}
-                className="h-[210px]"
-              />
-              <div className="min-h-[220px] p-5">
-                <div role="heading" aria-level="3" className="font-sans text-[16px] font-semibold leading-[1.35] text-[#30272D]">
-                  {title}
-                </div>
-                <p className="mt-2 line-clamp-2 !text-[13px] !leading-[1.35] !text-[#897A81]">
-                  {description}
-                </p>
-                <Link
-                  to="/blogs"
-                  className="mx-auto my-8 flex w-fit items-center gap-1 !text-[16px] !font-bold !text-[#E60059] transition hover:text-[#A80F46]"
-                >
-                  Read More <ArrowRight size={13} strokeWidth={2.5} />
-                </Link>
-              </div>
-            </article>
+          {articles.map((article, index) => (
+            <BlogCard key={article.title} article={article} index={index} />
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
+import MainAnimation, { PageTransition } from "./components/MainAnimation";
 
 import About from "./pages/About";
 import Blogs from "./pages/Blogs";
@@ -20,23 +21,31 @@ function App() {
   return (
     <BrowserRouter>
       <>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/event-planners" element={<EventPlanners />} />
-          <Route path="/event-categories" element={<EventCategories />} />
-          <Route path="/vendor-categories" element={<VendorCategories />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/enquiry" element={<Enquiry />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/vendor-login" element={<Login initialMode="vendor" />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/join-as-vendor" element={<JoinAsVendor />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        {/* Brand intro: first thing rendered on every load / reload */}
+        <MainAnimation />
+
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/event-planners" element={<EventPlanners />} />
+            <Route path="/event-categories" element={<EventCategories />} />
+            <Route path="/vendor-categories" element={<VendorCategories />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/enquiry" element={<Enquiry />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/vendor-login"
+              element={<Login initialMode="vendor" />}
+            />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/join-as-vendor" element={<JoinAsVendor />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
 
         <a
           href="https://wa.me/917448181396"

@@ -10,139 +10,226 @@ import {
   Building2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import SectionImage from "./SectionImage";
+import { motion } from "motion/react";
+
+const MotionLink = motion(Link);
 
 const categories = [
   {
     name: "Venues",
-    description: "Explore banquet halls, wedding lawns, resorts, heritage venues, and celebration spaces.",
+    description:
+      "Discover banquet halls, wedding lawns, resorts, heritage venues, and beautiful celebration spaces.",
     image: "/Luxurious Ivory Floral Wedding Stage.png",
     icon: Building2,
-    vendorCount: "4,000+ Vendors",
   },
   {
     name: "Event Planners",
-    description: "Discover professionals who coordinate your event from concept to execution.",
+    description:
+      "Find experienced professionals to plan, organize, and coordinate your special occasion.",
     image: "/Elegant Banquet Table Inspection.png",
     icon: PartyPopper,
-    vendorCount: "3,400+ Vendors",
-    popular: true,
   },
   {
     name: "Photographers & Videographers",
-    description: "Capture special moments through candid photography, cinematic films, and creative storytelling.",
+    description:
+      "Capture every special moment with candid photography and cinematic wedding films.",
     image: "/Golden Meadow Wedding Photoshoot.png",
     icon: Camera,
-    vendorCount: "4,200+ Vendors",
   },
   {
     name: "Decorators",
-    description: "Find floral arrangements, themed decorations, stage designs, and venue styling.",
+    description:
+      "Explore floral arrangements, stunning mandaps, stage designs, and themed decorations.",
     image: "/Lavish Nighttime Wedding Canopy.png",
     icon: Sparkles,
-    vendorCount: "1,850+ Vendors",
   },
   {
     name: "Caterers",
-    description: "Explore catering services offering diverse cuisines and menus for every occasion.",
+    description:
+      "Find catering professionals offering delicious menus for every kind of celebration.",
     image: "/Golden Wedding Buffet Under Crystal Lights.png",
     icon: Utensils,
-    vendorCount: "4,200+ Vendors",
   },
   {
     name: "Makeup & Mehendi Artists",
-    description: "Discover bridal makeup, occasion styling, and intricate mehendi artistry.",
+    description:
+      "Discover bridal makeup, occasion styling, and intricate mehendi artistry.",
     image: "/Circle of Henna Hands.png",
     icon: CakeSlice,
-    vendorCount: "6,850+ Vendors",
   },
   {
     name: "Entertainment",
-    description: "Find DJs, live bands, performers, and entertainment services for your celebration.",
+    description:
+      "Make your celebration memorable with DJs, live bands, performers, and music.",
     image: "/Glittering Indian Wedding Dance Stage.png",
     icon: Music2,
-    vendorCount: "5,200+ Vendors",
   },
   {
     name: "Invitations & Gifts",
-    description: "Explore digital invitations, printed stationery, personalized gifts, and event favors.",
+    description:
+      "Discover elegant invitations, personalized gifts, stationery, and event favors.",
     image: "/Elegant Botanical Wedding Invitation Suite.png",
     icon: Gift,
-    vendorCount: "150+ Vendors",
   },
 ];
 
 function FindRightVendor() {
   return (
-    <section className="bg-[#fef0e1] px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
+    <section className="overflow-hidden bg-[#fef0e1] px-5 pb-14 pt-12 sm:px-8 sm:pb-16 lg:px-12 lg:pb-20 lg:pt-16">
       <div className="mx-auto max-w-[1440px]">
+        {/* Section Heading */}
         <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-1 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[1.2px] text-[#D4145A]">
+            <p className="mb-1 flex items-center gap-2 font-poppins text-[12px] font-bold uppercase tracking-[1.2px] text-[#D4145A]">
               <span className="h-[2px] w-6 bg-[#D4145A]" />
               Curated Specialists
             </p>
-            <h2 className="text-3xl font-playfair font-bold tracking-tight text-[#30232B] sm:text-4xl">
+
+            <h2 className="font-playfair text-3xl font-bold tracking-tight text-[#30232B] sm:text-4xl">
               Find the Right Vendor
             </h2>
+
             <p className="mt-1.5 text-[16px] leading-6 text-[#8A7580]">
               Discover professionals for every part of your event.
             </p>
           </div>
+
           <Link
             to="/vendor-categories"
-            className="inline-flex h-9 w-fit shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#E60059] to-[#FF790D] px-4 text-xs font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            className="inline-flex h-9 w-fit shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#E60059] to-[#FF790D] px-4 font-poppins text-xs font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:shadow-md"
           >
-            View All Vendors <ArrowRight size={14} />
+            View All Vendors
+            <ArrowRight size={14} />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map(({ name, description, image, icon: Icon, vendorCount, popular }) => (
-            <Link
-              key={name}
-              to="/vendor-categories"
-              className="group flex h-[340px] flex-col overflow-hidden rounded-[15px] border border-[#F1DDE5] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#E9A0BA] hover:shadow-[0_8px_20px_rgba(71,34,52,0.12)] sm:h-[355px] lg:h-[370px]"
-            >
-              <div className="relative h-[210px] shrink-0 overflow-hidden sm:h-[220px] lg:h-[230px]">
-                <SectionImage
-                  src={image}
-                  alt={`${name} portfolio`}
-                  icon={Icon}
-                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                />
-                {popular && (
-                  <span className="absolute left-3 top-3 rounded-full border border-[#F8D8E5] bg-white px-3 py-1 text-[10px] font-semibold leading-none text-[#E60059] shadow-sm">
-                    Popular
-                  </span>
-                )}
-              </div>
-              <div className="flex min-h-0 flex-1 flex-col px-3 pb-2.5 pt-2.5 sm:px-3.5">
-                <h3 className="mt-1 font-sans text-[16px] font-semibold leading-5 text-[#382832]">{name}</h3>
-                <p className="mt-1 line-clamp-2 text-[13px] leading-[1.4] text-[#8A7580]">
-                  {description}
-                </p>
-                <div className="mt-auto flex items-center justify-between gap-2 border-t border-[#F2DDE5] pt-2">
-                  <span className={`inline-flex max-w-[calc(100%-32px)] items-center rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none ${
-                    ["Event Planners", "Decorators", "Invitations & Gifts"].includes(name)
-                      ? "bg-[#FFF3E9] text-[#F07814]"
-                      : "bg-[#FFF1F6] text-[#D4145A]"
-                  }`}>
-                    {vendorCount}
-                  </span>
-                  <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white transition duration-300 group-hover:scale-110 group-hover:shadow-md ${
-                    ["Event Planners", "Decorators", "Invitations & Gifts"].includes(name)
-                      ? "bg-[#FF790D]"
-                      : "bg-[#E60059]"
-                  }`}>
-                    <ArrowRight size={14} strokeWidth={2.5} />
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
+        {/* Horizontal Scrolling Cards */}
+        <div className="vendor-scroll -mx-1 snap-x snap-mandatory overflow-x-auto px-1 pb-6 pt-2">
+          <div className="flex items-stretch gap-3 sm:gap-4">
+            {categories.map(
+              ({ name, description, image, icon: Icon }, index) => (
+                <MotionLink
+                  key={name}
+                  to="/vendor-categories"
+                  aria-label={`Browse ${name}`}
+                  initial={{ opacity: 0, y: 34 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.08,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  whileHover={{ y: -6 }}
+                  className="vendor-card group relative flex h-[340px] w-[calc((100%-12px)/2)] shrink-0 snap-start flex-col overflow-hidden rounded-[15px] border border-[#F1DDE5] bg-[#fef0e1] shadow-[0_2px_6px_rgba(71,34,52,0.05)] transition-[border-color,box-shadow] duration-500 hover:border-[#E9A0BA] hover:shadow-[0_4px_10px_rgba(71,34,52,0.07)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4145A] focus-visible:ring-offset-2 sm:h-[355px] sm:w-[calc((100%-16px)/2)] lg:h-[370px] lg:w-[calc((100%-48px)/4)]"
+                >
+                  {/* Blurred Background Image */}
+                  <div className="absolute inset-0 overflow-hidden bg-[#2a1620]">
+                    <img
+                      src={image}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full scale-125 object-cover blur-2xl"
+                    />
+
+                    {/* Full Image */}
+                    <img
+                      src={image}
+                      alt={`${name} portfolio`}
+                      loading="lazy"
+                      className="vendor-card-image absolute inset-0 h-full w-full object-contain object-center transition-transform duration-[850ms] ease-out group-hover:scale-[1.04]"
+                    />
+                  </div>
+
+                  {/* Image Contrast Overlay */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/5 via-black/15 to-black/80 transition-all duration-500 group-hover:to-black/90" />
+
+                  {/* Light Sweep */}
+                  <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-all duration-700 ease-out group-hover:left-full group-hover:opacity-100" />
+
+                  {/* Card Content */}
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-3.5 pb-[18px]">
+                    <div className="vendor-card-content translate-y-1.5 transition-transform duration-500 ease-out group-hover:translate-y-0">
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/30 bg-[#E60059] text-white shadow-md transition-colors duration-300 group-hover:bg-white group-hover:text-[#E60059]">
+                          <Icon size={15} strokeWidth={2} />
+                        </span>
+
+                        <h3 className="min-w-0 grow font-poppins text-[13px] font-bold leading-snug text-white drop-shadow-sm sm:text-[14px]">
+                          {name}
+                        </h3>
+
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/95 text-[#D4145A] shadow-md transition-transform duration-300 ease-out group-hover:translate-x-[3px]">
+                          <ArrowRight size={13} strokeWidth={2.6} />
+                        </span>
+                      </div>
+
+                      {/* Description on Hover */}
+                      <p className="vendor-card-description line-clamp-2 max-h-0 overflow-hidden text-[12px] leading-[1.5] text-white/90 opacity-0 transition-all duration-500 ease-out group-hover:mt-2 group-hover:max-h-[62px] group-hover:opacity-100">
+                        {description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Inner Border */}
+                  <span className="pointer-events-none absolute inset-0 rounded-[14px] border border-white/0 transition-colors duration-500 group-hover:border-white/40" />
+                </MotionLink>
+              )
+            )}
+          </div>
         </div>
       </div>
+
+      <style>{`
+        .vendor-scroll {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+        }
+
+        .vendor-scroll::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .vendor-card {
+          -webkit-tap-highlight-color: transparent;
+          isolation: isolate;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+          .vendor-card-description {
+            transition-property: max-height, opacity, margin-top;
+          }
+        }
+
+        @media (hover: none) {
+          .vendor-card .vendor-card-content {
+            transform: translateY(0);
+          }
+
+          .vendor-card .vendor-card-description {
+            max-height: 62px;
+            margin-top: 8px;
+            opacity: 1;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .vendor-card,
+          .vendor-card * {
+            transition-duration: 0.01ms !important;
+          }
+
+          .vendor-scroll {
+            scroll-behavior: auto;
+          }
+        }
+      `}</style>
     </section>
   );
 }

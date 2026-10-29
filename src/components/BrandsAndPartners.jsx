@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   ArrowRight,
@@ -7,12 +6,11 @@ import {
   Cake,
   Camera,
   Heart,
-  ShieldCheck,
   Star,
   Utensils,
-  UsersRound,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Reveal } from "./MainAnimation";
 
 // Custom lotus icon for Royal Florist
 function LotusIcon({ size = 35 }) {
@@ -49,24 +47,6 @@ function LotusIcon({ size = 35 }) {
     </svg>
   );
 }
-
-const highlights = [
-  {
-    title: "Verified Vendors",
-    detail: "Only trusted &\nauthentic providers",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Quality\nAssured",
-    detail: "Top-rated pros\nacross India",
-    icon: Star,
-  },
-  {
-    title: "15,000+\nPartners",
-    detail: "Across Tier-1 &\nTier-2 cities",
-    icon: UsersRound,
-  },
-];
 
 const categories = [
   {
@@ -195,8 +175,11 @@ function BrandsAndPartners() {
   return (
     <section className="w-full overflow-hidden bg-white px-5 pb-8 pt-8 sm:px-8 lg:px-[4.55%] lg:pb-10">
       <div className="mx-auto max-w-[1440px]">
-        {/* Heading and Statistics */}
-        <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[1.05fr_1.55fr] lg:gap-7">
+        {/* Heading and View All Partners Button */}
+        <Reveal
+          className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center sm:gap-6"
+          y={20}
+        >
           {/* Left Content */}
           <div className="min-w-0">
             <p className="mb-[10px] flex items-center gap-[9px] font-poppins text-[13px] font-bold uppercase tracking-[1.25px] text-[#E60059]">
@@ -210,60 +193,27 @@ function BrandsAndPartners() {
                 Partners
               </span>
             </h2>
-
-            <p className="mt-3 max-w-[530px] font-poppins text-[16px] leading-[1.6] text-[#8D7A85]">
-              Work with certified event service providers who bring quality,
-              reliability and creativity to your special moments.
-            </p>
           </div>
 
-          {/* Right Content */}
-          <div className="flex min-w-0 flex-col items-end gap-3 lg:flex-row lg:items-end">
-            {/* Trust Statistics Panel */}
-          
-<ul className="grid min-h-[87px] w-full min-w-0 flex-1 grid-cols-3 items-center rounded-[16px] border border-[#F5D7E1] bg-[#fef0e1] px-2 py-3">
-  {highlights.map(({ title, detail, icon: Icon }, index) => (
-    <li
-      key={title}
-      className={`flex min-h-[58px] min-w-0 items-center gap-2 px-2 ${
-        index > 0 ? "border-l border-[#F0DDE5]" : ""
-      }`}
-    >
-      <span className="hidden h-[35px] w-[35px] shrink-0 items-center justify-center rounded-full border border-[#F7D5E1] bg-white text-[#E60059] shadow-sm sm:flex">
-        <Icon
-          size={17}
-          strokeWidth={2}
-          fill={index === 1 ? "currentColor" : "none"}
-        />
-      </span>
-
-      <span className="min-w-0">
-        <span className="block whitespace-pre-line font-poppins text-[12px] font-bold leading-[1.2] text-[#30272C]">
-          {title}
-        </span>
-
-        <span className="mt-1 block whitespace-pre-line font-poppins text-[10px] leading-[1.3] text-[#95838C] sm:text-[11px]">
-          {detail}
-        </span>
-      </span>
-    </li>
-  ))}
-</ul>
-
-            {/* View All Partners */}
-            <Link
-              to="/vendor-categories"
-              className="inline-flex h-[35px] shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#E60059] to-[#FF790D] px-[18px] font-poppins text-[12px] font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:shadow-md"
-            >
-              View all partners
-              <ArrowRight size={15} strokeWidth={2} />
-            </Link>
-          </div>
-        </div>
+          {/* View All Partners */}
+          <Link
+            to="/vendor-categories"
+            className="group inline-flex h-[38px] w-fit shrink-0 items-center justify-center gap-2 self-start rounded-full bg-gradient-to-r from-[#E60059] to-[#FF790D] px-5 font-poppins text-[12px] font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:self-auto"
+          >
+            View all partners
+            <ArrowRight
+              size={15}
+              strokeWidth={2}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
+        </Reveal>
 
         {/* Infinite Auto-Scrolling Carousel */}
         <div
-          className={`partners-carousel mt-9 ${isPaused ? "is-paused" : ""}`}
+          className={`partners-carousel mt-9 ${
+            isPaused ? "is-paused" : ""
+          }`}
           aria-label="Browse trusted brands and partners"
           onPointerUp={() => setIsPaused(false)}
           onPointerCancel={() => setIsPaused(false)}

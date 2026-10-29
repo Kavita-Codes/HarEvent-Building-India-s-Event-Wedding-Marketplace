@@ -10,6 +10,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
+import { motion } from "motion/react";
 
 const EVENT_MEGA_MENU = {
   id: "events",
@@ -282,7 +283,7 @@ const VENDOR_MEGA_MENU = {
           items: [
             "Banquet Chairs & Sofas",
             "VIP Lounge Furniture",
-            "Canopies & Shamiyanas",
+            "Canopies & Shamiyana",
             "Table Linens & Runners",
           ],
         },
@@ -405,11 +406,16 @@ function Navbar({ onLoginClick }) {
   const links = [
     { name: "Home", to: "/" },
     { name: "Event Planner", to: "/event-planners" },
-    { name: "Event Category", to: "/event-categories", hasMega: "events" },
-    { name: "Vendor Category", to: "/vendor-categories", hasMega: "vendors" },
-    { name: "Blogs", to: "/blogs" },
-    { name: "About Us", to: "/about" },
-    { name: "Contact Us", to: "/contact" },
+    {
+      name: "Event Category",
+      to: "/event-categories",
+      hasMega: "events",
+    },
+    {
+      name: "Vendor Category",
+      to: "/vendor-categories",
+      hasMega: "vendors",
+    },
   ];
 
   const handleMouseEnter = (menuType) => {
@@ -431,7 +437,9 @@ function Navbar({ onLoginClick }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
+
     if (!search.trim()) return;
+
     navigate(`/search?query=${encodeURIComponent(search.trim())}`);
     setOpen(false);
     setActiveMegaMenu(null);
@@ -457,7 +465,7 @@ function Navbar({ onLoginClick }) {
     currentMegaData?.tabs[0];
 
   const loginClass =
-    "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-[18px] py-2 text-[12px] font-semibold font-poppins text-white shadow-sm transition hover:brightness-105";
+    "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-[18px] py-2 text-[14px] font-semibold font-poppins text-white shadow-sm transition hover:brightness-105";
 
   return (
     <header
@@ -476,9 +484,10 @@ function Navbar({ onLoginClick }) {
           <img
             src="/logoForm.jpeg"
             alt="HarEvent Logo"
-            className="h-16 w-16 object-contain"
+            className="h-17 w-17 object-contain"
           />
-          <span className="font-playfair bg-gradient-to-r from-[#ed0055] to-[#ff7900] bg-clip-text text-[25px] font-bold leading-none text-transparent">
+
+          <span className="font-playfair bg-gradient-to-r from-[#ed0055] to-[#ff7900] bg-clip-text text-[28px] font-bold leading-none text-transparent">
             HarEvent
           </span>
         </Link>
@@ -503,7 +512,7 @@ function Navbar({ onLoginClick }) {
                     to={link.to}
                     onClick={() => setActiveMegaMenu(null)}
                     className={({ isActive }) =>
-                      `flex items-center gap-1 whitespace-nowrap rounded-md px-2.5 py-2 text-[14px] font-semibold transition-colors ${
+                      `flex items-center gap-1 whitespace-nowrap rounded-md px-2.5 py-2 text-[16px] font-semibold transition-colors ${
                         isActive || isMegaActive
                           ? "text-[#ed0055]"
                           : "text-[#51434B] hover:text-[#ed0055]"
@@ -511,10 +520,13 @@ function Navbar({ onLoginClick }) {
                     }
                   >
                     <span>{link.name}</span>
+
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ${
-                        isMegaActive ? "rotate-180 text-[#ed0055]" : "text-[#7d6f76]"
+                        isMegaActive
+                          ? "rotate-180 text-[#ed0055]"
+                          : "text-[#7d6f76]"
                       }`}
                     />
                   </NavLink>
@@ -529,7 +541,7 @@ function Navbar({ onLoginClick }) {
                 end={link.to === "/"}
                 onMouseEnter={() => setActiveMegaMenu(null)}
                 className={({ isActive }) =>
-                  `whitespace-nowrap rounded-md px-2.5 py-2 text-[14px] font-semibold transition-colors ${
+                  `whitespace-nowrap rounded-md px-2.5 py-2 text-[16px] font-semibold transition-colors ${
                     isActive
                       ? "text-[#ed0055]"
                       : "text-[#51434B] hover:text-[#ed0055]"
@@ -549,14 +561,15 @@ function Navbar({ onLoginClick }) {
             onSubmit={handleSearch}
             className="flex h-9 w-[220px] items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#fef0e1] px-3 focus-within:border-[#ed0055] 2xl:w-[240px]"
           >
-            <Search size={16} className="shrink-0 text-[#907D87]" />
+            <Search size={18} className="shrink-0 text-[#907D87]" />
+
             <input
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search events, vendors..."
               aria-label="Search events, vendors or locations"
-              className="min-w-0 flex-1 bg-transparent text-[12px] text-[#453640] outline-none placeholder:text-[#9A8992]"
+              className="min-w-0 flex-1 bg-transparent text-[13px] text-[#453640] outline-none placeholder:text-[#9A8992]"
             />
           </form>
 
@@ -590,42 +603,60 @@ function Navbar({ onLoginClick }) {
         </button>
       </div>
 
-      {/* DESKTOP MEGA MENU DROPDOWN                                      */}
-
+      {/* DESKTOP MEGA MENU DROPDOWN */}
       {activeMegaMenu && currentMegaData && (
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           onMouseEnter={() => {
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
           }}
           onMouseLeave={handleMouseLeave}
-          className="absolute left-0 top-[68px] z-50 w-full border-t border-rose-100 bg-[#fef0e1] shadow-2xl transition-all duration-300"
+          className="absolute left-0 top-[68px] z-50 w-full border-t border-rose-100 bg-[#fef0e1] shadow-2xl"
         >
           <div className="mx-auto max-w-[1440px]">
             {/* Top Horizontal Tabs */}
             <div className="flex items-center overflow-x-auto border-b border-gray-100 px-6 sm:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {currentMegaData.tabs.map((tab) => {
                 const isActive = tab.id === activeTabObj.id;
+
                 return (
                   <button
                     key={tab.id}
                     type="button"
                     onMouseEnter={() => {
-                      if (activeMegaMenu === "events") setActiveEventTab(tab.id);
-                      else setActiveVendorTab(tab.id);
+                      if (activeMegaMenu === "events") {
+                        setActiveEventTab(tab.id);
+                      } else {
+                        setActiveVendorTab(tab.id);
+                      }
                     }}
                     onClick={() => {
-                      if (activeMegaMenu === "events") setActiveEventTab(tab.id);
-                      else setActiveVendorTab(tab.id);
+                      if (activeMegaMenu === "events") {
+                        setActiveEventTab(tab.id);
+                      } else {
+                        setActiveVendorTab(tab.id);
+                      }
                     }}
-                    className={`relative cursor-pointer px-5 py-3.5 text-[14px] font-semibold transition-colors whitespace-nowrap ${
+                    className={`relative cursor-pointer whitespace-nowrap px-5 py-3.5 text-[14px] font-semibold transition-colors ${
                       isActive
                         ? "text-[#ed0055]"
                         : "text-[#584852] hover:text-[#ed0055]"
                     }`}
                   >
                     <span>{tab.name}</span>
+
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 right-0 h-[3px] rounded-t-full bg-gradient-to-r from-[#ed0055] to-[#ff7900]" />
+                      <motion.span
+                        layoutId="mega-tab-underline"
+                        transition={{
+                          type: "spring",
+                          stiffness: 420,
+                          damping: 34,
+                        }}
+                        className="absolute bottom-0 left-0 right-0 h-[3px] rounded-t-full bg-gradient-to-r from-[#ed0055] to-[#ff7900]"
+                      />
                     )}
                   </button>
                 );
@@ -636,22 +667,25 @@ function Navbar({ onLoginClick }) {
             <div className="bg-[#fef0e1] px-6 py-7 sm:px-10 sm:py-8">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
                 {activeTabObj.columns.map((col, cIdx) => (
-                  <div key={col.title || cIdx} className="flex flex-col">
-                    <h4 className="mb-3.5 flex items-center gap-1.5 text-[14px] font-bold tracking-tight text-[#ed0055]">
+                  <div
+                    key={col.title || cIdx}
+                    className="flex flex-col"
+                  >
+                    <h4 className="mb-3.5 flex items-center gap-1.5 text-[16px] font-bold tracking-tight text-[#ed0055]">
                       <span className="h-1.5 w-1.5 rounded-full bg-[#ed0055]" />
                       <span>{col.title}</span>
                     </h4>
 
-                    <ul className="flex flex-col gap-2 list-none p-0 m-0">
+                    <ul className="m-0 flex list-none flex-col gap-2 p-0">
                       {col.items.map((item) => (
                         <li key={item}>
                           <Link
                             to={`/search?query=${encodeURIComponent(item)}`}
                             onClick={closeMenu}
-                            className="group flex items-center gap-1.5 text-[13px] text-[#4d3e47] transition-all duration-150 hover:translate-x-1 hover:text-[#ed0055]"
+                            className="group flex items-center gap-1.5 text-[15px] text-[#4d3e47] transition-all duration-150 hover:translate-x-1 hover:text-[#ed0055]"
                           >
                             <ChevronRight
-                              size={12}
+                              size={13}
                               className="text-gray-300 transition-colors group-hover:text-[#ed0055]"
                             />
                             <span>{item}</span>
@@ -667,7 +701,9 @@ function Navbar({ onLoginClick }) {
               <div className="mt-8 flex items-center justify-between border-t border-rose-100/70 pt-4">
                 <div className="flex items-center gap-2 text-[12px] text-[#7a6c75]">
                   <Sparkles size={14} className="text-[#ff7900]" />
-                  <span>Discover 1000+ verified professionals across India</span>
+                  <span>
+                    Discover 1000+ verified professionals across India
+                  </span>
                 </div>
 
                 <Link
@@ -676,6 +712,7 @@ function Navbar({ onLoginClick }) {
                   className="group inline-flex items-center gap-1.5 text-[12px] font-bold text-[#ed0055] transition hover:text-[#ff7900]"
                 >
                   <span>View all {currentMegaData.label}</span>
+
                   <ArrowRight
                     size={14}
                     className="transition-transform group-hover:translate-x-1"
@@ -684,12 +721,10 @@ function Navbar({ onLoginClick }) {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
 
-      {/* ================================================================ */}
-      {/* MOBILE NAVIGATION DRAWER WITH ACCORDION                           */}
-      {/* ================================================================ */}
+      {/* MOBILE NAVIGATION DRAWER WITH ACCORDION */}
       {open && (
         <div className="max-h-[calc(100vh-68px)] overflow-y-auto border-t border-[#F0DDE5] bg-white px-4 pb-6 pt-4 shadow-xl xl:hidden">
           {/* Mobile Search */}
@@ -698,6 +733,7 @@ function Navbar({ onLoginClick }) {
             className="mb-4 flex h-11 items-center gap-2 rounded-full border border-[#F0DDE5] bg-[#fef0e1] px-3"
           >
             <Search size={17} className="text-[#ed0055]" />
+
             <input
               type="search"
               value={search}
@@ -709,13 +745,18 @@ function Navbar({ onLoginClick }) {
           </form>
 
           {/* Mobile Links */}
-          <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
+          <nav
+            className="flex flex-col gap-1"
+            aria-label="Mobile navigation"
+          >
             <NavLink
               to="/"
               onClick={closeMenu}
               className={({ isActive }) =>
-                `rounded-lg px-4 py-2.5 text-[14px] font-medium ${
-                  isActive ? "text-[#ed0055]" : "text-[#51434B] hover:bg-[#FFF7FA]"
+                `rounded-lg px-4 py-2.5 text-[16px] font-medium ${
+                  isActive
+                    ? "text-[#ed0055]"
+                    : "text-[#51434B] hover:bg-[#FFF7FA]"
                 }`
               }
             >
@@ -726,8 +767,10 @@ function Navbar({ onLoginClick }) {
               to="/event-planners"
               onClick={closeMenu}
               className={({ isActive }) =>
-                `rounded-lg px-4 py-2.5 text-[14px] font-medium ${
-                  isActive ? "text-[#ed0055]" : "text-[#51434B] hover:bg-[#FFF7FA]"
+                `rounded-lg px-4 py-2.5 text-[16px] font-medium ${
+                  isActive
+                    ? "text-[#ed0055]"
+                    : "text-[#51434B] hover:bg-[#FFF7FA]"
                 }`
               }
             >
@@ -742,6 +785,7 @@ function Navbar({ onLoginClick }) {
                 className="flex w-full items-center justify-between px-2 py-1.5 text-left text-[14px] font-semibold text-[#ed0055]"
               >
                 <span>Event Category</span>
+
                 <ChevronDown
                   size={16}
                   className={`transition-transform duration-200 ${
@@ -751,30 +795,35 @@ function Navbar({ onLoginClick }) {
               </button>
 
               {mobileEventOpen && (
-                <div className="mt-2 flex flex-col gap-3 pl-3 pr-2 pt-2 border-t border-rose-100/50">
+                <div className="mt-2 flex flex-col gap-3 border-t border-rose-100/50 pl-3 pr-2 pt-2">
                   {EVENT_MEGA_MENU.tabs.map((tab) => (
                     <div key={tab.id}>
                       <p className="text-[12px] font-bold uppercase tracking-wide text-[#ff7900]">
                         {tab.name}
                       </p>
+
                       <div className="mt-1.5 flex flex-wrap gap-1.5">
-                        {tab.columns.flatMap((c) => c.items).slice(0, 6).map((item) => (
-                          <Link
-                            key={item}
-                            to={`/search?query=${encodeURIComponent(item)}`}
-                            onClick={closeMenu}
-                            className="rounded-md bg-white border border-rose-100 px-2 py-1 text-[11px] text-[#4d3e47] hover:text-[#ed0055]"
-                          >
-                            {item}
-                          </Link>
-                        ))}
+                        {tab.columns
+                          .flatMap((c) => c.items)
+                          .slice(0, 6)
+                          .map((item) => (
+                            <Link
+                              key={item}
+                              to={`/search?query=${encodeURIComponent(item)}`}
+                              onClick={closeMenu}
+                              className="rounded-md border border-rose-100 bg-white px-2 py-1 text-[11px] text-[#4d3e47] hover:text-[#ed0055]"
+                            >
+                              {item}
+                            </Link>
+                          ))}
                       </div>
                     </div>
                   ))}
+
                   <Link
                     to="/event-categories"
                     onClick={closeMenu}
-                    className="inline-flex items-center gap-1 text-[12px] font-bold text-[#ed0055] pt-1"
+                    className="inline-flex items-center gap-1 pt-1 text-[12px] font-bold text-[#ed0055]"
                   >
                     <span>View all event categories →</span>
                   </Link>
@@ -790,6 +839,7 @@ function Navbar({ onLoginClick }) {
                 className="flex w-full items-center justify-between px-2 py-1.5 text-left text-[14px] font-semibold text-[#ed0055]"
               >
                 <span>Vendor Category</span>
+
                 <ChevronDown
                   size={16}
                   className={`transition-transform duration-200 ${
@@ -799,72 +849,41 @@ function Navbar({ onLoginClick }) {
               </button>
 
               {mobileVendorOpen && (
-                <div className="mt-2 flex flex-col gap-3 pl-3 pr-2 pt-2 border-t border-rose-100/50">
+                <div className="mt-2 flex flex-col gap-3 border-t border-rose-100/50 pl-3 pr-2 pt-2">
                   {VENDOR_MEGA_MENU.tabs.map((tab) => (
                     <div key={tab.id}>
                       <p className="text-[12px] font-bold uppercase tracking-wide text-[#ff7900]">
                         {tab.name}
                       </p>
+
                       <div className="mt-1.5 flex flex-wrap gap-1.5">
-                        {tab.columns.flatMap((c) => c.items).slice(0, 6).map((item) => (
-                          <Link
-                            key={item}
-                            to={`/search?query=${encodeURIComponent(item)}`}
-                            onClick={closeMenu}
-                            className="rounded-md bg-white border border-rose-100 px-2 py-1 text-[11px] text-[#4d3e47] hover:text-[#ed0055]"
-                          >
-                            {item}
-                          </Link>
-                        ))}
+                        {tab.columns
+                          .flatMap((c) => c.items)
+                          .slice(0, 6)
+                          .map((item) => (
+                            <Link
+                              key={item}
+                              to={`/search?query=${encodeURIComponent(item)}`}
+                              onClick={closeMenu}
+                              className="rounded-md border border-rose-100 bg-white px-2 py-1 text-[11px] text-[#4d3e47] hover:text-[#ed0055]"
+                            >
+                              {item}
+                            </Link>
+                          ))}
                       </div>
                     </div>
                   ))}
+
                   <Link
                     to="/vendor-categories"
                     onClick={closeMenu}
-                    className="inline-flex items-center gap-1 text-[12px] font-bold text-[#ed0055] pt-1"
+                    className="inline-flex items-center gap-1 pt-1 text-[12px] font-bold text-[#ed0055]"
                   >
                     <span>View all vendor categories →</span>
                   </Link>
                 </div>
               )}
             </div>
-
-            <NavLink
-              to="/blogs"
-              onClick={closeMenu}
-              className={({ isActive }) =>
-                `rounded-lg px-4 py-2.5 text-[14px] font-medium ${
-                  isActive ? "text-[#ed0055]" : "text-[#51434B] hover:bg-[#FFF7FA]"
-                }`
-              }
-            >
-              Blogs
-            </NavLink>
-
-            <NavLink
-              to="/about"
-              onClick={closeMenu}
-              className={({ isActive }) =>
-                `rounded-lg px-4 py-2.5 text-[14px] font-medium ${
-                  isActive ? "text-[#ed0055]" : "text-[#51434B] hover:bg-[#FFF7FA]"
-                }`
-              }
-            >
-              About Us
-            </NavLink>
-
-            <NavLink
-              to="/contact"
-              onClick={closeMenu}
-              className={({ isActive }) =>
-                `rounded-lg px-4 py-2.5 text-[14px] font-medium ${
-                  isActive ? "text-[#ed0055]" : "text-[#51434B] hover:bg-[#FFF7FA]"
-                }`
-              }
-            >
-              Contact Us
-            </NavLink>
           </nav>
 
           {/* Mobile Login */}

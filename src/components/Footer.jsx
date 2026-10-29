@@ -3,11 +3,15 @@ import {
   FaYoutube,
   FaLinkedinIn,
   FaFacebookF,
-  FaPhoneAlt,
-  FaWhatsapp,
-  FaRegCheckCircle,
+  FaShieldAlt,
   FaMapMarkerAlt,
+  FaChevronRight,
+  FaLink,
+  FaBuilding,
+  FaUsers,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { Reveal } from "./MainAnimation";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -25,8 +29,9 @@ const companyLinks = [
 ];
 
 const vendorLinks = [
-  { label: "Join as a Vendor", href: "/join-as-vendor" },
+  { label: "Join as Vendor", href: "/join-as-vendor" },
   { label: "Vendor Login", href: "/vendor-login" },
+  { label: "Vendor Registration", href: "/vendor-registration" },
   { label: "Partner Guidelines", href: "/partner-guidelines" },
 ];
 
@@ -49,24 +54,27 @@ const socialLinks = [
   },
 ];
 
-function FooterLinkColumn({ title, links }) {
+function FooterLinkColumn({ title, links, Icon }) {
   return (
-    <div className="min-w-0 pt-[48px] 2xl:pt-[54px] max-[1100px]:pt-[12px]">
-      <h3 className="font-playfair text-[16px] font-semibold leading-[1.35] text-white">
+    <div className="group min-w-0">
+      <Icon className="block h-[21px] w-[21px] text-[#c9962f] transition-transform duration-300 group-hover:-translate-y-[2px]" />
+
+      <h3 className="mt-[7px] font-playfair text-[21px] font-bold leading-[1.3] text-[#26233c]">
         {title}
       </h3>
 
-      <span className="mt-[7px] block h-[2px] w-[43px] rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900]" />
+      <span className="mt-[8px] block h-[2px] w-[44px] rounded-full bg-[#c9962f] transition-[width] duration-300 ease-out group-hover:w-[68px]" />
 
-      <ul className="mt-[14px] flex list-none flex-col gap-[10px] p-0">
+      <ul className="mt-[18px] flex list-none flex-col gap-[13px] p-0">
         {links.map((link) => (
-          <li key={link.label}>
-            <a
-              href={link.href}
-              className="inline-block font-poppins text-[15px] font-normal leading-[1.45] text-white/90 no-underline transition-[transform,color] duration-200 ease-in-out hover:translate-x-[3px] hover:text-white"
+          <li key={link.label} className="min-w-0">
+            <Link
+              to={link.href}
+              className="group flex items-center justify-between gap-[10px] font-poppins text-[14.5px] font-normal leading-[1.4] text-[#5c5866] no-underline transition-colors duration-200 ease-in-out hover:text-[#ed0055]"
             >
-              {link.label}
-            </a>
+              <span className="min-w-0 truncate">{link.label}</span>
+              <FaChevronRight className="h-[11px] w-[11px] shrink-0 text-[#c9962f] transition-transform duration-200 ease-in-out group-hover:translate-x-[3px]" />
+            </Link>
           </li>
         ))}
       </ul>
@@ -74,124 +82,117 @@ function FooterLinkColumn({ title, links }) {
   );
 }
 
-function ContactLink({ href, label, Icon, children, external = false }) {
-  return (
-    <a
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
-      className="group flex min-w-0 items-center gap-[10px] text-white no-underline"
-    >
-      <span className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-white/32 text-white transition-transform duration-200 ease-in-out group-hover:scale-[1.07]">
-        <Icon className="h-[15px] w-[15px]" />
-      </span>
-
-      <span className="min-w-0">
-        <span className="block font-poppins text-[11px] leading-[1.4] text-white/85">
-          {label}
-        </span>
-        <span className="mt-[1px] block font-poppins text-[15px] font-semibold leading-[1.4] whitespace-nowrap text-white">
-          {children}
-        </span>
-      </span>
-    </a>
-  );
-}
-
 export default function Footer() {
   return (
     <footer className="w-full font-poppins motion-reduce:[&_*]:transition-none">
-      <div className="bg-[linear-gradient(112deg,#ed0870_0%,#ed2854_42%,#ff650e_100%)] text-white">
-        <div className="mx-auto grid w-full max-w-[1600px] grid-cols-[1.85fr_1.05fr_1.05fr_1.15fr_1.3fr] items-start px-[5.3%] py-[24px] [column-gap:clamp(28px,3.8vw,64px)] max-[1100px]:grid-cols-[1.6fr_1fr_1fr] max-[1100px]:[column-gap:28px] max-[1100px]:[row-gap:20px] max-[1100px]:px-[5%] max-[1100px]:py-[26px] max-[540px]:grid-cols-[repeat(2,minmax(0,1fr))] max-[540px]:[column-gap:20px] max-[540px]:[row-gap:22px] max-[540px]:px-[6%] max-[540px]:py-[24px] 2xl:px-[5.3%] 2xl:pb-[14px] 2xl:pt-[24px]">
-          <div className="min-w-0 pt-[4px] max-[1100px]:col-span-3 max-[540px]:col-span-2">
-            <a
-              href="/"
+      <div className="border-t-[3px] border-[#f6a95f] bg-[#fef0e1]">
+        <Reveal
+          className="mx-auto grid w-full max-w-[1600px] grid-cols-[1.5fr_1fr_1fr_1fr] items-start gap-x-[52px] px-[5.3%] pb-[44px] pt-[26px] max-[1100px]:grid-cols-[1.4fr_1fr_1fr] max-[1100px]:gap-x-[30px] max-[1100px]:px-[5%] max-[860px]:grid-cols-[1fr_1fr] max-[860px]:gap-x-[26px] max-[860px]:gap-y-[34px] max-[860px]:px-[6%] max-[860px]:pb-[36px] max-[860px]:pt-[34px] max-[540px]:grid-cols-1 max-[540px]:gap-y-[30px]"
+          y={24}
+          duration={0.7}
+        >
+          {/* Brand column */}
+          <div className="min-w-0 max-[1100px]:col-span-3 max-[540px]:col-span-1">
+            <Link
+              to="/"
               aria-label="HarEvent Home"
-              className="mb-[10px] inline-flex items-center"
+              className="mb-[18px] flex items-start max-w-full"
             >
               <img
-                src="/WhiteLogo.png"
-                alt="HarEvent"
-                className="block h-[70px] w-[170px] object-contain object-left 2xl:h-[80px] 2xl:w-[195px]"
+                src="/logoForm.jpeg"
+                alt="HarEvent Logo"
+                className="block h-[100px] w-[100px] shrink-0 object-contain mix-blend-multiply max-[540px]:h-[76px] max-[540px]:w-[76px]"
               />
-            </a>
 
-            <div className="ml-[9px]">
-              <h2 className="max-w-[310px] font-playfair text-[18px] font-bold leading-[1.3] tracking-[-0.25px] text-white max-[540px]:text-[20px] 2xl:text-[22px]">
-                One Platform. Every Event.
-                <br />
-                Every Vendor.
-              </h2>
-
-              <p className="mt-[8px] max-w-[315px] font-poppins text-[12px] leading-[1.5] text-white/95 max-[1100px]:max-w-[430px] max-[540px]:text-[13px] 2xl:text-[14px]">
-                HarEvent helps customers discover event professionals and
-                services for weddings, celebrations, corporate functions, and
-                special occasions.
-              </p>
-
-              <div
-                className="mt-[12px] flex items-center gap-[10px]"
-                aria-label="Social media links"
-              >
-                {socialLinks.map(({ label, href, Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex h-[32px] w-[32px] shrink-0 items-center justify-center rounded-full bg-white text-[#ed0870] no-underline transition-[transform,box-shadow,background] duration-200 ease-in-out hover:-translate-y-[3px] hover:scale-[1.06] hover:bg-[#fff4f7] hover:shadow-[0_5px_12px_rgba(80,0,30,0.2)] 2xl:h-[36px] 2xl:w-[36px]"
-                  >
-                    <Icon className="block h-[15px] w-[15px] 2xl:h-[17px] 2xl:w-[17px]" />
-                  </a>
-                ))}
-              </div>
-
-              <div className="mt-[12px] flex flex-wrap items-center gap-[8px]">
-                <span className="inline-flex min-h-[24px] items-center justify-center gap-[6px] rounded-[30px] bg-[#fff7f5] px-[10px] py-[5px] font-poppins text-[10px] font-semibold leading-[1.2] whitespace-nowrap text-[#ff7900]">
-                  <FaRegCheckCircle className="h-[12px] w-[12px] shrink-0" />
-                  100% VERIFIED
+              <span className="flex min-w-0 flex-col pl-[3px] pt-[11px]">
+                <span className="font-playfair bg-gradient-to-r from-[#ed0055] to-[#ff7900] bg-clip-text text-[40px] font-bold leading-none text-transparent translate-y-[5px] max-[540px]:text-[32px]">
+                  HarEvent
                 </span>
 
-                <span className="inline-flex min-h-[24px] items-center justify-center gap-[6px] rounded-[30px] bg-[#fff7f5] px-[10px] py-[5px] font-poppins text-[10px] font-semibold leading-[1.2] whitespace-nowrap text-[#ed0870]">
-                  <FaMapMarkerAlt className="h-[12px] w-[12px] shrink-0" />
-                  PAN INDIA
+                <span className="relative mt-[12px] flex items-center gap-[8px]">
+
+                  <span className="h-[1px] flex-1 bg-[#c9962f]/70" />
+                  <span className="whitespace-nowrap font-poppins text-[11px] font-semibold tracking-[0.2em] text-[#7a5c2e]">
+                    PLAN • CONNECT • CELEBRATE
+                  </span>
+                  <span className="h-[1px] flex-1 bg-[#c9962f]/70" />
                 </span>
-              </div>
+              </span>
+            </Link>
+
+            <h2 className="max-w-[340px] font-playfair text-[23px] font-bold leading-[1.35] text-[#26233c] max-[540px]:text-[21px]">
+              One Platform  Every Event
+              <br />
+              Every Vendor.
+            </h2>
+
+            <p className="mt-[12px] max-w-[345px] font-poppins text-[13.5px] leading-[1.6] text-[#5c5866]">
+              HarEvent helps customers discover event professionals and
+              services for weddings, celebrations, corporate functions, and
+              special occasions.
+            </p>
+
+            <div
+              className="mt-[18px] flex items-center gap-[10px]"
+              aria-label="Social media links"
+            >
+              {socialLinks.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-[32px] w-[32px] shrink-0 items-center justify-center rounded-full bg-[#ed0055] text-white no-underline transition-[transform,box-shadow,background] duration-200 ease-in-out hover:-translate-y-[3px] hover:bg-[#d4145a] hover:shadow-[0_5px_12px_rgba(120,10,60,0.25)]"
+                >
+                  <Icon className="block h-[15px] w-[15px]" />
+                </a>
+              ))}
+            </div>
+
+            <div className="mt-[20px] flex flex-wrap items-center gap-[10px]">
+              <span className="inline-flex min-h-[30px] items-center justify-center gap-[7px] rounded-[30px] border border-[#e3c98b] bg-[#fdf6e9] px-[14px] py-[6px] font-poppins text-[11.5px] font-semibold leading-[1.2] whitespace-nowrap text-[#a87b1f]">
+                <FaShieldAlt className="h-[12px] w-[12px] shrink-0" />
+                100% VERIFIED
+              </span>
+
+              <span className="inline-flex min-h-[30px] items-center justify-center gap-[7px] rounded-[30px] bg-[#fce3ea] px-[14px] py-[6px] font-poppins text-[11.5px] font-semibold leading-[1.2] whitespace-nowrap text-[#ed0055]">
+                <FaMapMarkerAlt className="h-[12px] w-[12px] shrink-0" />
+                PAN INDIA
+              </span>
             </div>
           </div>
 
-          <FooterLinkColumn title="Quick Links" links={quickLinks} />
-          <FooterLinkColumn title="Company" links={companyLinks} />
-          <FooterLinkColumn title="For Vendors" links={vendorLinks} />
-
-          <div className="min-w-0 pt-[48px] max-[1100px]:col-span-3 max-[1100px]:pt-[12px] max-[540px]:col-span-2 2xl:pt-[54px]">
-            <h3 className="font-playfair text-[16px] font-semibold leading-[1.35] text-white">
-              Contact Us
-            </h3>
-
-            <span className="mt-[7px] block h-[2px] w-[43px] rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900]" />
-
-            <div className="mt-[16px] flex flex-col gap-[14px] max-[1100px]:flex-row max-[1100px]:flex-wrap max-[1100px]:gap-[14px_30px] max-[540px]:flex-col max-[540px]:gap-[12px]">
-              <ContactLink href="tel:+917448181396" label="Mobile" Icon={FaPhoneAlt}>
-                +91 74481 81396
-              </ContactLink>
-
-              <ContactLink
-                href="https://wa.me/917448181396"
-                label="WhatsApp"
-                Icon={FaWhatsapp}
-                external
-              >
-                +91 74481 81396
-              </ContactLink>
-            </div>
+          {/* Link columns */}
+          <div className="min-w-0 border-l border-[#ecd9c6] pl-[38px] self-center max-[1100px]:col-start-2 max-[1100px]:row-start-2 max-[860px]:border-l-0 max-[860px]:pl-0">
+            <FooterLinkColumn
+              title="Quick Links"
+              links={quickLinks}
+              Icon={FaLink}
+            />
           </div>
+
+          <div className="min-w-0 border-l border-[#ecd9c6] pl-[38px] self-center max-[1100px]:border-l-0 max-[1100px]:pl-0 max-[860px]:border-l-0 max-[860px]:pl-0">
+            <FooterLinkColumn
+              title="Company"
+              links={companyLinks}
+              Icon={FaBuilding}
+            />
+          </div>
+
+          <div className="min-w-0 border-l border-[#ecd9c6] pl-[38px] self-center max-[1100px]:col-start-1 max-[1100px]:row-start-3 max-[1100px]:col-span-3 max-[1100px]:border-l-0 max-[1100px]:pl-0 max-[860px]:col-start-2 max-[860px]:row-start-auto max-[860px]:col-span-1 max-[540px]:col-start-1 max-[540px]:col-span-1">
+            <FooterLinkColumn
+              title="For Vendors"
+              links={vendorLinks}
+              Icon={FaUsers}
+            />
+          </div>
+        </Reveal>
+
+        {/* Copyright bar */}
+        <div className="bg-[#4a1420] px-[16px] py-[16px] text-center font-poppins text-[13.5px] font-medium leading-[1.5] text-white/95 max-[540px]:text-[11.5px]">
+          © 2026 HarEvent India Private Limited. All rights reserved.
         </div>
-      </div>
-
-      <div className="flex min-h-[38px] items-center justify-center border-t border-[#FCE7EE] bg-[linear-gradient(112deg,#ed0870_0%,#ed2854_42%,#ff650e_100%)] px-[16px] py-[10px] text-center font-poppins text-[13px] leading-[1.5] text-white max-[540px]:text-[10px] 2xl:min-h-[42px]">
-        © 2026 HarEvent India Private Limited. All rights reserved.
       </div>
     </footer>
   );

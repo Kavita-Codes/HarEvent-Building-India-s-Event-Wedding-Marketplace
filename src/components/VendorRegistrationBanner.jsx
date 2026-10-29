@@ -1,6 +1,7 @@
 
 import { ArrowRight, Store } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Reveal } from "./MainAnimation";
 
 function VendorRegistrationBanner({
   onVendorLoginClick,
@@ -8,7 +9,7 @@ function VendorRegistrationBanner({
 }) {
   return (
     <section className="px-5 py-10 sm:px-8 lg:px-12">
-      <div
+      <Reveal
         className="mx-auto max-w-[1440px] overflow-hidden rounded-3xl bg-cover bg-center bg-no-repeat px-6 py-10 text-white sm:px-10 lg:flex lg:items-center lg:justify-between lg:px-14 lg:py-12"
         style={{
           backgroundImage: `
@@ -21,8 +22,14 @@ function VendorRegistrationBanner({
             url('/party.png')
           `,
         }}
+        y={30}
       >
-        <div className="relative max-w-2xl">
+        <Reveal
+          className="relative max-w-2xl"
+          delay={0.12}
+          y={18}
+          duration={0.55}
+        >
           <p className="mb-2 text-[10px] font-bold uppercase tracking-[1.5px] text-white/80">
             Grow Your Event Business
           </p>
@@ -40,27 +47,44 @@ function VendorRegistrationBanner({
             Make your work discoverable to people looking for event
             professionals and services.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="relative mt-7 flex shrink-0 flex-col items-start gap-4 lg:mt-0 lg:items-end">
+        <Reveal
+          className="relative mt-7 flex shrink-0 flex-col items-start gap-4 lg:mt-0 lg:items-end"
+          delay={0.22}
+          y={18}
+          duration={0.55}
+        >
           {onVendorRegisterClick ? (
             <button
               type="button"
               onClick={onVendorRegisterClick}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-bold text-[#B20F4B] shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-bold text-[#B20F4B] shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <Store size={16} />
+              <Store
+                size={16}
+                className="transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+              />
               Join as a Vendor
-              <ArrowRight size={15} />
+              <ArrowRight
+                size={15}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </button>
           ) : (
             <Link
               to="/join-as-vendor"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-bold text-[#B20F4B] shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-bold text-[#B20F4B] shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <Store size={16} />
+              <Store
+                size={16}
+                className="transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+              />
               Join as a Vendor
-              <ArrowRight size={15} />
+              <ArrowRight
+                size={15}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </Link>
           )}
 
@@ -68,20 +92,20 @@ function VendorRegistrationBanner({
             <button
               type="button"
               onClick={onVendorLoginClick}
-              className="text-xs font-medium text-white/90 underline decoration-white/50 underline-offset-4 hover:text-white"
+              className="text-xs font-medium text-white/90 underline decoration-white/50 underline-offset-4 transition-colors duration-200 hover:text-white hover:decoration-white"
             >
               Already a vendor? Log in
             </button>
           ) : (
             <Link
               to="/vendor-login"
-              className="text-xs font-medium text-white/90 underline decoration-white/50 underline-offset-4 hover:text-white"
+              className="text-xs font-medium text-white/90 underline decoration-white/50 underline-offset-4 transition-colors duration-200 hover:text-white hover:decoration-white"
             >
               Already a vendor? Log in
             </Link>
           )}
-        </div>
-      </div>
+        </Reveal>
+      </Reveal>
     </section>
   );
 }

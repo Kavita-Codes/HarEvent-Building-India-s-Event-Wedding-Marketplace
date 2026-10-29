@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+
 import {
   Search,
   Scale,
@@ -6,10 +6,8 @@ import {
   CalendarCheck,
   PartyPopper,
   ChevronRight,
-  CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const steps = [
   {
@@ -51,10 +49,9 @@ const steps = [
 ];
 
 export default function HowItWorks() {
-  const navigate = useNavigate();
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#fef0e1] px-4 pt-0 pb-12 font-poppins sm:px-6 sm:pb-16 lg:px-8 lg:pb-20">
+    <section className="relative w-full pt-6 overflow-hidden bg-[#fef0e1] px-4 pt-0 pb-12 font-poppins sm:px-6 sm:pb-16 lg:px-8 lg:pb-20">
       {/* Soft ambient background orbs */}
       <div className="pointer-events-none absolute -left-28 top-10 -z-10 h-72 w-72 rounded-full bg-pink-200/40 blur-[90px]" />
       <div className="pointer-events-none absolute -right-28 bottom-20 -z-10 h-80 w-80 rounded-full bg-orange-200/40 blur-[90px]" />
@@ -64,7 +61,7 @@ export default function HowItWorks() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-80px" }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center"
         >
@@ -81,8 +78,14 @@ export default function HowItWorks() {
 
         {/* 5 Process Cards Grid */}
         <div className="relative mx-auto mt-12 w-full max-w-[1280px]">
-          {/* Subtle horizontal track behind cards on desktop */}
-          <div className="pointer-events-none absolute left-[10%] right-[10%] top-[4.5rem] hidden h-[2px] bg-gradient-to-r from-[#ed0055]/20 via-[#ff7900]/25 to-[#ed0055]/20 lg:block" />
+          {/* Subtle horizontal track that draws itself behind the cards */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-none absolute left-[10%] right-[10%] top-[4.5rem] hidden h-[2px] origin-left bg-gradient-to-r from-[#ed0055]/20 via-[#ff7900]/25 to-[#ed0055]/20 lg:block"
+          />
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
             {steps.map((step, index) => {
@@ -93,13 +96,13 @@ export default function HowItWorks() {
                   key={step.number}
                   initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, margin: "-60px" }}
+                  viewport={{ once: true, margin: "-60px" }}
                   transition={{
                     duration: 0.5,
                     delay: index * 0.1,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group relative flex flex-col items-center rounded-2xl border border-white/90 bg-white/85 p-6 text-center shadow-[0_10px_28px_rgba(237,0,85,0.06)] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-[#ed0055]/30 hover:bg-white hover:shadow-[0_20px_40px_rgba(237,0,85,0.15)]"
+                  className="group relative flex flex-col items-center rounded-2xl border border-white/90 bg-white/85 p-6 text-center shadow-[0_10px_28px_rgba(237,0,85,0.06)] backdrop-blur-md transition-[border-color,background-color,box-shadow,translate] duration-300 hover:-translate-y-2 hover:border-[#ed0055]/30 hover:bg-white hover:shadow-[0_20px_40px_rgba(237,0,85,0.15)]"
                 >
                   {/* Step Pill */}
                   <span className="mb-4 inline-flex items-center gap-1 rounded-full border border-[#ed0055]/15 bg-gradient-to-r from-[#ed0055]/8 to-[#ff7900]/8 px-3 py-0.5 text-[11px] font-bold tracking-wider text-[#ed0055] transition-all duration-300 group-hover:scale-105 group-hover:bg-gradient-to-r group-hover:from-[#ed0055] group-hover:to-[#ff7900] group-hover:text-white">
@@ -135,7 +138,7 @@ export default function HowItWorks() {
 
                   {/* Next Step Arrow Connector for Desktop */}
                   {index < steps.length - 1 && (
-                    <div className="pointer-events-none absolute -right-3.5 top-[4.5rem] z-20 hidden h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-rose-100 bg-white text-[#ff7900] shadow-sm lg:flex">
+                    <div className="pointer-events-none absolute -right-3.5 top-[4.5rem] z-20 hidden h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-rose-100 bg-white text-[#ff7900] shadow-sm transition-transform duration-300 group-hover:translate-x-1 lg:flex">
                       <ChevronRight size={15} strokeWidth={2.5} />
                     </div>
                   )}
@@ -144,42 +147,6 @@ export default function HowItWorks() {
             })}
           </div>
         </div>
-
-        {/* Bottom Feature & Action Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mx-auto mt-12 flex max-w-4xl flex-col items-center justify-between gap-4 rounded-2xl border border-rose-100/80 bg-white/80 p-4 shadow-sm backdrop-blur-md sm:flex-row sm:p-5"
-        >
-          <div className="flex items-center gap-3.5">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#ed0055] to-[#ff7900] text-white shadow-sm">
-              <CheckCircle2 size={22} />
-            </span>
-            <div>
-              <h4 className="text-[14px] font-bold text-[#24151B] sm:text-[15px]">
-                Ready to plan your unforgettable celebration?
-              </h4>
-              <p className="text-[12px] text-[#776c74] sm:text-[13px]">
-                Explore verified professionals, compare prices, and connect
-                instantly.
-              </p>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => navigate("/event-categories")}
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-6 py-2.5 text-[13px] font-semibold text-white shadow-md shadow-[#ed0055]/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-[#ed0055]/30 active:scale-95 sm:text-[14px]"
-          >
-            <span>Explore Events</span>
-            <ArrowRight
-              size={15}
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </button>
-        </motion.div>
       </div>
     </section>
   );
