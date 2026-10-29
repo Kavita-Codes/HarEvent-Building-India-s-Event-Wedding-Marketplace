@@ -83,7 +83,7 @@ function VendorCard({ vendor, index }) {
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.55, delay: index * 0.08, ease: EASE_OUT }}
       whileHover={{ y: -8, transition: { duration: 0.3, ease: EASE_OUT } }}
-      className="group relative flex min-h-[390px] flex-col overflow-hidden rounded-[15px] border border-[#F1DDE5] bg-white shadow-[0_3px_14px_rgba(71,34,52,0.04)] transition-[border-color,box-shadow] duration-300 hover:border-[#E9A0BA] hover:shadow-[0_18px_38px_rgba(71,34,52,0.16)] sm:min-h-[405px] lg:min-h-[420px]"
+      className="group relative flex min-h-[430px] flex-col overflow-hidden rounded-[15px] border border-[#F1DDE5] bg-white shadow-[0_3px_14px_rgba(71,34,52,0.04)] transition-[border-color,box-shadow] duration-300 hover:border-[#E9A0BA] hover:shadow-[0_18px_38px_rgba(71,34,52,0.16)] sm:min-h-[445px] lg:min-h-[460px]"
     >
       {/* Gradient hairline that runs across the top on hover */}
       <span className="pointer-events-none absolute left-0 top-0 z-30 h-[3px] w-0 bg-gradient-to-r from-[#E60059] via-[#FF4E6B] to-[#FF7628] transition-[width] duration-[700ms] ease-out group-hover:w-full" />
@@ -96,62 +96,54 @@ function VendorCard({ vendor, index }) {
           className="vendor-kb h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
         />
 
-        {/* Legibility scrim, deepens on hover */}
-        <span className="pointer-events-none absolute inset-x-0 bottom-0 h-[64%] bg-gradient-to-t from-[#2A1220]/60 via-[#2A1220]/16 to-transparent opacity-75 transition-opacity duration-500 group-hover:opacity-100" />
-
         {/* Light sweep across the photo */}
         <span className="pointer-events-none absolute inset-0 overflow-hidden">
           <span className="absolute -left-full top-[-25%] h-[150%] w-[55%] rotate-[18deg] bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 transition-[left,opacity] duration-[1100ms] ease-out group-hover:left-[150%] group-hover:opacity-100" />
         </span>
-
-        {/* Price chip */}
-        <span className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 rounded-full bg-white/95 py-1 pl-2.5 pr-3 shadow-[0_6px_16px_rgba(42,18,32,0.22)] ring-1 ring-white/70 transition-transform duration-500 ease-out group-hover:-translate-y-[3px]">
-          <span className="text-[12.5px] font-bold leading-none text-[#E60059]">
-            {vendor.priceFrom}
-          </span>
-          <span className="text-[9.5px] font-semibold uppercase leading-none tracking-[0.4px] text-[#8A7580]">
-            {vendor.priceNote}
-          </span>
-        </span>
-
-        {/* Location rides the photo so the body keeps its original height */}
-        <span className="absolute right-2.5 top-2.5 flex items-center gap-1 rounded-full bg-[#2A1220]/45 py-[5px] pl-2 pr-2.5 text-[10px] font-semibold text-white/95 ring-1 ring-white/25 transition-transform duration-500 ease-out group-hover:-translate-y-[3px]">
-          <MapPin size={10} className="shrink-0 text-[#FFB6C8]" />
-          {vendor.location}
-        </span>
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col px-3 pb-3 pt-3 sm:px-3.5">
-        <p className="text-[13px] font-bold uppercase tracking-[0.3px] text-[#E60059]">
+      <div className="flex min-h-0 flex-1 flex-col px-4 pb-4 pt-4 sm:px-5">
+        {/* Price left, location right — plain text row under the photo */}
+        <div className="flex items-center justify-between gap-3">
+          <p className="flex items-baseline gap-1 text-[16px] font-bold leading-none text-[#382832]">
+            {vendor.priceFrom}
+            <span className="text-[11px] font-semibold text-[#8A7580]">
+              {vendor.priceNote}
+            </span>
+          </p>
+
+          <p className="flex shrink-0 items-center gap-1 text-[13px] font-medium text-[#8A7580]">
+            <MapPin size={14} className="shrink-0 text-[#E60059]" />
+            {vendor.location}
+          </p>
+        </div>
+
+        <p className="mt-3 text-[13px] font-bold uppercase tracking-[0.6px] text-[#E60059]">
           {vendor.category}
         </p>
 
-        <h3 className="mt-1.5 font-sans text-[16px] font-semibold leading-5 text-[#382832] transition-colors duration-300 group-hover:text-[#B41049]">
+        <h3 className="mt-1.5 font-sans text-[19px] font-bold leading-6 text-[#2E2230] transition-colors duration-300 group-hover:text-[#B41049]">
           {vendor.businessName}
         </h3>
 
-        <p className="mt-1.5 line-clamp-2 text-[13px] leading-[1.6] text-[#8A7580]">
+        <p className="mt-2 line-clamp-2 text-[14px] leading-[1.55] text-[#7C6A74]">
           {vendor.description}
         </p>
 
-        <div className="mt-auto pt-1">
-          <div className="mb-2.5 h-px w-full bg-gradient-to-r from-[#F2DDE5] via-[#F2DDE5] to-transparent" />
+        <div className="mt-auto flex gap-2.5 pt-4">
+          <Link
+            to={vendor.inquiryUrl}
+            className="inline-flex h-11 min-w-0 flex-[1.35] items-center justify-center rounded-full bg-[#E60059] px-3 text-[14px] font-bold text-white shadow-[0_8px_18px_rgba(230,0,89,0.25)] transition hover:bg-[#A80F46] active:scale-[0.97]"
+          >
+            Send Inquiry
+          </Link>
 
-          <div className="flex gap-1.5">
-            <Link
-              to={vendor.inquiryUrl}
-              className="inline-flex h-7 min-w-0 flex-1 items-center justify-center gap-1 rounded-full bg-[#E60059] px-2 text-[11px] font-semibold text-white transition hover:bg-[#A80F46]"
-            >
-              Send Inquiry
-            </Link>
-
-            <Link
-              to={vendor.profileUrl}
-              className="inline-flex h-7 min-w-0 flex-1 items-center justify-center rounded-full border border-[#F1DDE5] bg-[#FFF7FA] px-2 text-[11px] font-normal text-[#493640] transition hover:border-[#E9B4C7] hover:text-[#E60059]"
-            >
-              View Profile
-            </Link>
-          </div>
+          <Link
+            to={vendor.profileUrl}
+            className="inline-flex h-11 min-w-0 flex-1 items-center justify-center rounded-full border border-[#F3DFC8] bg-[#FFF4E4] px-3 text-[14px] font-bold text-[#3A2B33] transition hover:border-[#E6C48F] hover:bg-[#FFEEDA] active:scale-[0.97]"
+          >
+            View Profile
+          </Link>
         </div>
       </div>
     </motion.article>
