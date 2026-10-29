@@ -141,6 +141,125 @@ body {
   background-size: 100% 1.5px;
 }
 
+/* ---------------------------------------------------------------------------
+   Press feedback (site-wide)
+   Every clickable control dips inward while held, so a click feels physical.
+   Built on the standalone `scale` / `translate` properties on purpose: motion
+   writes an inline `transform`, which a stylesheet `transform` rule could never
+   beat, while these separate properties simply compose with it. `transform` is
+   deliberately kept out of the transitioned list so CSS never fights a motion
+   animation frame-by-frame.
+   Opt a control out with `press-off` when motion already animates its tap.
+--------------------------------------------------------------------------- */
+
+/* Defaults and easing live in the base layer, so any Tailwind `transition-*`
+   / `hover:scale-*` utility on the element still wins where it is declared.
+   Anchors are matched by shape (`rounded-*` pills, `inline-flex` CTAs) because
+   a link styled as a button deserves the same feedback as a real `<button>`. */
+@layer base {
+  button:not(.press-off),
+  [role="button"]:not(.press-off),
+  input[type="submit"]:not(.press-off),
+  input[type="button"]:not(.press-off),
+  a[class*="rounded-full"]:not(.press-off),
+  a[class*="inline-flex"]:not(.press-off) {
+    transition-property: scale, translate, color, background-color,
+      border-color, opacity, box-shadow, filter;
+    transition-duration: 180ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* Unlayered on purpose: the pressed state has to outrank hover utilities. */
+button:not(.press-off):active,
+[role="button"]:not(.press-off):active,
+input[type="submit"]:not(.press-off):active,
+input[type="button"]:not(.press-off):active,
+a[class*="rounded-full"]:not(.press-off):active,
+a[class*="inline-flex"]:not(.press-off):active {
+  scale: 0.965;
+  translate: 0 1px;
+}
+
+button[disabled]:active,
+button[disabled],
+[role="button"][aria-disabled="true"]:active,
+[role="button"][aria-disabled="true"] {
+  scale: 1;
+  translate: 0 0;
+}
+
+/* Light that sweeps across a filled button on hover / keyboard focus */
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-sheen > * {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -70%;
+  width: 45%;
+  height: 220%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transform: translateX(-100%) rotate(14deg);
+}
+
+.btn-sheen:hover::after,
+.btn-sheen:focus-visible::after {
+  animation: btn-sheen-sweep 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes btn-sheen-sweep {
+  from {
+    opacity: 0.9;
+    transform: translateX(-100%) rotate(14deg);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(360%) rotate(14deg);
+  }
+}
+
+/* Ambient brand glow: animates box-shadow only, so it never touches transform */
+.btn-glow {
+  animation: btn-glow-breathe 3.4s ease-in-out infinite;
+}
+
+@keyframes btn-glow-breathe {
+  0%,
+  100% {
+    box-shadow: 0 8px 20px -10px rgba(237, 0, 85, 0.55);
+  }
+  50% {
+    box-shadow: 0 12px 26px -8px rgba(255, 121, 0, 0.6);
+  }
+}
+
+/* Small lift on hover, sinks back on press */
+.btn-lift:hover {
+  translate: 0 -2px;
+}
+
+.btn-lift:active {
+  translate: 0 1px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -152,5 +271,30 @@ body {
 
   .draw-underline {
     transition: none;
+  }
+
+  button:not(.press-off),
+  [role="button"]:not(.press-off),
+  input[type="submit"]:not(.press-off),
+  input[type="button"]:not(.press-off),
+  a[class*="rounded-full"]:not(.press-off),
+  a[class*="inline-flex"]:not(.press-off) {
+    transition: none;
+    translate: 0 0;
+    scale: 1;
+  }
+
+  .btn-sheen::after {
+    display: none;
+  }
+
+  .btn-glow {
+    animation: none;
+    box-shadow: 0 8px 20px -10px rgba(237, 0, 85, 0.55);
+  }
+
+  .btn-lift:hover,
+  .btn-lift:active {
+    translate: 0 0;
   }
 }

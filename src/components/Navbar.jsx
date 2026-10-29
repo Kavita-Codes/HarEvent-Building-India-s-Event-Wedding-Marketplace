@@ -10,7 +10,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 const EVENT_MEGA_MENU = {
   id: "events",
@@ -402,6 +402,7 @@ function Navbar({ onLoginClick }) {
   const navigate = useNavigate();
   const navRef = useRef(null);
   const timeoutRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const links = [
     { name: "Home", to: "/" },
@@ -464,8 +465,42 @@ function Navbar({ onLoginClick }) {
     currentMegaData?.tabs.find((t) => t.id === currentTabId) ||
     currentMegaData?.tabs[0];
 
-  const loginClass =
-    "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-[18px] py-2 text-[14px] font-semibold font-poppins text-white shadow-sm transition hover:brightness-105";
+  const loginClassBase =
+    "btn-sheen btn-glow btn-lift group inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-[18px] py-2 text-[14px] font-semibold font-poppins text-white hover:brightness-105";
+
+  /* The motion pill animates its own tap, so it opts out of the global CSS
+     press (`press-off`) to avoid stacking two shrinks on top of each other. */
+  const loginClass = `press-off ${loginClassBase}`;
+
+  const mobileLoginClass =
+    "btn-sheen btn-glow btn-lift group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-3 py-3 text-center text-sm font-semibold font-poppins text-white hover:brightness-105";
+
+  const loginSpring = {
+    type: "spring",
+    stiffness: 420,
+    damping: 28,
+    mass: 0.7,
+  };
+
+  const loginMotionProps = {
+    initial: { opacity: 0, y: -10 },
+    animate: { opacity: 1, y: 0 },
+    whileHover: prefersReducedMotion ? undefined : { scale: 1.05 },
+    whileTap: prefersReducedMotion ? undefined : { scale: 0.9 },
+    transition: prefersReducedMotion ? { duration: 0 } : loginSpring,
+  };
+
+  const loginContent = (size) => (
+    <>
+      <UserRound
+        size={size}
+        aria-hidden="true"
+        className="transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+      />
+
+      <span>Login</span>
+    </>
+  );
 
   return (
     <header
@@ -575,18 +610,17 @@ function Navbar({ onLoginClick }) {
 
           {/* Login */}
           {onLoginClick ? (
-            <button
+            <motion.button
               type="button"
               onClick={onLoginClick}
               className={loginClass}
+              {...loginMotionProps}
             >
-              <UserRound size={16} aria-hidden="true" />
-              Login
-            </button>
+              {loginContent(16)}
+            </motion.button>
           ) : (
-            <Link to="/login" className={loginClass}>
-              <UserRound size={14} aria-hidden="true" />
-              Login
+            <Link to="/login" className={loginClassBase}>
+              {loginContent(14)}
             </Link>
           )}
         </div>
@@ -889,25 +923,27 @@ function Navbar({ onLoginClick }) {
           {/* Mobile Login */}
           <div className="mt-4 grid grid-cols-1 gap-3 border-t border-[#F0DDE5] pt-4">
             {onLoginClick ? (
-              <button
+              <motion.button
                 type="button"
                 onClick={() => {
                   closeMenu();
                   onLoginClick();
                 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-3 py-3 text-center text-sm font-semibold text-white shadow-sm"
+                className={`press-off ${mobileLoginClass}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
+                transition={loginSpring}
               >
-                <UserRound size={16} aria-hidden="true" />
-                Login
-              </button>
+                {loginContent(16)}
+              </motion.button>
             ) : (
               <Link
                 to="/login"
                 onClick={closeMenu}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#ed0055] to-[#ff7900] px-3 py-3 text-center text-sm font-semibold text-white shadow-sm"
+                className={mobileLoginClass}
               >
-                <UserRound size={16} aria-hidden="true" />
-                Login
+                {loginContent(16)}
               </Link>
             )}
           </div>
